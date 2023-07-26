@@ -54,6 +54,15 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
             .HasForeignKey(o => o.FollowingId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
+        modelBuilder.Entity<GroupMessage>()
+            .HasMany(gm => gm.ReadFrom)
+            .WithMany()
+            .UsingEntity<Dictionary<string, object>>(
+            "GroupMessageReadFrom",
+            r => r.HasOne<User>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Restrict),
+            l => l.HasOne<GroupMessage>().WithMany().HasForeignKey("MessageId").OnDelete(DeleteBehavior.Restrict));
+
+
         ConfigureLikesTable(modelBuilder, user => user.LikedPosts);
         ConfigureLikesTable(modelBuilder, user => user.LikedComments);
         ConfigureLikesTable(modelBuilder, user => user.LikedReplies);

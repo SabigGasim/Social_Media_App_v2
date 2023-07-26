@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Entities;
 
@@ -14,7 +16,10 @@ public abstract class Message<TChat, TMessage>
     public string Text { get; set; }
     public DateTime SentAt { get; set; }
     public Guid MediaId { get; set; }
-    public Media Media { get; set; }
-    public User User { get; set; }
-    public TChat Chat { get; set; }
+    [ForeignKey(nameof(MediaId))]
+    [DeleteBehavior(DeleteBehavior.NoAction)]
+    public virtual Media Media { get; set; }
+    public virtual User User { get; set; }
+    [DeleteBehavior(DeleteBehavior.Cascade)]
+    public virtual TChat Chat { get; set; }
 }
