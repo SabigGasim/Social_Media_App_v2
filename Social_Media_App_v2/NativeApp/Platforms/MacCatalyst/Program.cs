@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace NativeApp.Platforms.iOS;
+namespace NativeApp;
 public class Program
 {
     // This is the main entry point of the application.
