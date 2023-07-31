@@ -9,6 +9,7 @@ namespace Server.Data.DbContexts;
 public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public DbSet<Profile> Profiles { get; set; }
+    public DbSet<Timeline> Timelines { get; set; }
     public DbSet<Post> Posts { get; set; }
     public DbSet<Media> Media { get; set; }
     public DbSet<Comment> Comments { get; set; }
