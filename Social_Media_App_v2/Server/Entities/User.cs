@@ -15,6 +15,7 @@ public class User : IdentityUser<Guid>
     [Required]
     public AccountState State { get; set; }
     public virtual Profile Profile { get; set; }
+    public virtual Timeline Timeline { get; set; }
     public virtual IList<Follow> Followers { get; set; }
     public virtual IList<Follow> Followings { get; set; }
     public virtual IList<FollowRequest> SentFollowRequests { get; set; }

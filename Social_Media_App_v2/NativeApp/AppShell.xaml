@@ -4,11 +4,39 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:NativeApp"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:NativeApp.MVVM.Views"
+    xmlns:viewmodels="clr-namespace:NativeApp.MVVM.ViewModels"
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.SearchHandler>
+        <SearchHandler/>
+    </Shell.SearchHandler>
+
+    <TabBar x:Name="ButtomTabBar"
+            Route="main">
+        <Tab Icon="home.png"
+             Title="Home"
+             Route="home">
+            <ShellContent
+                Route="view"
+                ContentTemplate="{DataTemplate views:HomePage}">
+            </ShellContent>
+        </Tab>
+        <Tab Route="bell"
+             Icon="bell.png" 
+             Title="Notifications">
+            <ShellContent />
+        </Tab>
+        <Tab Route="search"
+             Icon="search.png" 
+             Title="Explore">
+            <ShellContent />
+        </Tab>
+        <Tab Route="settings"
+             Icon="settings.png" 
+             Title="Settings">
+            <ShellContent/>
+        </Tab>
+    </TabBar>
 
 </Shell>
