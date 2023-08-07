@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             x:Class="NativeApp.MVVM.Views.CommentsPage"
+             Title="Comments"
+             FlowDirection="LeftToRight"
+             xmlns:templateSelectors="clr-namespace:NativeApp.Templates.DataTemplateSelectors"
+             x:DataType="{x:Type viewModels:PostCommentsViewModel}"
+             >
+    <CollectionView x:Name="CommentsCollectionView"
+              ItemsSource="{Binding Comments, Mode=OneTime}"
+              Header="{Binding PostViewModel, Mode=OneTime}"
+              HeaderTemplate="{StaticResource postAsHeaderDataTemplateSelector}"
+              >
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="{x:Type viewModels:CommentViewModel}">
+                <Grid x:Name="CommentGrid"
+                             ColumnDefinitions="50,*,47" 
+                             RowDefinitions="{OnIdiom Tablet='22,Auto,600,20', Default='22,Auto,40'}"
+                             RowSpacing="10"
+                             BackgroundColor="Transparent"
+                          Padding="10"
+                             >
+                    <Label x:Name="MoreOptionsButton"
+                                Style="{StaticResource ElementLabel}"
+                                Text="⁝"
+                                FontAttributes="Bold"
+                                BackgroundColor="Transparent"
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                HorizontalOptions="End"
+                                />
+                    <Label x:Name="UserDetailsAndActionDateLabel"
+                                    LineBreakMode="MiddleTruncation"
+                                    FontSize="{StaticResource ElementSize}"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="10,0"
+                                    >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Comment.User.Nickname, Mode=OneTime}"
+                                            FontSize="{StaticResource ElementSize}"
+                                            FontAttributes="Bold"
+                                            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                <Span Text="{Binding Comment.User.UserName, Mode=OneTime, StringFormat=' @{0} •&#160;'}"
+                                          TextColor="{StaticResource Gray500}"/>
+                                <Span TextColor="{StaticResource Gray500}"
+                                            Text="{Binding Comment.Date, Mode=OneTime, Converter={StaticResource DateTimeToStringConverter}}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <ImageButton x:Name="ProfileImageButton"
+                                Source="{Binding Comment.User.Profile.Icon.Source}"
+                                Aspect="AspectFill"
+                                HeightRequest="50"
+                                CornerRadius="25"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.RowSpan="3"
+                                VerticalOptions="Start"
+                                />
+                    <Label Text="{Binding Comment.Text}"
+                                Style="{StaticResource ElementLabel}"
+                                VerticalTextAlignment="Start"
+                                Margin="10,0,0,0"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"   
+                                />
+
+                    <Grid Grid.Row="2" Grid.ColumnSpan="3"
+                                RowDefinitions="20"
+                                ColumnDefinitions="30,50,*,30,50"
+                                Padding="0,0,-5,0"
+                                VerticalOptions="Center">
+                        <ImageButton x:Name="ReplyImageButton"
+                                    Source="comment.png"
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    Grid.Column="0"
+                                    CommandParameter="{Binding}"
+                                    Command="{Binding ReplyButtonClickedCommand, Mode=OneTime}"
+                                    VerticalOptions="Start"
+                            />
+                        <Label x:Name="RepliesCountLabel"
+                                    Style="{StaticResource ElementLabel}"
+                                    FontSize="{StaticResource ElementSize}"
+                                    FontAttributes="Bold"
+                                    Grid.Column="1"
+                                    Text="{Binding Comment.RepliesCount, Mode=OneTime, Converter={StaticResource IntToStirngConverter}}"
+                                    />
+                        <ImageButton x:Name="ShareImageButton" 
+                                    Source="share.png"
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Start"
+                                    Grid.Column="2"
+                                    Margin="0,0,5,0"
+                                    />
+                        <ImageButton x:Name="LikeImageButton"
+                                    Source="heart_selected.png"
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    Grid.Column="3"
+                                    />
+                        <Label x:Name="LikesCountLabel"
+                                    Style="{StaticResource ElementLabel}"
+                                    FontSize="{StaticResource ElementSize}"
+                                    FontAttributes="Bold"
+                                    Grid.Column="4"
+                                    Text="{Binding Comment.Likes, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}">
+                        </Label>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
