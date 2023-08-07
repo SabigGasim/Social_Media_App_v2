@@ -5,23 +5,26 @@ namespace NativeApp.MVVM.ViewModels;
 
 public interface IPropertyChangedNotifier : INotifyPropertyChanged
 {
-    bool TrySetValue<T>(ref T property, T value, [CallerMemberName] string propertyName = null);
+    bool TrySetValue<T>(ref T? property, T? value, [CallerMemberName] string? propertyName = null);
 }
 
 public class PropertyChangedNotifier : IPropertyChangedNotifier
 {
-    public bool TrySetValue<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
+    public bool TrySetValue<T>(ref T? property, T? value, [CallerMemberName] string? propertyName = null)
     {
-        if (property.Equals(value))
+        if(property is null || !property!.Equals(value)!)
         {
-            return false;
+            property = value;
+            OnPropertyChanged(propertyName!);
+            return true;
         }
 
-        property = value;
+        return false;
+    }
 
+    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        return true;
     }
 
     public event PropertyChangedEventHandler PropertyChanged;

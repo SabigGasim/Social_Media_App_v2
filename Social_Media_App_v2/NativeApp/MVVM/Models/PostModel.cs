@@ -17,6 +17,5 @@ public sealed class PostModel
     public DateTime Date { get; init; }
     public long Likes { get; set; }
     public long CommentsCount { get; set; }
-    public ObservableCollection<CommentModel>? Comments { get; set; }
     public ObservableCollection<MediaModel>? Media { get; set; }
 }

@@ -7,6 +7,5 @@ public class ReplyModel
     public long Likes { get; set; }
     public DateTime Date { get; init; }
     public UserModel User { get; set; }
-
     public CommentModel Comment { get; set; }
 }

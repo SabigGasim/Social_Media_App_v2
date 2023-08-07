@@ -29,14 +29,21 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IDatabase, FakeInMemoryDatabase>();
         builder.Services.AddSingleton<ITimelineRepository, FakeTimelineRepository>();
+        builder.Services.AddSingleton<ICommentsRepository, FakeCommentsRepository>();
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+        builder.Services.AddSingleton<INavigateCommandFactory, NavigateCommandFactory>();
+        
         builder.Services.AddTransient<PostViewModel>();
+        builder.Services.AddTransient<CommentViewModel>();
+
         builder.Services.AddTransient<TimelineViewModel>();
+        builder.Services.AddTransient<PostCommentsViewModel>();
+
         builder.Services.AddSingleton<PostDataTemplateSelector>();
 
         builder.Services.AddSingleton<HomePage>();
-
+        builder.Services.AddTransient<CommentsPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
