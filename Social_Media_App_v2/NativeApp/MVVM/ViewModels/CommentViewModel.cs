@@ -1,4 +1,5 @@
-﻿using NativeApp.Interfaces;
+﻿using NativeApp.Constants;
+using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using System.Windows.Input;
 
@@ -13,7 +14,10 @@ public class CommentViewModel : ViewModelBase
     public CommentViewModel(INavigateCommandFactory navigateCommandFactory)
     {
         _navigateCommandFactory = navigateCommandFactory;
+        
+        InitializeComands();
     }
+
 
     public CommentModel? Comment 
     { 
@@ -25,5 +29,12 @@ public class CommentViewModel : ViewModelBase
     {
         get => _replyButtonClickedCommand;
         set => TrySetValue(ref _replyButtonClickedCommand, value);
+    }
+    
+    
+    private void InitializeComands()
+    {
+        _replyButtonClickedCommand = _navigateCommandFactory
+            .Create(nameof(CommentViewModel), this, Routes.RepliesPage);
     }
 }
