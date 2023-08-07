@@ -65,9 +65,29 @@ public class FakeInMemoryDatabase : IDatabase
             .Skip(1);
 
 
-        var postsToTake = Math.Min(numberOfComments, remaining.Count());
+        var commentsToTake = Math.Min(numberOfComments, remaining.Count());
 
-        return Task.FromResult(remaining.Take(postsToTake));
+        return Task.FromResult(remaining.Take(commentsToTake));
+    }
+
+    public Task<IEnumerable<ReplyModel>> GetCommentReplies(Guid commentId, Guid? lastSeenReplyId, int numberOfReplies)
+    {
+        var replies = _replies.Where(x => x.CommentId == commentId);
+
+        if (lastSeenReplyId is null)
+        {
+            var count = Math.Min(numberOfReplies, replies.Count());
+
+            return Task.FromResult(replies.Take(count));
+        }
+
+        var remaining = replies
+            .SkipWhile(reply => reply.Id != lastSeenReplyId)
+            .Skip(1);
+
+        var repliesToTake = Math.Min(numberOfReplies, remaining.Count());
+
+        return Task.FromResult(remaining.Take(repliesToTake));
     }
 
     private void SetFakeDatabase(int numberOfPosts)
@@ -91,16 +111,19 @@ public class FakeInMemoryDatabase : IDatabase
 
             _comments.AddRange(comments);
 
-            _replies.AddRange(replyFaker.Generate(comments.Count())
-                .Select(x =>
-                {
-                    foreach (var comment in comments)
-                    {
-                        x.Comment = comment;
-                    }
+            foreach (var comment in comments)
+            {
 
-                    return x;
-                }));
+                _replies.AddRange(replyFaker.Generate(comment.RepliesCount)
+                    .Select(x =>
+                    {
+                        x.CommentId = comment.Id;
+                        x.ReplyingTo = comment.User;
+
+                        return x;
+                    }));
+            }
+
         }
     }
 
@@ -141,8 +164,9 @@ public class FakeInMemoryDatabase : IDatabase
             .RuleFor(comment => comment.Text, f => f.Lorem.Text())
             .RuleFor(comment => comment.User, () => fakeUser.Generate())
             .RuleFor(comment => comment.Date, f => f.Date.Between(DateTime.Now.AddYears(-5), DateTime.Now))
-            .RuleFor(comment => comment.Likes, () => randomizer.Next(1_000_000_000))
-            .RuleFor(comment => comment.RepliesCount, () => randomizer.Next(200));
+            .RuleFor(comment => comment.Likes, () => randomizer.Next(100_000))
+            .RuleFor(comment => comment.RepliesCount, () => randomizer.Next(30))
+            .RuleFor(comment => comment.Id, () => Guid.NewGuid());
     }
 
     private static Faker<ReplyModel> GetReplyFaker(Faker<UserModel> fakeUser)
@@ -174,6 +198,4 @@ public class FakeInMemoryDatabase : IDatabase
 
         return profileFaker;
     }
-
-    
 }
