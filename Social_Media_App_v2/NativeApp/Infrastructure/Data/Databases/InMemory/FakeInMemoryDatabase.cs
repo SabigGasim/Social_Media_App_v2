@@ -15,25 +15,9 @@ public class FakeInMemoryDatabase : IDatabase
         _comments = new();
         _replies = new();
         _users = new();
-        _posts = GetPosts(100).ToList();
+        _posts = new();
 
-        foreach (var post in _posts)
-        {
-            _users.Add(post.User);
-            _comments.AddRange(post.Comments);
-            post.CommentsCount = post.Comments.Count;
-
-            foreach (var comment in post.Comments)
-            {
-                _users.Add(comment.User);
-                _replies.AddRange(comment.Replies);
-
-                foreach (var reply in comment.Replies)
-                {
-                    _users.Add(reply.User);
-                }
-            }
-        }
+        SetFakeDatabase(100);
     }
 
     public Task<IEnumerable<PostModel>> GetTimelinePosts(Guid? lastSeenPostId, int numberOfPosts)
@@ -56,7 +40,7 @@ public class FakeInMemoryDatabase : IDatabase
     {
         if (posts is null || posts.Count() == 0)
         {
-            _posts.AddRange(GetPosts(10));
+            SetFakeDatabase(10);
             return Task.CompletedTask;
         }
 
@@ -64,17 +48,60 @@ public class FakeInMemoryDatabase : IDatabase
         return Task.CompletedTask;
     }
 
-    private static IEnumerable<PostModel> GetPosts(int numberOfPosts)
+    public Task<IEnumerable<CommentModel>> GetPostComments(Guid? lastSeenCommentId, Guid? postId, int numberOfComments)
+    {
+        if (lastSeenCommentId is null)
+        {
+            var comments = _comments.Where(x => x.PostId == postId);
+
+            var count = Math.Min(numberOfComments, comments.Count());
+
+            return Task.FromResult(comments.Take(count));
+        }
+
+        var remaining = _comments
+            .Where(x => x.PostId == postId)
+            .SkipWhile(comment => comment.Id != lastSeenCommentId)
+            .Skip(1);
+
+
+        var postsToTake = Math.Min(numberOfComments, remaining.Count());
+
+        return Task.FromResult(remaining.Take(postsToTake));
+    }
+
+    private void SetFakeDatabase(int numberOfPosts)
     {
         var mediaFaker = GetMediaFaker();
         var userFaker = GetUserFaker(mediaFaker);
         var replyFaker = GetReplyFaker(userFaker);
-        var commentsFaker = GetCommentsFaker(userFaker, replyFaker);
+        var commentsFaker = GetCommentsFaker(userFaker);
         var postFaker = GetPostsFaker(userFaker, commentsFaker, mediaFaker);
 
-        var posts = postFaker.Generate(numberOfPosts);
+        _posts.AddRange(postFaker.Generate(numberOfPosts));
 
-        return posts;
+        foreach(var post in _posts)
+        {
+            var comments = commentsFaker.Generate((int)post.CommentsCount)
+                .Select(x =>
+                {
+                    x.PostId = post.Id;
+                    return x;
+                });
+
+            _comments.AddRange(comments);
+
+            _replies.AddRange(replyFaker.Generate(comments.Count())
+                .Select(x =>
+                {
+                    foreach (var comment in comments)
+                    {
+                        x.Comment = comment;
+                    }
+
+                    return x;
+                }));
+        }
     }
 
     private static Faker<PostModel> GetPostsFaker(Faker<UserModel> userFaker, Faker<CommentModel> commentsFaker, Faker<MediaModel> mediaFaker)
@@ -83,7 +110,6 @@ public class FakeInMemoryDatabase : IDatabase
 
         return new Faker<PostModel>()
             .RuleFor(x => x.User, () => userFaker.Generate())
-            .RuleFor(x => x.Comments, () => new(commentsFaker.GenerateBetween(10, 100)))
             .RuleFor(x => x.Media, () =>
             {
                 var postMediaFilesLength = randomizer.Next(-4, 5);
@@ -97,8 +123,9 @@ public class FakeInMemoryDatabase : IDatabase
             })
             .RuleFor(x => x.Text, x => x.Lorem.Text())
             .RuleFor(x => x.Likes, () => randomizer.Next(100, 3_000_000))
+            .RuleFor(x => x.CommentsCount, () => randomizer.Next(0, 30))
             .RuleFor(x => x.Date, x => x.Date.Between(DateTime.Now.AddYears(-10), DateTime.Now))
-            .RuleFor(x => x.Id, Guid.NewGuid);
+            .RuleFor(x => x.Id, (x) => Guid.NewGuid());
     }
 
     private static Faker<MediaModel> GetMediaFaker()
@@ -107,7 +134,7 @@ public class FakeInMemoryDatabase : IDatabase
             .RuleFor(x => x.Url, x => x.Image.LoremFlickrUrl(1920, 1080));
     }
 
-    private static Faker<CommentModel> GetCommentsFaker(Faker<UserModel> fakeUser, Faker<ReplyModel> replyFaker)
+    private static Faker<CommentModel> GetCommentsFaker(Faker<UserModel> fakeUser)
     {
         var randomizer = new Random(Guid.NewGuid().GetHashCode());
         return new Faker<CommentModel>()
@@ -115,7 +142,7 @@ public class FakeInMemoryDatabase : IDatabase
             .RuleFor(comment => comment.User, () => fakeUser.Generate())
             .RuleFor(comment => comment.Date, f => f.Date.Between(DateTime.Now.AddYears(-5), DateTime.Now))
             .RuleFor(comment => comment.Likes, () => randomizer.Next(1_000_000_000))
-            .RuleFor(comment => comment.Replies, () => new(replyFaker.GenerateBetween(1, 10)));
+            .RuleFor(comment => comment.RepliesCount, () => randomizer.Next(200));
     }
 
     private static Faker<ReplyModel> GetReplyFaker(Faker<UserModel> fakeUser)
@@ -147,4 +174,6 @@ public class FakeInMemoryDatabase : IDatabase
 
         return profileFaker;
     }
+
+    
 }
