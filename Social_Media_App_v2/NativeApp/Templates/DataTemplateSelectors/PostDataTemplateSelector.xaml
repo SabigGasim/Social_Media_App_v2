@@ -50,10 +50,10 @@
                                              FontSize="{StaticResource ElementSize}"
                                              FontAttributes="Bold"
                                             TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
-                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •&#160;'}"
+                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •'}"
                                           TextColor="{StaticResource Gray500}"/>
                                         <Span TextColor="{StaticResource Gray500}"
-                                            Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}}"/>
+                                            Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}, StringFormat=' {0}'}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -178,13 +178,13 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Post.User.Nickname, Mode=OneTime}"
-                                            FontSize="{StaticResource ElementSize}"
-                                            FontAttributes="Bold"
+                                             FontSize="{StaticResource ElementSize}"
+                                             FontAttributes="Bold"
                                             TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
-                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •&#160;'}"
+                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •'}"
                                           TextColor="{StaticResource Gray500}"/>
                                         <Span TextColor="{StaticResource Gray500}"
-                                            Text="{Binding Post.Date, Mode=OneTime, Converter={StaticResource DateTimeToStringConverter}}"/>
+                                            Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}, StringFormat=' {0}'}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -289,10 +289,10 @@
                                              FontSize="{StaticResource ElementSize}"
                                              FontAttributes="Bold"
                                             TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
-                                <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •&#160;'}"
+                                <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •'}"
                                           TextColor="{StaticResource Gray500}"/>
                                 <Span TextColor="{StaticResource Gray500}"
-                                            Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}}"/>
+                                            Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}, StringFormat=' {0}'}"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -408,13 +408,13 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Post.User.Nickname, Mode=OneTime}"
-                                            FontSize="{StaticResource ElementSize}"
-                                            FontAttributes="Bold"
-                                            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
-                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •&#160;'}"
-                                          TextColor="{StaticResource Gray500}"/>
+                                                     FontSize="{StaticResource ElementSize}"
+                                                     FontAttributes="Bold"
+                                                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+                                        <Span Text="{Binding Post.User.UserName, Mode=OneTime, StringFormat=' @{0} •'}"
+                                                  TextColor="{StaticResource Gray500}"/>
                                         <Span TextColor="{StaticResource Gray500}"
-                                            Text="{Binding Post.Date, Mode=OneTime, Converter={StaticResource DateTimeToStringConverter}}"/>
+                                                    Text="{Binding Post.Date, Mode=OneTime,Converter={StaticResource DateTimeToStringConverter}, StringFormat=' {0}'}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>

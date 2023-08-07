@@ -110,6 +110,9 @@
 	  <MauiXaml Update="MVVM\Views\CommentsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\RepliesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Templates\DataTemplateSelectors\PostDataTemplateSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

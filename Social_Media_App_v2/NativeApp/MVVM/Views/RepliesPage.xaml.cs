@@ -1,0 +1,24 @@
+using NativeApp.MVVM.ViewModels;
+
+namespace NativeApp.MVVM.Views;
+
+public partial class RepliesPage : ContentPage, IQueryAttributable
+{
+    private readonly CommentRepliesViewModel _viewModel;
+
+    public RepliesPage(CommentRepliesViewModel viewModel)
+	{
+		InitializeComponent();
+
+		_viewModel = viewModel;
+    }
+
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        _viewModel.CommentViewModel = query[nameof(CommentViewModel)] as CommentViewModel;
+        
+        await _viewModel.UpdateReplies(null);
+        
+        BindingContext = _viewModel;
+    }
+}
