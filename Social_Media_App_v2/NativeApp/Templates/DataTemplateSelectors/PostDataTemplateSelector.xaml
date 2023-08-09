@@ -6,10 +6,13 @@
                     xmlns:models="clr-namespace:NativeApp.MVVM.Models"
                     xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
                     >
-    <DataTemplate x:Key="MediaItemTemplate" x:DataType="{x:Type models:MediaModel}">
+    <DataTemplate x:Key="MediaItemTemplate" 
+                  x:DataType="{x:Type models:MediaModel}">
         <ImageButton x:Name="PostImageCarouselView"
                      Source="{Binding Source, Mode=OneTime}"
-                     Aspect="AspectFill" />
+                     Aspect="AspectFill"
+                     Command="{Binding Source={RelativeSource AncestorType={x:Type CarouselView}}, Path=BindingContext.PostsButtonClickedCommand}"
+                     CommandParameter="{Binding}"/>
     </DataTemplate>
     
     <templateSelectors:PostDataTemplateSelector x:Key="postDataTemplateSelector">
@@ -78,16 +81,17 @@
                             <Border StrokeShape="RoundRectangle 10"
                                 Grid.Row="2"
                                 Grid.ColumnSpan="3"
-                                StrokeThickness="0">
+                                StrokeThickness="0"
+                                >
                                 <CarouselView x:Name="PostImagesCarouselView"
                                   ItemsSource="{Binding Post.Media, Mode=OneTime}"
                                   Loop="False"
                                   IndicatorView="{x:Reference MediaIndicatorView}"
-                                  ItemTemplate="{StaticResource MediaItemTemplate}"
-                                  />
+                                  ItemTemplate="{StaticResource MediaItemTemplate}"/>
                             </Border>
 
-                            <IndicatorView x:Name="MediaIndicatorView" 
+
+                                <IndicatorView x:Name="MediaIndicatorView" 
                                IndicatorColor="{StaticResource Gray400}"
                                SelectedIndicatorColor="{StaticResource Primary}"
                                Margin="0,0,0,15"
@@ -107,7 +111,7 @@
                                     WidthRequest="20"
                                     HeightRequest="20"
                                     Grid.Column="0"
-                                    Command="{Binding CommentsButtonClickedCommand, Mode=TwoWay}"
+                                    Command="{Binding CommentsButtonClickedCommand, Mode=OneTime}"
                                     VerticalOptions="Start"
                                     />
                                 <Label x:Name="CommentsCountLabel"

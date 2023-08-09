@@ -11,5 +11,6 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(Routes.CommentsPage, typeof(CommentsPage));
         Routing.RegisterRoute(Routes.RepliesPage, typeof(RepliesPage));
+        Routing.RegisterRoute(Routes.MediaViewer, typeof(PostMediaViewer));
     }
 }

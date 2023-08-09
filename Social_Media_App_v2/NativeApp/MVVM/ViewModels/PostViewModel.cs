@@ -3,6 +3,7 @@ using NativeApp.Factories;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using NativeApp.Services;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -47,6 +48,18 @@ public class PostViewModel : ViewModelBase
     {
         _commentsButtonClickedCommand = _navigateCommandFactory.Create("PostViewModel", this, Routes.CommentsPage);
 
-        _postsButtonClickedCommand = _navigateCommandFactory.Create<MediaModel>("Image", "mediaViewer");
+
+        _postsButtonClickedCommand = 
+            _navigateCommandFactory.Create("params", Routes.MediaViewer, (context) =>
+            {
+                var index = this.Post!.Media!.IndexOf((MediaModel)context!);
+                var post = this.Post!;
+
+                return new Dictionary<string, object>
+                {
+                    ["Index"] = index,
+                    [nameof(PostModel)] = post
+                };
+            });
     }
 }

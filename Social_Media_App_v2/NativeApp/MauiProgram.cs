@@ -47,6 +47,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddTransient<CommentsPage>();
         builder.Services.AddTransient<RepliesPage>();
+        builder.Services.AddTransient<PostMediaViewer>();
 
 #if DEBUG
         builder.Logging.AddDebug();

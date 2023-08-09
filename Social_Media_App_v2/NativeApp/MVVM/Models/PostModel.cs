@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NativeApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,5 +18,5 @@ public sealed class PostModel
     public DateTime Date { get; init; }
     public long Likes { get; set; }
     public long CommentsCount { get; set; }
-    public ObservableCollection<MediaModel>? Media { get; set; }
+    public ObservableList<MediaModel>? Media { get; set; }
 }
