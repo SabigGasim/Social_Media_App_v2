@@ -1,4 +1,5 @@
-﻿using NativeApp.Interfaces;
+﻿using Bogus.Bson;
+using NativeApp.Interfaces;
 using System.Windows.Input;
 
 namespace NativeApp.Factories;
@@ -25,15 +26,6 @@ public class NavigateCommandFactory : INavigateCommandFactory
         });
     }
 
-    public ICommand Create<TParameter>(string key, string route) where TParameter : class
-    {
-        return new Command(async (parameter) =>
-        {
-            var param = _routeParametersFactory.Create(key, parameter as TParameter);
-            await _navigationService.NavigateToAsync(route, param);
-        });
-    }
-
     public ICommand Create(string key, object value, string route, Action beforeNavigation)
     {
         return new Command(async () =>
@@ -41,6 +33,33 @@ public class NavigateCommandFactory : INavigateCommandFactory
             beforeNavigation();
 
             var param = _routeParametersFactory.Create(key, value);
+            await _navigationService.NavigateToAsync(route, param);
+        });
+    }
+
+    public ICommand Create(string key, string route, Func<object> getValue)
+    {
+        return new Command(async () =>
+        {
+            var param = _routeParametersFactory.Create(key, getValue());
+            await _navigationService.NavigateToAsync(route, param);
+        });
+    }
+
+    public ICommand Create(string key, string route, Func<object, object> getValue)
+    {
+        return new Command(async (object context) =>
+        {
+            var param = _routeParametersFactory.Create(key, getValue(context));
+            await _navigationService.NavigateToAsync(route, param);
+        });
+    }
+
+    public ICommand Create(string key, string route, Func<object, IDictionary<string, object>> getValues)
+    {
+        return new Command(async (object context) =>
+        {
+            var param = getValues(context);
             await _navigationService.NavigateToAsync(route, param);
         });
     }
