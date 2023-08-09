@@ -15,10 +15,6 @@ public class PostViewModel : ViewModelBase
     private ICommand? _commentsButtonClickedCommand;
     private PostModel? _post;
     
-    //I'm sorry but... maui forces you to do this
-    //this property is used to not throw null exception when passing a query parameter through shell
-    public static PostViewModel? Empty;
-
     public PostViewModel(INavigateCommandFactory navigateCommandFactory)
     {
         _navigateCommandFactory = navigateCommandFactory;
