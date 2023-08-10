@@ -30,4 +30,6 @@ public static partial class MapperlyMappings
     public static partial IEnumerable<ReplyModel> Map(this IEnumerable<ReplyDto> replies);
     public static partial IEnumerable<FollowRequestModel> Map(this IEnumerable<FollowRequestDto> followRequests);
     public static partial IEnumerable<FollowRequestDto> Map(this IEnumerable<FollowRequestModel> followRequests);
+    public static partial IEnumerable<UserDto> Map(this IEnumerable<UserModel> user);
+    public static partial IEnumerable<UserModel> Map(this IEnumerable<UserDto> user);
 }
