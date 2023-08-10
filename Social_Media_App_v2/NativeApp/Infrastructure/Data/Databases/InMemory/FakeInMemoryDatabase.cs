@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Domain.Enums;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 
@@ -9,6 +10,7 @@ public class FakeInMemoryDatabase : IDatabase
     private readonly List<CommentModel> _comments;
     private readonly List<ReplyModel> _replies;
     private readonly List<UserModel> _users;
+    private readonly List<FollowRequestModel> _followRequests;
 
     public FakeInMemoryDatabase()
     {
@@ -16,6 +18,7 @@ public class FakeInMemoryDatabase : IDatabase
         _replies = new();
         _users = new();
         _posts = new();
+        _followRequests = new();
 
         SetFakeDatabase(100);
     }
@@ -96,7 +99,7 @@ public class FakeInMemoryDatabase : IDatabase
         var userFaker = GetUserFaker(mediaFaker);
         var replyFaker = GetReplyFaker(userFaker);
         var commentsFaker = GetCommentsFaker(userFaker);
-        var postFaker = GetPostsFaker(userFaker, commentsFaker, mediaFaker);
+        var postFaker = GetPostsFaker(userFaker, mediaFaker);
 
         _posts.AddRange(postFaker.Generate(numberOfPosts));
 
@@ -123,11 +126,43 @@ public class FakeInMemoryDatabase : IDatabase
                         return x;
                     }));
             }
-
         }
+
+        var users = _posts.Select(post => post.User)
+            .Concat(_comments.Select(comment => comment.User))
+            .Concat(_replies.Select(reply => reply.User))
+            .Distinct();
+
+        _users.AddRange(users);
+
+        var followRequestsFaker = GetFollowRequestsFaker(_users);
+
+        _followRequests.AddRange(followRequestsFaker!.Generate(_users.Count / 2));
     }
 
-    private static Faker<PostModel> GetPostsFaker(Faker<UserModel> userFaker, Faker<CommentModel> commentsFaker, Faker<MediaModel> mediaFaker)
+    public Task<IEnumerable<FollowRequestModel>> GetFollowRequests(Guid? userId, Guid? lastSeenFollowRequest, int numberOfRequests)
+    {
+        userId ??= _users.First().Id;
+
+        var requests = _followRequests.Where(req => req.Following.Id == userId);
+
+        if (lastSeenFollowRequest is null)
+        {
+            var count = Math.Min(numberOfRequests, requests.Count());
+
+            return Task.FromResult(requests.Take(count));
+        }
+
+        var remaining = requests
+            .SkipWhile(req => req.Id != lastSeenFollowRequest)
+            .Skip(1);
+
+        var repliesToTake = Math.Min(numberOfRequests, remaining.Count());
+
+        return Task.FromResult(remaining.Take(repliesToTake));
+    }
+
+    private static Faker<PostModel> GetPostsFaker(Faker<UserModel> userFaker, Faker<MediaModel> mediaFaker)
     {
         var randomizer = new Random(Guid.NewGuid().GetHashCode());
 
@@ -197,5 +232,30 @@ public class FakeInMemoryDatabase : IDatabase
                 .RuleFor(profile => profile.Icon, () => mediaFaker.Generate());
 
         return profileFaker;
+    }
+
+    private static Faker<FollowRequestModel> GetFollowRequestsFaker(IList<UserModel> users)
+    {
+        var randomizer = new Random(Guid.NewGuid().GetHashCode());
+        var followerIndices = Enumerable.Range(0, users.Count).ToList();
+        var followingIndices = Enumerable.Range(0, users.Count).ToList();
+
+        return new Faker<FollowRequestModel>()
+            .RuleFor(req => req.Following, () =>
+            {
+                var index = randomizer.Next(0, followingIndices.Count);
+                var user = users[index]!;
+                followingIndices.RemoveAt(index);
+                return user;
+            })
+            .RuleFor(req => req.Follower, () =>
+            {
+                var index = randomizer.Next(0, followerIndices.Count);
+                var user = users[index]!;
+                followerIndices.RemoveAt(index);
+                return user;
+            })
+            .RuleFor(req => req.State, FollowRequestState.Pending)
+            .RuleFor(req => req.Id, () => Guid.NewGuid());
     }
 }
