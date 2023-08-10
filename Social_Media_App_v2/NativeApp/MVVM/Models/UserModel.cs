@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using NativeApp.Helpers;
 using System.Collections.ObjectModel;
 
 namespace NativeApp.MVVM.Models;
@@ -10,5 +11,4 @@ public class UserModel
     public string Nickname { get; set; }
     public ProfileModel Profile { get; set; }
     public AccountState State { get; set; }
-    public ObservableCollection<PostModel> Posts { get; set; }
 }

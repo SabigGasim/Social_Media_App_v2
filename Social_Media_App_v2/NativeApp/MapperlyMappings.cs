@@ -17,12 +17,6 @@ public static partial class MapperlyMappings
     [MapProperty(nameof(CommentModel.Date), nameof(CommentDto.CreatedDate))]
     public static partial CommentDto Map(this CommentModel comment);
 
-    private static PostDto MapPostViewModeltoPostDto(this PostViewModel? postViewModel)
-    {
-        return Map(postViewModel?.Post!);
-    }
-
-
     public static partial IEnumerable<PostDto> Map(this ObservableList<PostModel> postCollection);
     public static partial IEnumerable<PostDto> Map(this ObservableList<PostViewModel> postCollection);
     
@@ -34,4 +28,6 @@ public static partial class MapperlyMappings
     public static partial IEnumerable<CommentDto> Map(this IEnumerable<CommentModel> commentDtos);
     public static partial IEnumerable<ReplyDto> Map(this IEnumerable<ReplyModel> replies);
     public static partial IEnumerable<ReplyModel> Map(this IEnumerable<ReplyDto> replies);
+    public static partial IEnumerable<FollowRequestModel> Map(this IEnumerable<FollowRequestDto> followRequests);
+    public static partial IEnumerable<FollowRequestDto> Map(this IEnumerable<FollowRequestModel> followRequests);
 }
