@@ -93,6 +93,14 @@ public class FakeInMemoryDatabase : IDatabase
         return Task.FromResult(remaining.Take(repliesToTake));
     }
 
+    public Task<IEnumerable<UserModel>> FindUsersByUsername(string query)
+    {
+        query = query.ToLower();
+        var users = _users.Where(user => user.Nickname.ToLower()!.StartsWith(query) || user.UserName.ToLower().StartsWith(query));
+
+        return Task.FromResult(users);
+    }
+
     private void SetFakeDatabase(int numberOfPosts)
     {
         var mediaFaker = GetMediaFaker();
