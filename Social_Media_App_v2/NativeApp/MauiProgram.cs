@@ -31,6 +31,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ITimelineRepository, FakeTimelineRepository>();
         builder.Services.AddSingleton<ICommentsRepository, FakeCommentsRepository>();
         builder.Services.AddSingleton<IRepliesRepository, FakeRepliesRepository>();
+        builder.Services.AddSingleton<IFollowRequestsRepository, FakeFollowRequestsRepository>();
 
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
@@ -43,11 +44,13 @@ public static class MauiProgram
         builder.Services.AddTransient<TimelineViewModel>();
         builder.Services.AddTransient<PostCommentsViewModel>();
         builder.Services.AddTransient<CommentRepliesViewModel>();
+        builder.Services.AddTransient<FollowRequestViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddTransient<CommentsPage>();
         builder.Services.AddTransient<RepliesPage>();
         builder.Services.AddTransient<PostMediaViewer>();
+        builder.Services.AddTransient<FriendRequestsPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

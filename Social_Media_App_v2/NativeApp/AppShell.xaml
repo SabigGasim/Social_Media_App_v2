@@ -22,10 +22,15 @@
                 ContentTemplate="{DataTemplate views:HomePage}">
             </ShellContent>
         </Tab>
-        <Tab Route="bell"
+        <Tab Route="notifications"
              Icon="bell.png" 
              Title="Notifications">
-            <ShellContent />
+            <ShellContent Route="notifications"
+                          Title="Alerts"
+                          ContentTemplate="{DataTemplate views:NotificationsPage}"/>
+            <ShellContent Route="friend_requests"
+                          Title="Follow Requests"
+                          ContentTemplate="{DataTemplate views:FollowRequestsPage}"/>
         </Tab>
         <Tab Route="search"
              Icon="search.png" 

@@ -3,7 +3,7 @@
 namespace NativeApp.Helpers;
 public class ObservableList<T> : List<T>, INotifyCollectionChanged
 {
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
     public ObservableList(){}
 
