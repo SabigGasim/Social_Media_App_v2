@@ -32,10 +32,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<ICommentsRepository, FakeCommentsRepository>();
         builder.Services.AddSingleton<IRepliesRepository, FakeRepliesRepository>();
         builder.Services.AddSingleton<IFollowRequestsRepository, FakeFollowRequestsRepository>();
+        builder.Services.AddSingleton<IUserLookupRepository, FakeUserLookupRepository>();
 
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         builder.Services.AddSingleton<INavigateCommandFactory, NavigateCommandFactory>();
+        builder.Services.AddSingleton<ILookupHandler, LookupHandler>();
         
         builder.Services.AddTransient<PostViewModel>();
         builder.Services.AddTransient<CommentViewModel>();
@@ -45,12 +47,14 @@ public static class MauiProgram
         builder.Services.AddTransient<PostCommentsViewModel>();
         builder.Services.AddTransient<CommentRepliesViewModel>();
         builder.Services.AddTransient<FollowRequestViewModel>();
+        builder.Services.AddSingleton<UserSearchViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<SearchPage>();
         builder.Services.AddTransient<CommentsPage>();
         builder.Services.AddTransient<RepliesPage>();
         builder.Services.AddTransient<PostMediaViewer>();
-        builder.Services.AddTransient<FriendRequestsPage>();
+        builder.Services.AddTransient<FollowRequestsPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -32,10 +32,11 @@
                           Title="Follow Requests"
                           ContentTemplate="{DataTemplate views:FollowRequestsPage}"/>
         </Tab>
-        <Tab Route="search"
+        <Tab Route="explore"
              Icon="search.png" 
              Title="Explore">
-            <ShellContent />
+            <ShellContent Title="Explore"
+                          ContentTemplate="{DataTemplate views:SearchPage}"/>
         </Tab>
         <Tab Route="settings"
              Icon="settings.png" 

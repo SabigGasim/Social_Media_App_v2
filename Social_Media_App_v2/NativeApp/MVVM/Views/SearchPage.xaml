@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.SearchPage"
+             xmlns:viewModel="clr-namespace:NativeApp.MVVM.ViewModels"
+             xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+             Title="Explore" 
+             x:DataType="{x:Type viewModel:UserSearchViewModel}">
+    <Grid x:Name="UsersGrid" Margin="0,0,0,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <SearchBar x:Name="searchBar"
+                           Placeholder="Search for users.." 
+                           BackgroundColor="#141414" 
+                           Grid.Row="0"
+                           Margin="0,0,0,5"
+                           TextColor="LightGray"
+                           PlaceholderColor="{StaticResource Gray400}" 
+                           CancelButtonColor="{StaticResource Gray400}"
+                   TextChanged="SearchTextChanged"/>
+
+        <CollectionView ItemsSource="{Binding Users}" 
+                            Grid.Row="1">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:UserModel}">
+                    <Grid ColumnSpacing="15"
+                              Padding="15,0"
+                              >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ImageButton Source="{Binding Profile.Icon.Source}"
+                                     Aspect="AspectFill" 
+                                     Grid.Column="0"
+                                     CornerRadius="25"
+                                     Margin="0,5"
+                                     />
+                        <Label Style="{StaticResource HeaderLabel}"
+                               Grid.Column="1"
+                               HorizontalTextAlignment="Start" 
+                               VerticalOptions="Start"
+                               >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Nickname}"
+                                          FontSize="20"
+                                          FontAttributes="Bold"
+                                          />
+                                    <Span Text="&#x0a;"/>
+                                    <Span Text="{Binding UserName}"
+                                          FontSize="16"
+                                          TextColor="{StaticResource Gray400}"
+                                          />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+</ContentPage>
