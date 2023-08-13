@@ -6,7 +6,7 @@ public sealed class TimelineViewModel : ViewModelBase
 {
     private readonly ITimelineRepository _timelineRepository;
     private readonly IServiceProvider _serviceProvider;
-    private ObservableList<PostViewModel>? _postViewModels = new(100);
+    private RangeObservableCollection<PostViewModel>? _postViewModels = new();
 
     public TimelineViewModel(
         ITimelineRepository timelineRepository,
@@ -37,7 +37,7 @@ public sealed class TimelineViewModel : ViewModelBase
         }
     }
 
-    public ObservableList<PostViewModel>? PostViewModels
+    public RangeObservableCollection<PostViewModel>? PostViewModels
     {
         get => _postViewModels;
         set => TrySetValue(ref _postViewModels, value);

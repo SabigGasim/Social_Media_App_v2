@@ -1,9 +1,6 @@
 ﻿using NativeApp.Constants;
-using NativeApp.Factories;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
-using NativeApp.Services;
-using System.Reflection;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -42,7 +39,8 @@ public class PostViewModel : ViewModelBase
 
     private void InitializeCommands()
     {
-        _commentsButtonClickedCommand = _navigateCommandFactory.Create("PostViewModel", this, Routes.CommentsPage);
+        _commentsButtonClickedCommand = 
+            _navigateCommandFactory.Create(nameof(PostViewModel), this, Routes.CommentsPage);
 
 
         _postsButtonClickedCommand = 

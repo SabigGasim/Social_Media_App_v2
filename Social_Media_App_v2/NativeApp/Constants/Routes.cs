@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-﻿namespace NativeApp.Constants;
+namespace NativeApp.Constants;
 
 internal class Routes
 {

@@ -7,7 +7,7 @@ public class CommentRepliesViewModel : ViewModelBase
 {
     private readonly IRepliesRepository _repository;
     private readonly IServiceProvider _serviceProvider;
-    private ObservableList<ReplyViewModel>? _replies;
+    private RangeObservableCollection<ReplyViewModel>? _replies;
     private CommentViewModel? _comment;
 
     public CommentRepliesViewModel(
@@ -18,7 +18,7 @@ public class CommentRepliesViewModel : ViewModelBase
         _serviceProvider = serviceProvider;
     }
 
-    public ObservableList<ReplyViewModel>? Replies 
+    public RangeObservableCollection<ReplyViewModel>? Replies 
     { 
         get => _replies; 
         set => TrySetValue(ref _replies, value); 
@@ -31,7 +31,7 @@ public class CommentRepliesViewModel : ViewModelBase
         {
             if(value is not null)
             {
-                _replies ??= new(value!.Comment!.RepliesCount);
+                _replies ??= new();
             }
 
             TrySetValue(ref _comment, value);

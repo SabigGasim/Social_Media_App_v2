@@ -1,17 +1,12 @@
 ﻿using Infrastructure.Interfaces;
 using NativeApp.Helpers;
 using NativeApp.MVVM.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NativeApp.MVVM.ViewModels;
 
 public class FollowRequestViewModel : ViewModelBase
 {
-    private ObservableList<FollowRequestModel>? _requests = new();
+    private RangeObservableCollection<FollowRequestModel>? _requests = new();
     private readonly IFollowRequestsRepository _repository;
 
     public FollowRequestViewModel(IFollowRequestsRepository repository)
@@ -28,7 +23,7 @@ public class FollowRequestViewModel : ViewModelBase
         }
     }
 
-    public ObservableList<FollowRequestModel>? Requests 
+    public RangeObservableCollection<FollowRequestModel>? Requests 
     {
         get => _requests;
         set => TrySetValue(ref _requests, value);

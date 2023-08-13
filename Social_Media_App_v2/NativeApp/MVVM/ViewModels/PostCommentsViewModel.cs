@@ -6,7 +6,7 @@ namespace NativeApp.MVVM.ViewModels;
 
 public partial class PostCommentsViewModel : ViewModelBase
 {
-    private ObservableList<CommentViewModel>? _comments = new();
+    private RangeObservableCollection<CommentViewModel>? _comments = new();
     private PostViewModel? _postViewModel;
     private readonly ICommentsRepository _repository;
     private readonly IServiceProvider _serviceProvider;
@@ -32,7 +32,7 @@ public partial class PostCommentsViewModel : ViewModelBase
         Comments?.InsertRange(0, commentViewModels.Reverse());
     }
     
-    public ObservableList<CommentViewModel>? Comments
+    public RangeObservableCollection<CommentViewModel>? Comments
     {
         get => _comments;
         set => TrySetValue(ref _comments, value);
