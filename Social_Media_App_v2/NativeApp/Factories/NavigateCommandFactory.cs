@@ -1,5 +1,4 @@
-﻿using Bogus.Bson;
-using NativeApp.Interfaces;
+﻿using NativeApp.Interfaces;
 using System.Windows.Input;
 
 namespace NativeApp.Factories;
@@ -21,17 +20,6 @@ public class NavigateCommandFactory : INavigateCommandFactory
     {
         return new Command(async () =>
         {
-            var param = _routeParametersFactory.Create(key, value);
-            await _navigationService.NavigateToAsync(route, param);
-        });
-    }
-
-    public ICommand Create(string key, object value, string route, Action beforeNavigation)
-    {
-        return new Command(async () =>
-        {
-            beforeNavigation();
-
             var param = _routeParametersFactory.Create(key, value);
             await _navigationService.NavigateToAsync(route, param);
         });

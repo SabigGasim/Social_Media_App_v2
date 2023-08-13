@@ -7,6 +7,7 @@ internal class Routes
     internal const string CommentsPage = nameof(MVVM.Views.CommentsPage);
     internal const string RepliesPage = nameof(MVVM.Views.RepliesPage);
     internal const string MediaViewer = nameof(MVVM.Views.PostMediaViewer);
+    internal const string ProfilePage = nameof(MVVM.Views.ProfilePage);
 
     internal static void RegisterRoutes()
     {

@@ -10,4 +10,5 @@ public interface IDatabase
     Task<IEnumerable<ReplyModel>> GetCommentReplies(Guid commentId, Guid? lastSeenReplyId, int numberOfReplies);
     Task<IEnumerable<FollowRequestModel>> GetFollowRequests(Guid? userId, Guid? lastSeenFollowRequest, int numberOfRequests);
     Task<IEnumerable<UserModel>> FindUsersByUsername(string query);
+    Task<IEnumerable<PostModel>> GetUserPosts(Guid userId, Guid? lastSeenPost, int numberOfPosts);
 }
