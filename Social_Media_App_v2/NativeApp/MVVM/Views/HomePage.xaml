@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:NativeApp.MVVM.ViewModels"
              x:Class="NativeApp.MVVM.Views.HomePage"
-             Title="not facebook"
+             Title="VibeConnect"
              xmlns:converter="clr-namespace:NativeApp.MVVM.Converters"
              xmlns:templateSelectors="clr-namespace:NativeApp.Templates.DataTemplateSelectors"
              xmlns:helpers="clr-namespace:NativeApp.Helpers"
