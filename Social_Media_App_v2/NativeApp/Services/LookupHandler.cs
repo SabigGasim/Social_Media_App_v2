@@ -24,7 +24,7 @@ public class LookupHandler : ILookupHandler
 
     public Func<string, Task> Handle { get; set; } = default!;
 
-    public void ResetAndStartSearchTimer(string query)
+    public void Reset(string query)
     {
         _timer.Stop();
         _newQuery = query;

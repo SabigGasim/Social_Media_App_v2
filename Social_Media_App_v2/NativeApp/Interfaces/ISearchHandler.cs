@@ -4,7 +4,7 @@ namespace NativeApp.Interfaces;
 
 public interface ILookupHandler
 {
-    void ResetAndStartSearchTimer(string query);
+    void Reset(string query);
     Func<string, Task> Handle { get; set; }
     double Interval { get; set; }
 }
