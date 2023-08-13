@@ -1,5 +1,4 @@
 using NativeApp.MVVM.Models;
-using NativeApp.MVVM.ViewModels;
 
 namespace NativeApp.MVVM.Views;
 
@@ -12,10 +11,10 @@ public partial class PostMediaViewer : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-		var post = (PostModel)query[nameof(PostModel)];
+		var media = (MediaListModel)query[nameof(MediaListModel)];
 		var index = (int)query["Index"];
 
-		BindingContext = post;
+		BindingContext = media;
 
 		PostImagesCarouselView.Position = index;
     }

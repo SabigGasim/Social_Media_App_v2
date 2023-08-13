@@ -1,14 +1,5 @@
-﻿using NativeApp.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace NativeApp.MVVM.Models;
 
-namespace NativeApp.MVVM.Models;
-
-#nullable enable
 
 public sealed class PostModel
 {
@@ -18,5 +9,5 @@ public sealed class PostModel
     public DateTime Date { get; init; }
     public long Likes { get; set; }
     public long CommentsCount { get; set; }
-    public ObservableList<MediaModel>? Media { get; set; }
+    public MediaListModel? Media { get; set; }
 }

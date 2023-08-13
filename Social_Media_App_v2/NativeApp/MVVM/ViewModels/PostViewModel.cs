@@ -48,13 +48,14 @@ public class PostViewModel : ViewModelBase
         _postsButtonClickedCommand = 
             _navigateCommandFactory.Create("params", Routes.MediaViewer, (context) =>
             {
-                var index = this.Post!.Media!.IndexOf((MediaModel)context!);
-                var post = this.Post!;
+                var media = this.Post!.Media!;
+                var index = media.IndexOf((MediaModel)context!);
+                
 
                 return new Dictionary<string, object>
                 {
                     ["Index"] = index,
-                    [nameof(PostModel)] = post
+                    [nameof(MediaListModel)] = media
                 };
             });
     }
