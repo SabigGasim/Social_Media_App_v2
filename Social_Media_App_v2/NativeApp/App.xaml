@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Resources/Styles/Converters.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplateSelectors/PostDataTemplateSelector.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplates/CommentDataTemplate.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplates/ProfileHeaderDataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,4 +1,5 @@
-﻿using NativeApp.Interfaces;
+﻿using NativeApp.Constants;
+using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using System.Windows.Input;
 
@@ -21,5 +22,20 @@ public class UserViewModel : ViewModelBase
         set => TrySetValue(ref _user, value); 
     }
 
-    public ICommand? ProfileIconClickedCommand => _profileIconClickedCommand;
+    public bool IsDisplayingUserProfile { get; set; }
+
+    public ICommand? ProfileIconClickedCommand 
+    {
+        get
+        {
+            if (!IsDisplayingUserProfile)
+            {
+                return _profileIconClickedCommand ??= 
+                    _navigateCommandFactory.Create(nameof(UserModel), this.User!, Routes.ProfilePage);
+            }
+
+            return _profileIconClickedCommand ??= _navigateCommandFactory
+                .Create(nameof(MediaListModel), new MediaListModel{User!.Profile.Icon}, Routes.MediaViewer);
+        }
+    }
 }

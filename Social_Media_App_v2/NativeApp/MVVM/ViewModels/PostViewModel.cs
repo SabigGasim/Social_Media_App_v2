@@ -11,7 +11,8 @@ public class PostViewModel : ViewModelBase
     private ICommand? _postsButtonClickedCommand;
     private ICommand? _commentsButtonClickedCommand;
     private PostModel? _post;
-    
+    private ICommand? _profileButtonClickedCommand;
+
     public PostViewModel(INavigateCommandFactory navigateCommandFactory)
     {
         _navigateCommandFactory = navigateCommandFactory;
@@ -37,11 +38,16 @@ public class PostViewModel : ViewModelBase
         set => TrySetValue(ref _postsButtonClickedCommand, value);
     }
 
+
+    public ICommand? ProfileButtonClickedCommand => _profileButtonClickedCommand;
+
     private void InitializeCommands()
     {
         _commentsButtonClickedCommand = 
             _navigateCommandFactory.Create(nameof(PostViewModel), this, Routes.CommentsPage);
 
+        _profileButtonClickedCommand ??=
+            _navigateCommandFactory.Create(nameof(UserModel), Routes.ProfilePage);
 
         _postsButtonClickedCommand = 
             _navigateCommandFactory.Create("params", Routes.MediaViewer, (context) =>

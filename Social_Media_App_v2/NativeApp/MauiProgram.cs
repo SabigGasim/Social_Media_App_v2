@@ -2,14 +2,11 @@
 using Microsoft.Extensions.Logging;
 using NativeApp.Factories;
 using NativeApp.Infrastructure.Data.Databases.InMemory;
-using NativeApp.Infrastructure.Data.FileManagers;
 using NativeApp.Infrastructure.Repositories;
 using NativeApp.Interfaces;
-using NativeApp.MVVM.Converters;
 using NativeApp.MVVM.ViewModels;
 using NativeApp.MVVM.Views;
 using NativeApp.Services;
-using NativeApp.Templates.DataTemplateSelectors;
 
 namespace NativeApp;
 public static class MauiProgram
@@ -31,6 +28,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ITimelineRepository, FakeTimelineRepository>();
         builder.Services.AddSingleton<ICommentsRepository, FakeCommentsRepository>();
         builder.Services.AddSingleton<IRepliesRepository, FakeRepliesRepository>();
+        builder.Services.AddSingleton<IPostRepository, FakePostsRepository>();
         builder.Services.AddSingleton<IFollowRequestsRepository, FakeFollowRequestsRepository>();
         builder.Services.AddSingleton<IUserLookupRepository, FakeUserLookupRepository>();
 
@@ -47,6 +45,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PostCommentsViewModel>();
         builder.Services.AddTransient<CommentRepliesViewModel>();
         builder.Services.AddTransient<FollowRequestViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
+        builder.Services.AddTransient<UserViewModel>();
         builder.Services.AddSingleton<UserSearchViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
@@ -55,6 +55,7 @@ public static class MauiProgram
         builder.Services.AddTransient<RepliesPage>();
         builder.Services.AddTransient<PostMediaViewer>();
         builder.Services.AddTransient<FollowRequestsPage>();
+        builder.Services.AddTransient<ProfilePage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
