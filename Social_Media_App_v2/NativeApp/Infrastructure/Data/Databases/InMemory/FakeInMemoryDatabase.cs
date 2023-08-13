@@ -101,6 +101,27 @@ public class FakeInMemoryDatabase : IDatabase
         return Task.FromResult(users);
     }
 
+    public Task<IEnumerable<PostModel>> GetUserPosts(Guid userId, Guid? lastSeenPost, int numberOfPosts)
+    {
+        var posts = _posts.Where(post => post.User.Id == _users.FirstOrDefault(x => x.Id == userId)?.Id);
+
+        if (lastSeenPost is null)
+        {
+            return Task.FromResult(posts.Take(Math.Min(numberOfPosts, posts.Count())));
+        }
+
+        var remaining = posts.SkipWhile(post => post.Id != lastSeenPost);
+        int count = remaining.Count();
+        if (count < 1)
+        {
+            return Task.FromResult((IEnumerable<PostModel>)Array.Empty<PostModel>());
+        }
+
+        return Task.FromResult(remaining
+            .Skip(1)
+            .Take(Math.Min(count, numberOfPosts + 1)));
+    }
+
     private void SetFakeDatabase(int numberOfPosts)
     {
         var mediaFaker = GetMediaFaker();
@@ -225,19 +246,32 @@ public class FakeInMemoryDatabase : IDatabase
 
     private static Faker<UserModel> GetUserFaker(Faker<MediaModel> mediaFaker)
     {
+        var randomizer = new Random(Guid.NewGuid().GetHashCode());
         var profileFaker = GetProfileFaker(mediaFaker);
 
-        var fakeUser = new Faker<UserModel>()
-                .RuleFor(user => user.Nickname, f => f.Name.FullName())
-                .RuleFor(user => user.UserName, f => f.Name.FirstName())
-                .RuleFor(user => user.Profile, () => profileFaker.Generate());
-        return fakeUser;
+        return new Faker<UserModel>()
+            .RuleFor(user => user.Nickname, f => f.Name.FullName())
+            .RuleFor(user => user.UserName, f => f.Name.FirstName())
+            .RuleFor(user => user.Profile, () => profileFaker.Generate())
+            .RuleFor(user => user.FollowersCount, () => randomizer.Next(5, 200))
+            .RuleFor(user => user.FollowingCount, () => randomizer.Next(5, 200))
+            .RuleFor(user => user.PostsCount, () => randomizer.Next(5, 1000));
     }
 
     private static Faker<ProfileModel> GetProfileFaker(Faker<MediaModel> mediaFaker)
     {
         var profileFaker = new Faker<ProfileModel>()
-                .RuleFor(profile => profile.Icon, () => mediaFaker.Generate());
+                .RuleFor(profile => profile.Icon, () => mediaFaker.Generate())
+                .RuleFor(profile => profile.Description, faker =>
+                {
+                    var text = faker.Lorem.Text();
+                    if(text.Length > 150)
+                    {
+                        return text.AsSpan()[..150].ToString();
+                    }
+
+                    return text;
+                });
 
         return profileFaker;
     }
@@ -266,4 +300,6 @@ public class FakeInMemoryDatabase : IDatabase
             .RuleFor(req => req.State, FollowRequestState.Pending)
             .RuleFor(req => req.Id, () => Guid.NewGuid());
     }
+
+    
 }
