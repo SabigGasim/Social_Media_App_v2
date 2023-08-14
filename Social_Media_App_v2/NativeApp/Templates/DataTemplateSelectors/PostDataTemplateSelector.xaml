@@ -102,11 +102,20 @@
                                     Margin="0,0,5,0"
                                     />
                 <ImageButton x:Name="LikeImageButton"
-                                    Source="heart_selected.png"
-                                    WidthRequest="20"
-                                    HeightRequest="20"
-                                    Grid.Column="3"
-                                    />
+                             Source="heart.png"
+                             WidthRequest="20"
+                             HeightRequest="20"
+                             Grid.Column="3"
+                             Command="{Binding LikeButtonClickedCommand, Mode=OneTime}"
+                             >
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                                     Binding="{Binding Post.IsLiked, Mode=OneWay}"
+                                     Value="true">
+                            <Setter Property="Source" Value="heart_selected.png"/>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
                 <Label x:Name="LikesCountLabel"
                                     Style="{StaticResource ElementLabel}"
                                     FontSize="{StaticResource ElementSize}"
@@ -228,11 +237,20 @@
                                     Margin="0,0,5,0"
                                     />
                 <ImageButton x:Name="LikeImageButton"
-                                    Source="heart.png"
-                                    WidthRequest="20"
-                                    HeightRequest="20"
-                                    Grid.Column="3"
-                                    />
+                             Source="heart.png"
+                             WidthRequest="20"
+                             HeightRequest="20"
+                             Grid.Column="3"
+                             Command="{Binding LikeButtonClickedCommand, Mode=OneTime}"
+                             >
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                                     Binding="{Binding Post.IsLiked, Mode=OneWay}"
+                                     Value="true">
+                            <Setter Property="Source" Value="heart_selected.png"/>
+                        </DataTrigger>
+                    </ImageButton.Triggers> 
+                </ImageButton>
                 <Label x:Name="LikesCountLabel"
                                     Style="{StaticResource ElementLabel}"
                                     FontSize="{StaticResource ElementSize}"

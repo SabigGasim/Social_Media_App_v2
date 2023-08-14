@@ -83,11 +83,20 @@
                                     Text="{Binding Comment.RepliesCount, Mode=OneTime, Converter={StaticResource IntToStirngConverter}}"
                                     />
                 <ImageButton x:Name="LikeImageButton"
-                                    Source="heart_selected.png"
+                                    Source="heart.png"
                                     WidthRequest="20"
                                     HeightRequest="20"
                                     Grid.Column="3"
-                                    />
+                                    Command="{Binding LikeButtonClickedCommand, Mode=OneTime}"
+                                    >
+                    <ImageButton.Triggers>
+                        <DataTrigger TargetType="ImageButton"
+                                Binding="{Binding Comment.IsLiked, Mode=OneWay}"
+                                Value="true">
+                            <Setter Property="Source" Value="heart_selected.png"/>
+                        </DataTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
                 <Label x:Name="LikesCountLabel"
                                     Style="{StaticResource ElementLabel}"
                                     FontSize="{StaticResource ElementSize}"

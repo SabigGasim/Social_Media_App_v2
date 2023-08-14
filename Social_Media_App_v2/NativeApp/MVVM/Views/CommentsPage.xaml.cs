@@ -13,11 +13,19 @@ public partial class CommentsPage : ContentPage, IQueryAttributable
         _viewModel = viewModel;
     }
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (!query.Any())
+        {
+            return;
+        }
+
         _viewModel.PostViewModel = query[nameof(PostViewModel)] as PostViewModel;
-        _viewModel.UpdateComments(null, 20).GetAwaiter().GetResult();
+        
+        await _viewModel.UpdateComments(null, 20);
 
         BindingContext = _viewModel;
+
+        query.Clear();
     }
 }

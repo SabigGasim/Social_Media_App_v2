@@ -15,10 +15,17 @@ public partial class RepliesPage : ContentPage, IQueryAttributable
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (!query.Any())
+        {
+            return;
+        }
+
         _viewModel.CommentViewModel = query[nameof(CommentViewModel)] as CommentViewModel;
         
         await _viewModel.UpdateReplies(null);
         
         BindingContext = _viewModel;
+
+        query.Clear();
     }
 }

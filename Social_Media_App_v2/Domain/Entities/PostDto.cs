@@ -8,5 +8,6 @@ public class PostDto
     public UserDto User { get; set; }
     public DateTime Date { get; init; }
     public long Likes { get; set; }
+    public bool IsLiked { get; set; }
     public long CommentsCount { get; set; }
 }

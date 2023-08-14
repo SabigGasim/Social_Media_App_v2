@@ -12,6 +12,7 @@ public class PostViewModel : ViewModelBase
     private ICommand? _commentsButtonClickedCommand;
     private PostModel? _post;
     private ICommand? _profileButtonClickedCommand;
+    private ICommand? _likeButtonClickedCommand;
 
     public PostViewModel(INavigateCommandFactory navigateCommandFactory)
     {
@@ -26,18 +27,11 @@ public class PostViewModel : ViewModelBase
         set => TrySetValue(ref _post, value);
     }
 
-    public ICommand? CommentsButtonClickedCommand
-    {
-        get => _commentsButtonClickedCommand;
-        set => TrySetValue(ref _commentsButtonClickedCommand, value);
-    }
+    public ICommand? CommentsButtonClickedCommand => _commentsButtonClickedCommand;
 
-    public ICommand? PostsButtonClickedCommand
-    {
-        get => _postsButtonClickedCommand;
-        set => TrySetValue(ref _postsButtonClickedCommand, value);
-    }
+    public ICommand? PostsButtonClickedCommand => _postsButtonClickedCommand;
 
+    public ICommand? LikeButtonClickedCommand => _likeButtonClickedCommand;
 
     public ICommand? ProfileButtonClickedCommand => _profileButtonClickedCommand;
 
@@ -48,6 +42,12 @@ public class PostViewModel : ViewModelBase
 
         _profileButtonClickedCommand ??=
             _navigateCommandFactory.Create(nameof(UserModel), Routes.ProfilePage);
+
+        _likeButtonClickedCommand = new Command(() =>
+        {
+            Post!.IsLiked = !Post.IsLiked;
+            OnPropertyChanged(nameof(Post));
+        });
 
         _postsButtonClickedCommand = 
             _navigateCommandFactory.Create("params", Routes.MediaViewer, (context) =>

@@ -11,16 +11,29 @@ public class ReplyViewModel : ViewModelBase
 {
     private ReplyModel? _reply;
     private ICommand? _replyButtonClickedCommand;
+    private ICommand? _likeButtonClickedCommand;
 
-    public ReplyModel? Reply    
-    { 
-        get => _reply; 
-        set => TrySetValue(ref _reply, value); 
+    public ReplyViewModel()
+    {
+        InitializeCommands();
     }
 
-    public ICommand? ReplyButtonClickedCommand
+    public ReplyModel? Reply
     {
-        get => _replyButtonClickedCommand;
-        set => TrySetValue(ref _replyButtonClickedCommand, value);
+        get => _reply;
+        set => TrySetValue(ref _reply, value);
+    }
+
+    public ICommand? ReplyButtonClickedCommand => _replyButtonClickedCommand;
+
+    public ICommand? LikeButtonClickedCommand => _likeButtonClickedCommand;
+
+    private void InitializeCommands()
+    {
+        _likeButtonClickedCommand = new Command(() =>
+        {
+            Reply!.IsLiked = !Reply.IsLiked;
+            OnPropertyChanged(nameof(Reply));
+        });
     }
 }

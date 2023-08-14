@@ -8,5 +8,6 @@ public class ReplyDto
     public DateTime Date { get; set; }
     public UserDto User { get; set; }
     public UserDto ReplyingTo { get; set; }
+    public bool IsLiked { get; set; }
     public long Likes { get; set; }
 }

@@ -9,5 +9,6 @@ public class CommentDto
     public UserDto User { get; set; }
     public Guid PostId { get; set; }
     public long Likes { get; set; }
+    public bool IsLiked { get; set; }
     public int RepliesCount { get; set; }
 }
