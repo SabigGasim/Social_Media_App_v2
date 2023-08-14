@@ -19,7 +19,7 @@ internal class Routes
             {
                 var pageName = (string)field.GetRawConstantValue()!;
                 var type = Type.GetType($"NativeApp.MVVM.Views.{pageName}");
-                Routing.RegisterRoute(field.Name, type);
+                Routing.RegisterRoute(pageName, type);
             }
         }
     }
