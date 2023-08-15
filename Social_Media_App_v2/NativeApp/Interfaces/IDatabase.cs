@@ -1,4 +1,5 @@
-﻿using NativeApp.MVVM.Models;
+﻿using Domain.Common;
+using NativeApp.MVVM.Models;
 
 
 namespace NativeApp.Interfaces;
@@ -11,4 +12,5 @@ public interface IDatabase
     Task<IEnumerable<FollowRequestModel>> GetFollowRequests(Guid? userId, Guid? lastSeenFollowRequest, int numberOfRequests);
     Task<IEnumerable<UserModel>> FindUsersByUsername(string query);
     Task<IEnumerable<PostModel>> GetUserPosts(Guid userId, Guid? lastSeenPost, int numberOfPosts);
+    Task<IEnumerable<AlertModelBase>> GetAlerts(Guid userId, Guid? lastSeenAlert, int numberOfAlerts);
 }

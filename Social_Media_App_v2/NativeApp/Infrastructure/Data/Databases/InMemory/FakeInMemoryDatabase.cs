@@ -11,6 +11,7 @@ public class FakeInMemoryDatabase : IDatabase
     private readonly List<ReplyModel> _replies;
     private readonly List<UserModel> _users;
     private readonly List<FollowRequestModel> _followRequests;
+    private readonly List<AlertModelBase> _alerts;
 
     public FakeInMemoryDatabase()
     {
@@ -19,8 +20,9 @@ public class FakeInMemoryDatabase : IDatabase
         _users = new();
         _posts = new();
         _followRequests = new();
+        _alerts = new();
 
-        SetFakeDatabase(100);
+        SetFakeDatabase(10);
     }
 
     public Task<IEnumerable<PostModel>> GetTimelinePosts(Guid? lastSeenPostId, int numberOfPosts)
@@ -122,6 +124,19 @@ public class FakeInMemoryDatabase : IDatabase
             .Take(Math.Min(count, numberOfPosts + 1)));
     }
 
+    public Task<IEnumerable<AlertModelBase>> GetAlerts(Guid userId, Guid? lastSeenAlert, int numberOfAlerts)
+    {
+        if(lastSeenAlert is null)
+        {
+            return Task.FromResult(_alerts.Take(Math.Min(_alerts.Count, numberOfAlerts)));
+        }
+
+        return Task.FromResult(_alerts
+            .SkipWhile(alert => alert.Id != lastSeenAlert)
+            .Skip(1)
+            .Take(numberOfAlerts));
+    }
+
     private void SetFakeDatabase(int numberOfPosts)
     {
         var mediaFaker = GetMediaFaker();
@@ -129,6 +144,8 @@ public class FakeInMemoryDatabase : IDatabase
         var replyFaker = GetReplyFaker(userFaker);
         var commentsFaker = GetCommentsFaker(userFaker);
         var postFaker = GetPostsFaker(userFaker, mediaFaker);
+        var userAlertsFaker = GetUserAlertsFaker(userFaker, mediaFaker);
+        var accountAlretsFaker = GetAccountAlertsFaker(mediaFaker);
 
         _posts.AddRange(postFaker.Generate(numberOfPosts));
 
@@ -167,6 +184,49 @@ public class FakeInMemoryDatabase : IDatabase
         var followRequestsFaker = GetFollowRequestsFaker(_users);
 
         _followRequests.AddRange(followRequestsFaker!.Generate(_users.Count / 2));
+
+        var userAlerts = userAlertsFaker.Generate(25);
+        var accountAlerts = accountAlretsFaker.Generate(25);
+
+        var alerts = userAlerts
+            .Concat((IEnumerable<AlertModelBase>)accountAlerts)
+            .OrderBy(x => x.Id)
+            .ToList();
+
+        _alerts.AddRange(alerts);
+    }
+
+    private Faker<UserAlertModel> GetUserAlertsFaker(Faker<UserModel> userFaker, Faker<MediaModel> mediaFaker)
+    {
+        var randomizer = new Random(Guid.NewGuid().GetHashCode());
+
+        return new Faker<UserAlertModel>()
+            .Rules((faker, alert) =>
+            {
+                SetAlertModelBaseRules(faker, alert);
+                alert.User = userFaker.Generate();
+                alert.Thumbnail = mediaFaker.Generate();
+
+            });
+    }
+
+    private Faker<AccountAlertModel> GetAccountAlertsFaker(Faker<MediaModel> mediaFaker)
+    {
+        var randomizer = new Random(Guid.NewGuid().GetHashCode());
+
+        return new Faker<AccountAlertModel>()
+            .Rules((faker, alert) =>
+            {
+                SetAlertModelBaseRules(faker, alert);
+                alert.Icon = mediaFaker.Generate();
+            });
+    }
+
+    private void SetAlertModelBaseRules(Faker faker, AlertModelBase alert)
+    {
+        alert.Date = faker.Date.Between(DateTime.Now.AddMonths(2), DateTime.Now);
+        alert.Id = Guid.NewGuid();
+        alert.Description = faker.Lorem.Text();
     }
 
     public Task<IEnumerable<FollowRequestModel>> GetFollowRequests(Guid? userId, Guid? lastSeenFollowRequest, int numberOfRequests)
