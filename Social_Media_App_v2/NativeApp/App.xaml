@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Templates/DataTemplateSelectors/PostDataTemplateSelector.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplates/CommentDataTemplate.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplates/ProfileHeaderDataTemplate.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplateSelectors/AlertDataTemplateSelector.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
