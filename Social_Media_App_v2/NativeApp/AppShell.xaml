@@ -25,10 +25,10 @@
         <Tab Route="notifications"
              Icon="bell.png" 
              Title="Notifications">
-            <ShellContent Route="notifications"
+            <ShellContent Route="AlertsPage"
                           Title="Alerts"
-                          ContentTemplate="{DataTemplate views:NotificationsPage}"/>
-            <ShellContent Route="friend_requests"
+                          ContentTemplate="{DataTemplate views:AlertsPage}"/>
+            <ShellContent Route="FollowRequestsPage"
                           Title="Follow Requests"
                           ContentTemplate="{DataTemplate views:FollowRequestsPage}"/>
         </Tab>

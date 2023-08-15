@@ -15,6 +15,11 @@ public partial class ProfilePage : ContentPage, IQueryAttributable
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        if (!query.Any())
+        {
+            return;
+        }
+
         var userModel = (UserModel)query[nameof(UserModel)];
         
         _viewModel.UserViewModel!.User = userModel;
@@ -23,5 +28,7 @@ public partial class ProfilePage : ContentPage, IQueryAttributable
         await _viewModel.UpdatePosts(null, 20);
 
         BindingContext = _viewModel;
+
+        query.Clear();
     }
 }

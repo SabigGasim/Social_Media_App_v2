@@ -31,6 +31,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPostRepository, FakePostsRepository>();
         builder.Services.AddSingleton<IFollowRequestsRepository, FakeFollowRequestsRepository>();
         builder.Services.AddSingleton<IUserLookupRepository, FakeUserLookupRepository>();
+        builder.Services.AddSingleton<IAlertsRepository, FakeAlertsRepository>();
 
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
@@ -40,6 +41,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PostViewModel>();
         builder.Services.AddTransient<CommentViewModel>();
         builder.Services.AddTransient<ReplyViewModel>();
+        builder.Services.AddTransient<UserAlertViewModel>();
+        builder.Services.AddTransient<AccountAlertViewModel>();
 
         builder.Services.AddTransient<TimelineViewModel>();
         builder.Services.AddTransient<PostCommentsViewModel>();
@@ -48,9 +51,11 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfileViewModel>();
         builder.Services.AddTransient<UserViewModel>();
         builder.Services.AddSingleton<UserSearchViewModel>();
+        builder.Services.AddSingleton<AlertsViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
+        builder.Services.AddSingleton<AlertsPage>();
         builder.Services.AddTransient<CommentsPage>();
         builder.Services.AddTransient<RepliesPage>();
         builder.Services.AddTransient<PostMediaViewer>();
