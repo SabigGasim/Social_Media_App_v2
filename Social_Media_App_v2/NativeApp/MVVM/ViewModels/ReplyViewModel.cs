@@ -1,9 +1,4 @@
 ﻿using NativeApp.MVVM.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -24,6 +19,8 @@ public class ReplyViewModel : ViewModelBase
         set => TrySetValue(ref _reply, value);
     }
 
+    public CommentRepliesViewModel? CommentRepliesViewModel { get; set; }
+
     public ICommand? ReplyButtonClickedCommand => _replyButtonClickedCommand;
 
     public ICommand? LikeButtonClickedCommand => _likeButtonClickedCommand;
@@ -33,7 +30,14 @@ public class ReplyViewModel : ViewModelBase
         _likeButtonClickedCommand = new Command(() =>
         {
             Reply!.IsLiked = !Reply.IsLiked;
+            Reply!.Likes += Reply!.IsLiked ? 1 : -1;
+
             OnPropertyChanged(nameof(Reply));
+        });
+
+        _replyButtonClickedCommand = new Command((param) =>
+        {
+            CommentRepliesViewModel!.ReplyingTo = (UserModel)param;
         });
     }
 }

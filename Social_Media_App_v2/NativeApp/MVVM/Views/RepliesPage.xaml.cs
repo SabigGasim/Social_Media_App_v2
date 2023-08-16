@@ -28,4 +28,9 @@ public partial class RepliesPage : ContentPage, IQueryAttributable
 
         query.Clear();
     }
+
+    private void ReplyEntry_Completed(object sender, EventArgs e)
+    {
+        _viewModel.SendReplyCommand!.Execute(((Editor)sender).Text);
+    }
 }
