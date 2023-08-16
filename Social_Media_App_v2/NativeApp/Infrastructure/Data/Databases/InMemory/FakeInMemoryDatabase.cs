@@ -58,6 +58,19 @@ public class FakeInMemoryDatabase : IDatabase
         _comments.Add(commentDto.Map());
         return Task.FromResult(Results.Success(commentDto));
     }
+
+    public Task<Result<UserDto>> GetUserById(Guid id)
+    {
+        var user = _users.FirstOrDefault(user => user.Id == id);
+        if(user is null)
+        {
+            return Task.FromResult(
+                Results.Fail<UserDto>(new KeyNotFoundException("the Id provided didn't match any reuslts")));
+        }
+
+        return Task.FromResult(Results.Success(user.Map()));
+    }
+
     public Task<IEnumerable<CommentModel>> GetPostComments(Guid? lastSeenCommentId, Guid? postId, int numberOfComments)
     {
         if (lastSeenCommentId is null)

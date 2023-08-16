@@ -30,8 +30,9 @@ public class FakeUserLookupRepository : IUserLookupRepository
         return Results.Success(users);
     }
 
-    public Task<Result<UserDto>> GetById(Guid Id)
+    public async Task<Result<UserDto>> GetById(Guid Id)
     {
-        throw new NotImplementedException();
+        var result = await _database.GetUserById(Id);
+        return result;
     }
 }
