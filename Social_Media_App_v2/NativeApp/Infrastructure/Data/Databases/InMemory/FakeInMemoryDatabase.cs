@@ -1,4 +1,6 @@
 ﻿using Bogus;
+using Domain.Common;
+using Domain.Entities;
 using Domain.Enums;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
@@ -57,6 +59,13 @@ public class FakeInMemoryDatabase : IDatabase
     {
         _comments.Add(commentDto.Map());
         return Task.FromResult(Results.Success(commentDto));
+    }
+
+    public Task<Result<ReplyDto>> AddReply(ReplyDto replyDto)
+    {
+        var reply = replyDto.Map();
+        _replies.Add(reply);
+        return Task.FromResult(Results.Success(replyDto));
     }
 
     public Task<Result<UserDto>> GetUserById(Guid id)
@@ -378,6 +387,4 @@ public class FakeInMemoryDatabase : IDatabase
             .RuleFor(req => req.State, FollowRequestState.Pending)
             .RuleFor(req => req.Id, () => Guid.NewGuid());
     }
-
-    
 }

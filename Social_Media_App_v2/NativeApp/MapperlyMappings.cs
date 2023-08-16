@@ -18,6 +18,10 @@ public static partial class MapperlyMappings
     public static partial UserAlertModel Map(this UserAlertDto alert);
     public static partial AccountAlertDto Map(this AccountAlertModel alert);
     public static partial AccountAlertModel Map(this AccountAlertDto alert);
+    public static partial ReplyDto Map(this ReplyModel reply);
+    public static partial ReplyModel Map(this ReplyDto reply);
+    public static partial UserDto Map(this UserModel user);
+    public static partial UserModel Map(this UserDto user);
 
     public static partial IEnumerable<PostDto> Map(this IEnumerable<PostModel> postCollection);
     public static partial IEnumerable<PostModel> Map(this IEnumerable<PostDto> postDtoList);
