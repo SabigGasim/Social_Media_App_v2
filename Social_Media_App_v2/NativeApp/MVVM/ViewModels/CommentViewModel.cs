@@ -38,6 +38,8 @@ public class CommentViewModel : ViewModelBase
         _likeButtonClickedCommand = new Command(() =>
         {
             Comment!.IsLiked = !Comment.IsLiked;
+            Comment.Likes += Comment!.IsLiked ? 1 : -1;
+
             OnPropertyChanged(nameof(Comment));
         });
     }

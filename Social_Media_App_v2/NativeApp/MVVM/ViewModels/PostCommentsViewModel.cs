@@ -1,6 +1,9 @@
-﻿using Infrastructure.Interfaces;
+﻿using Domain.Common;
+using Domain.Entities;
+using Infrastructure.Interfaces;
 using NativeApp.Helpers;
 using NativeApp.MVVM.Models;
+using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
 
@@ -8,6 +11,7 @@ public partial class PostCommentsViewModel : ViewModelBase
 {
     private RangeObservableCollection<CommentViewModel>? _comments = new();
     private PostViewModel? _postViewModel;
+    private ICommand? _sendCommentCommand;
     private readonly ICommentsRepository _repository;
     private readonly IServiceProvider _serviceProvider;
 
@@ -17,6 +21,8 @@ public partial class PostCommentsViewModel : ViewModelBase
     {
         _repository = repository;
         _serviceProvider = serviceProvider;
+
+        InitializeCommands();
     }
 
     public async Task UpdateComments(Guid? lastSeenComment, int numberOfCommnets)
@@ -42,6 +48,37 @@ public partial class PostCommentsViewModel : ViewModelBase
     {
         get => _postViewModel;
         set => TrySetValue(ref _postViewModel, value);
+    }
+
+    public ICommand? SendCommentCommand => _sendCommentCommand;
+
+    private void InitializeCommands()
+    {
+        _sendCommentCommand = new Command(async (param) =>
+        {
+            var text = (string)param;
+            
+            if (string.IsNullOrEmpty(text))
+            {
+                return;
+            }
+
+            await AddComment(text);
+        });
+    }
+
+    private async Task AddComment(string text)
+    {
+        var commentDto = await _repository.AddComment(PostViewModel!.Post!.Id, text);
+        if(!commentDto.Success || commentDto.Value is null)
+        {
+            return;
+        }
+
+        var vm = _serviceProvider.GetRequiredService<CommentViewModel>();
+        vm.Comment = commentDto.Value.Map();
+
+        Comments!.Insert(0, vm);
     }
 
     private IEnumerable<CommentViewModel> MapCommentViewModels(IEnumerable<CommentModel> comments)

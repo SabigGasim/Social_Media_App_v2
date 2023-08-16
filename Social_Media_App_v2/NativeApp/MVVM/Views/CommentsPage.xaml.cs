@@ -28,4 +28,9 @@ public partial class CommentsPage : ContentPage, IQueryAttributable
 
         query.Clear();
     }
+
+    private void CommentEntry_Completed(object sender, EventArgs e)
+    {
+        _viewModel.SendCommentCommand!.Execute(((Editor)sender).Text);
+    }
 }
