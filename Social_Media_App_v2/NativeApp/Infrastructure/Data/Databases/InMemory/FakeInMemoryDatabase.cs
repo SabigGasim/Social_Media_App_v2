@@ -53,6 +53,11 @@ public class FakeInMemoryDatabase : IDatabase
         return Task.CompletedTask;
     }
 
+    public Task<Result<CommentDto>> AddComment(CommentDto commentDto)
+    {
+        _comments.Add(commentDto.Map());
+        return Task.FromResult(Results.Success(commentDto));
+    }
     public Task<IEnumerable<CommentModel>> GetPostComments(Guid? lastSeenCommentId, Guid? postId, int numberOfComments)
     {
         if (lastSeenCommentId is null)

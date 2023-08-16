@@ -13,4 +13,5 @@ public interface IDatabase
     Task<IEnumerable<UserModel>> FindUsersByUsername(string query);
     Task<IEnumerable<PostModel>> GetUserPosts(Guid userId, Guid? lastSeenPost, int numberOfPosts);
     Task<IEnumerable<AlertModelBase>> GetAlerts(Guid userId, Guid? lastSeenAlert, int numberOfAlerts);
+    Task<Result<CommentDto>> AddComment(CommentDto commentDto);
 }

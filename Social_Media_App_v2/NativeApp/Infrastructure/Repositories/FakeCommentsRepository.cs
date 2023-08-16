@@ -25,9 +25,36 @@ public class FakeCommentsRepository : ICommentsRepository
         return Results.Success(comments);
     }
 
-    public Task<Result> AddComment(CommentDto comment)
+    public async Task<Result<CommentDto>> AddComment(Guid postId, string text)
     {
-        throw new NotImplementedException();
+        var user = new UserDto()
+        {
+            State = Domain.Enums.AccountState.Active,
+            Nickname = "Just Me",
+            UserName = "ME",
+            Profile = new ProfileDto
+            {
+                Description = "nothing but test",
+                Icon = new MediaDto
+                {
+                    Url = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
+                    ContentType = ".png"
+                }
+            }
+        };
+        user.Profile.User = user;
+
+        var comment = new CommentDto
+        {
+            CreatedDate = DateTime.Now,
+            Text = text,
+            User = user,
+            PostId = postId,
+        };
+
+        var result = await _database.AddComment(comment);
+
+        return result;
     }
 
     public Task<Result> DeleteComment(Guid? commentId)
@@ -35,7 +62,7 @@ public class FakeCommentsRepository : ICommentsRepository
         throw new NotImplementedException();
     }
 
-    public Task<Result> UpdateComment(CommentDto comment)
+    public Task<Result> UpdateComment(string comment)
     {
         throw new NotImplementedException();
     }
