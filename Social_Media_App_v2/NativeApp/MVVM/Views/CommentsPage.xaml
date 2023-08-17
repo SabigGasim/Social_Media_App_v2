@@ -24,7 +24,7 @@
               ColumnDefinitions="50,*,50"
               ColumnSpacing="10"
               Grid.Row="1"
-              BackgroundColor="{StaticResource Gray600}">
+              BackgroundColor="{StaticResource Gray950}">
             
             <BoxView HeightRequest="1"
                      Grid.ColumnSpan="3"
