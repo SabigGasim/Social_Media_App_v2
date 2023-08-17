@@ -1,7 +1,5 @@
 ﻿using Domain.Enums;
 
-using System.Collections.ObjectModel;
-
 namespace NativeApp.MVVM.Models;
 
 public class UserModel
@@ -15,4 +13,5 @@ public class UserModel
     public bool IsUserBeingFollowed { get; set; }
     public ProfileModel Profile { get; set; }
     public AccountState State { get; set; }
+    public Privacy AccountPrivacy { get; set; }
 }
