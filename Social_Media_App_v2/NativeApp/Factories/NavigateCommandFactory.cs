@@ -1,4 +1,5 @@
-﻿using NativeApp.Interfaces;
+﻿using CommunityToolkit.Maui.Views;
+using NativeApp.Interfaces;
 using System.Windows.Input;
 
 namespace NativeApp.Factories;
@@ -58,6 +59,46 @@ public class NavigateCommandFactory : INavigateCommandFactory
         {
             var param = _routeParametersFactory.Create(key, commandParameter);
             await _navigationService.NavigateToAsync(route, param);
+        });
+    }
+
+    public ICommand Create(string route)
+    {
+        return new Command(async () =>
+        {
+            await _navigationService.NavigateToAsync(route);
+        });
+    }
+
+    public ICommand Create<TPopup>(Func<TPopup> popup) where TPopup : Popup
+    {
+        return new Command(async () =>
+        {
+            await _navigationService.ShowPopupAsync(popup());
+        });
+    }
+
+    public ICommand Create<TPopup, TResult>(Func<TPopup> popup, Action<TResult> action) where TPopup : Popup
+    {
+        return new Command(async () =>
+        {
+            var result = await _navigationService.ShowPopupAsync(popup());
+            if(result is TResult obj && obj is not null)
+            {
+                action(obj);
+            }
+        });
+    }
+
+    public ICommand Create<TPopup, TResult>(Func<TPopup> popup, Func<TResult, Task> task) where TPopup : Popup
+    {
+        return new Command(async () =>
+        {
+            var result = await _navigationService.ShowPopupAsync(popup());
+            if (result is TResult obj && obj is not null)
+            {
+                await task(obj);
+            }
         });
     }
 }
