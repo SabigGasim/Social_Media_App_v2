@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             x:Class="NativeApp.ContentViews.FlyoutHeaderContentView">
+    <Grid x:Name="FlyoutHeaderGrid"
+          x:DataType="{x:Type viewModels:ShellViewModel}"
+       RowDefinitions="60,60,30,1"
+       ColumnDefinitions="*"
+       Padding="20,30"
+       RowSpacing="10"
+       >
+        <ImageButton x:Name="ProfileIconImageButton"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start"
+                     CornerRadius="25"
+                     WidthRequest="50"
+                     HeightRequest="50"
+                     Grid.Row="0"
+                     Source="{Binding CurrentAccount.User.Profile.Icon.Source, Mode=OneWay}"/>
+
+
+        <ImageButton x:Name="AccountManagerButton"
+                     WidthRequest="30"
+                     HeightRequest="30"
+                     VerticalOptions="Start"
+                     HorizontalOptions="End"
+                     Source="three_dots.png"
+                     Command="{Binding AccountManagerButtonClicked, Mode=OneTime}"
+                     Grid.Row="0"/>
+
+        <Label x:Name="UserAndDisplayNamesLabel"
+               Style="{StaticResource HeaderLabel}"
+               Grid.Column="0"
+               Grid.Row="1">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding CurrentAccount.User.Nickname, Mode=OneWay}"
+                       FontAttributes="Bold"
+                       FontSize="22"/>
+                    <Span Text="&#x0a;"/>
+                    <Span Text="{Binding CurrentAccount.User.UserName, StringFormat='@{0}', Mode=OneWay}"
+                       TextColor="#5E6369"
+                       FontSize="18"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label x:Name="FollowersAndFollowingLabel"
+               Style="{StaticResource HeaderLabel}"
+               FontSize="18"
+               Grid.Row="2">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding CurrentAccount.User.FollowingCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
+                          FontAttributes="Bold"/>
+                    <Span Text=" Following"
+                          TextColor="#5E6369"/>
+                    <Span Text="&#x0020;&#x0020;&#x0020;"/>
+                    <Span Text="{Binding CurrentAccount.User.FollowersCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
+                          FontAttributes="Bold"/>
+                    <Span Text=" Followers"
+                          TextColor="#5E6369"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <BoxView x:Name="HeaderSeparatorBoxView"
+                 BackgroundColor="#5E6369"
+                 Grid.Row="3"
+                 Opacity="0.5"
+                 HeightRequest="1"
+                 VerticalOptions="Start"/>
+    </Grid>
+</ContentView>
