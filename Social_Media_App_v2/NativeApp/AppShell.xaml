@@ -6,11 +6,24 @@
     xmlns:local="clr-namespace:NativeApp"
     xmlns:views="clr-namespace:NativeApp.MVVM.Views"
     xmlns:viewmodels="clr-namespace:NativeApp.MVVM.ViewModels"
-    Shell.FlyoutBehavior="Flyout">
+    xmlns:contnetViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
+    Shell.FlyoutBehavior="Flyout"
+    FlowDirection="LeftToRight"
+    FlyoutVerticalScrollMode="Auto"
+    x:DataType="{x:Type viewmodels:ShellViewModel}"
+    >
 
-    <Shell.SearchHandler>
-        <SearchHandler/>
-    </Shell.SearchHandler>
+    <Shell.FlyoutHeader>
+        <contnetViews:FlyoutHeaderContentView/>
+    </Shell.FlyoutHeader>
+
+    <MenuFlyoutItem Text="Profile"
+                    IconImageSource="profile.png"
+                    Command="{Binding ProfileFlyoutItemClickedCommand, Mode=OneTime}"/>
+    <MenuFlyoutItem Text="Settings &amp; Privacy"
+                IconImageSource="settings_ruller.png"
+                Command="{Binding SettingsFlyoutItemClickedCommand, Mode=OneTime}"/>
+
 
     <TabBar x:Name="ButtomTabBar"
             Route="main">

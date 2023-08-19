@@ -1,14 +1,16 @@
 ﻿using NativeApp.Constants;
-using NativeApp.MVVM.Views;
+using NativeApp.MVVM.ViewModels;
 
 namespace NativeApp;
 
 public partial class AppShell : Shell
 {
-    public AppShell()
+    public AppShell(ShellViewModel viewModel)
     {
         InitializeComponent();
 
         Routes.RegisterRoutes();
+
+        BindingContext = viewModel;
     }
 }

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="NativeApp.MVVM.Views.AccountsPopup"
+       xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+       xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+       xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+       CanBeDismissedByTappingOutsideOfPopup="True"
+       x:DataType="{x:Type viewModels:ShellViewModel}"
+       Color="Transparent"
+       >
+    <Border x:Name="AccountsContentView"
+            Padding="30"
+            BackgroundColor="#0e0e0e"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 15"
+            WidthRequest="300"
+            >
+        <CollectionView x:Name="AccountsCollectionView"
+                    Footer="{Binding .}"
+                    ItemsSource="{Binding Accounts, Mode=OneWay}"
+                    ItemSizingStrategy="MeasureAllItems"
+                    >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type viewModels:UserViewModel}">
+                    <Grid x:Name="AccountGrid"
+                          RowDefinitions="40"
+                          ColumnDefinitions="36,*"
+                          ColumnSpacing="10"
+                          >
+                        <ImageButton x:Name="AccountImageButton"
+                                 Source="{Binding User.Profile.Icon.Source, Mode=OneTime}"
+                                 Grid.Column="0"
+                                 CornerRadius="18"
+                                 WidthRequest="36"
+                                 HeightRequest="36"
+                                 VerticalOptions="Start"
+                                 HorizontalOptions="Center"
+                                 />
+                        <Label x:Name="UserAndDisplayNamesLabel"
+                               Style="{StaticResource HeaderLabel}"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               FontSize="13"
+                               VerticalOptions="Start"
+                               VerticalTextAlignment="Start"
+                               HorizontalOptions="Start"
+                               HorizontalTextAlignment="Start"
+                               >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding User.Nickname, Mode=OneTime}"
+                                          FontAttributes="Bold"/>
+                                    <Span Text="&#x0a;"/>
+                                    <Span Text="{Binding User.UserName, StringFormat='@{0}', Mode=OneTime}"
+                                          TextColor="#5E6369"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.FooterTemplate>
+                <DataTemplate>
+                    <Grid x:Name="CreateOrAddAccountGrid"
+                          RowDefinitions="40,40"
+                          RowSpacing="10">
+                        <Button x:Name="CreateAccountButton"
+                                Grid.Row="0"
+                                Text="Create a new account"
+                                BackgroundColor="#0e0e0e"
+                                TextColor="White"
+                                CornerRadius="20"
+                                FontAttributes="Bold"
+                                BorderWidth="1"
+                                BorderColor="#5E6369"
+                                />
+                        <Button x:Name="AddExistingAccountButton"
+                                Grid.Row="1"
+                                Text="Add an existing account"
+                                BackgroundColor="#0e0e0e"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="20"
+                                BorderWidth="1"
+                                BorderColor="#5E6369"
+                                />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.FooterTemplate>
+        </CollectionView>
+    </Border>
+</mct:Popup>

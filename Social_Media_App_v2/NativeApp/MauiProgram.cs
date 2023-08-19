@@ -1,4 +1,5 @@
-﻿using Infrastructure.Interfaces;
+﻿using CommunityToolkit.Maui;
+using Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 using NativeApp.Factories;
 using NativeApp.Infrastructure.Data.Databases.InMemory;
@@ -16,6 +17,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -52,6 +54,7 @@ public static class MauiProgram
         builder.Services.AddTransient<UserViewModel>();
         builder.Services.AddSingleton<UserSearchViewModel>();
         builder.Services.AddSingleton<AlertsViewModel>();
+        builder.Services.AddSingleton<ShellViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -61,6 +64,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PostMediaViewer>();
         builder.Services.AddTransient<FollowRequestsPage>();
         builder.Services.AddTransient<ProfilePage>();
+
+        builder.Services.AddSingleton<App>();
 
 #if DEBUG
         builder.Logging.AddDebug();

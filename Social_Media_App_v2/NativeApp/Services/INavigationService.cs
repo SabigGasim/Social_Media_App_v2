@@ -1,4 +1,5 @@
-﻿using NativeApp.Interfaces;
+﻿using CommunityToolkit.Maui.Views;
+using NativeApp.Interfaces;
 
 namespace NativeApp.Services;
 
@@ -15,4 +16,9 @@ public class MauiNavigationService : INavigationService
             : Shell.Current.GoToAsync(route);
 
     public Task PopAsync(string route = "..") => Shell.Current.GoToAsync(route);
+
+    public Task<object?> ShowPopupAsync<TPopup>(TPopup popup) where TPopup : Popup
+    {
+        return Shell.Current.ShowPopupAsync(popup);
+    }
 }
