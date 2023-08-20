@@ -57,7 +57,11 @@ public class ShellViewModel : ViewModelBase
             });
 
         _profileFlyoutItemClickedCommand =
-            _navigateCommandFactory.Create(nameof(UserModel), Routes.ProfilePage, () => this.CurrentAccount!.User!);
+            _navigateCommandFactory.Create(nameof(UserModel), Routes.ProfilePage, () =>
+            {
+                Shell.Current.FlyoutIsPresented = false;
+                return this.CurrentAccount!.User!;
+            });
     }
 
     private void AddFakeAccounts()

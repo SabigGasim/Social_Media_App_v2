@@ -2,7 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
-             x:Class="NativeApp.ContentViews.FlyoutHeaderContentView">
+             x:Class="NativeApp.MVVM.Views.ContentViews.FlyoutHeaderContentView">
     <Grid x:Name="FlyoutHeaderGrid"
           x:DataType="{x:Type viewModels:ShellViewModel}"
        RowDefinitions="60,60,30,1"
@@ -17,6 +17,7 @@
                      WidthRequest="50"
                      HeightRequest="50"
                      Grid.Row="0"
+                     Command="{Binding ProfileFlyoutItemClickedCommand, Mode=OneTime}"
                      Source="{Binding CurrentAccount.User.Profile.Icon.Source, Mode=OneWay}"/>
 
 
