@@ -4,10 +4,10 @@ namespace NativeApp.Constants;
 
 internal class Routes
 {
-    internal readonly string CommentsPage = typeof(MVVM.Views.CommentsPage).FullName!;
-    internal readonly string RepliesPage = typeof(MVVM.Views.RepliesPage).FullName!;
-    internal readonly string MediaViewer = typeof(MVVM.Views.PostMediaViewer).FullName!;
-    internal readonly string ProfilePage = typeof(MVVM.Views.ProfilePage).FullName!;
+    internal static readonly string CommentsPage = typeof(MVVM.Views.CommentsPage).FullName!;
+    internal static readonly string RepliesPage = typeof(MVVM.Views.RepliesPage).FullName!;
+    internal static readonly string MediaViewer = typeof(MVVM.Views.PostMediaViewer).FullName!;
+    internal static readonly string ProfilePage = typeof(MVVM.Views.ProfilePage).FullName!;
 
     internal static void RegisterRoutes()
     {
@@ -15,14 +15,19 @@ internal class Routes
 
         foreach (var field in fields)
         {
-            if (field.IsLiteral)
+            if (!field.IsInitOnly)
             {
-                var pageName = field.Name;
-                var pageFullName = (string)field.GetRawConstantValue()!;
-                var type = Type.GetType(pageFullName);
-
-                Routing.RegisterRoute(pageName, type);
+                continue;
             }
+
+            var pageFullName = (string)field.GetValue(null)!;
+            if(!pageFullName.StartsWith("NativeApp.MVVM.Views.", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var type = Type.GetType(pageFullName);
+            Routing.RegisterRoute(pageFullName, type);
         }
     }
 }
