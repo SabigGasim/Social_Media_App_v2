@@ -2,7 +2,8 @@
 
 public class AccountInfoModel
 {
-    public UserModel User { get; set; } = default!;
+    public string Username { get; set; } = default!;
+    public string Nickname { get; set; } = default!;
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
 }
