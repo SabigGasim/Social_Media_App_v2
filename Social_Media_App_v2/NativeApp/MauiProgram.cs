@@ -55,6 +55,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<UserSearchViewModel>();
         builder.Services.AddSingleton<AlertsViewModel>();
         builder.Services.AddSingleton<ShellViewModel>();
+        builder.Services.AddSingleton<SettingsViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -64,6 +65,7 @@ public static class MauiProgram
         builder.Services.AddTransient<PostMediaViewer>();
         builder.Services.AddTransient<FollowRequestsPage>();
         builder.Services.AddTransient<ProfilePage>();
+        builder.Services.AddSingleton<SettingsPage>();
 
         builder.Services.AddSingleton<App>();
 

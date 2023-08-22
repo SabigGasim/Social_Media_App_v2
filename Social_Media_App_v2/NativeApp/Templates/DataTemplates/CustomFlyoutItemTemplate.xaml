@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.Templates.DataTemplates.CustomFlyoutItemTemplate"
+                    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <DataTemplate x:Key="CustomMenuFlyoutItemTemplate">
+        <Grid x:Name="FlyoutItemLayout"
+          HeightRequest="{OnPlatform 44, Android=50}"
+          ColumnSpacing="{OnPlatform 0}"
+          RowSpacing="{OnPlatform WinUI=0}"
+              Padding="20,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnPlatform Android=20, iOS=50, WinUI=Auto}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="FlyoutItemImage"
+               Source="{Binding FlyoutIcon}"
+               VerticalOptions="Center"
+               HorizontalOptions="{OnPlatform Default=Center, WinUI=Start}"
+               HeightRequest="{OnPlatform Android=24, iOS=22, WinUI=16}"
+               WidthRequest="{OnPlatform Android=24, iOS=22, WinUI=16}"
+               StyleClass="FlyoutItemImageStyle"
+                   >
+                <Image.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="WinUI"
+                            Value="12,0,12,0" />
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </Image.Margin>
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+                </Image.Behaviors>
+            </Image>
+            <Label x:Name="FlyoutItemLabel"
+               Grid.Column="1"
+               Text="{Binding Text}"
+               StyleClass="FlyoutItemLabelStyle"
+               HorizontalOptions="{OnPlatform WinUI=Start}"
+               HorizontalTextAlignment="{OnPlatform WinUI=Start}"
+               VerticalTextAlignment="Center"
+               Margin="{OnPlatform Android='20,0,0,0'}"
+                   TextColor="{AppThemeBinding Light=Black, Dark=White}">
+            </Label>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

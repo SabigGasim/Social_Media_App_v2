@@ -11,6 +11,7 @@
     FlowDirection="LeftToRight"
     FlyoutVerticalScrollMode="Auto"
     x:DataType="{x:Type viewmodels:ShellViewModel}"
+    MenuItemTemplate="{StaticResource CustomMenuFlyoutItemTemplate}"
     >
 
     <Shell.FlyoutHeader>
@@ -21,8 +22,9 @@
                     IconImageSource="profile.png"
                     Command="{Binding ProfileFlyoutItemClickedCommand, Mode=OneTime}"/>
     <MenuFlyoutItem Text="Settings &amp; Privacy"
-                IconImageSource="settings_ruller.png"
-                Command="{Binding SettingsFlyoutItemClickedCommand, Mode=OneTime}"/>
+                    IconImageSource="settings_ruller.png"
+                    Clicked="SettingsFlyoutItem_Clicked"
+                    />
 
 
     <TabBar x:Name="ButtomTabBar"
@@ -51,10 +53,11 @@
             <ShellContent Title="Explore"
                           ContentTemplate="{DataTemplate views:SearchPage}"/>
         </Tab>
-        <Tab Route="settings"
+        <Tab x:Name="SettingsItem"
+             Route="settings"
              Icon="settings.png" 
              Title="Settings">
-            <ShellContent/>
+            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"/>
         </Tab>
     </TabBar>
 

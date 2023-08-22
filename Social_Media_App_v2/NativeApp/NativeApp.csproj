@@ -81,14 +81,19 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Helvetica Neue Medium Extended.ttf" />
 	  <None Remove="Resources\Fonts\Helvetica Neue UltraLight.ttf" />
+	  <None Remove="Resources\Images\audience.png" />
 	  <None Remove="Resources\Images\back.png" />
 	  <None Remove="Resources\Images\bell.png" />
 	  <None Remove="Resources\Images\bell_selected.png" />
+	  <None Remove="Resources\Images\blocked_content.png" />
+	  <None Remove="Resources\Images\blocked_user.png" />
 	  <None Remove="Resources\Images\camera.png" />
 	  <None Remove="Resources\Images\chat.png" />
 	  <None Remove="Resources\Images\comment.png" />
 	  <None Remove="Resources\Images\default_profile.jpg" />
+	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\empty_heart.png" />
+	  <None Remove="Resources\Images\filter.png" />
 	  <None Remove="Resources\Images\heart.png" />
 	  <None Remove="Resources\Images\heart_selected.png" />
 	  <None Remove="Resources\Images\home.png" />
@@ -96,6 +101,8 @@
 	  <None Remove="Resources\Images\image_icon.png" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\like_selected.png" />
+	  <None Remove="Resources\Images\lock.png" />
+	  <None Remove="Resources\Images\mute.png" />
 	  <None Remove="Resources\Images\pencil.png" />
 	  <None Remove="Resources\Images\profile.png" />
 	  <None Remove="Resources\Images\request.png" />
@@ -107,6 +114,7 @@
 	  <None Remove="Resources\Images\settings_selected.png" />
 	  <None Remove="Resources\Images\share.png" />
 	  <None Remove="Resources\Images\three_dots.png" />
+	  <None Remove="Resources\Images\twofactor.png" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -135,13 +143,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ContentViews\FlyoutHeaderContentView.xaml">
+	  <MauiXaml Update="MVVM\Views\AccountInfoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\ChangePasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\ContentViews\FlyoutHeaderContentView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\AccountsPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\CommentsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\ContentViews\SettingsViewCell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\FollowRequestsPage.xaml">
@@ -162,6 +179,9 @@
 	  <MauiXaml Update="MVVM\Views\SearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Templates\DataTemplateSelectors\AlertDataTemplateSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -169,6 +189,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Converters.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Templates\DataTemplates\CustomFlyoutItemTemplate.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Templates\DataTemplates\ProfileHeaderDataTemplate.xaml">

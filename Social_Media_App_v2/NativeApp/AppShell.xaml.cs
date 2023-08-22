@@ -13,4 +13,10 @@ public partial class AppShell : Shell
 
         BindingContext = viewModel;
     }
+
+    private void SettingsFlyoutItem_Clicked(object sender, EventArgs e) 
+    {
+        CurrentItem = SettingsItem;
+        FlyoutIsPresented = false;
+    }
 }

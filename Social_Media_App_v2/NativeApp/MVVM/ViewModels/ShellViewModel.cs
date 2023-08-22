@@ -43,7 +43,6 @@ public class ShellViewModel : ViewModelBase
 
     public ICommand? AccountManagerButtonClicked => _accountManagerButtonClicked;
     public ICommand? ProfileFlyoutItemClickedCommand => _profileFlyoutItemClickedCommand;
-    public ICommand? SettingsFlyoutItemClickedCommand => _settingsFlyoutItemClickedCommand;
 
     private void InitializeCommands()
     {

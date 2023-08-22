@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="Templates/DataTemplates/CommentDataTemplate.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplates/ProfileHeaderDataTemplate.xaml"/>
                 <ResourceDictionary Source="Templates/DataTemplateSelectors/AlertDataTemplateSelector.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplates/CustomFlyoutItemTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
