@@ -17,12 +17,16 @@ public class NavigateCommandFactory : INavigateCommandFactory
         _routeParametersFactory = routeParametersFactory;
     }
 
-    public ICommand Create(string key, object value, string route)
+    public ICommand Create(string key, object value, string route, Action? afterNavigation = null)
     {
         return new Command(async () =>
         {
             var param = _routeParametersFactory.Create(key, value);
             await _navigationService.NavigateToAsync(route, param);
+            if(afterNavigation is not null)
+            {
+                afterNavigation();
+            }
         });
     }
 
@@ -99,6 +103,15 @@ public class NavigateCommandFactory : INavigateCommandFactory
             {
                 await task(obj);
             }
+        });
+    }
+
+    public ICommand Create()
+    {
+        return new Command(async (param) =>
+        {
+            var route = (string)param;
+            await _navigationService.NavigateToAsync(route);
         });
     }
 }
