@@ -1,18 +1,10 @@
-
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.Views.ContentViews;
 
 public partial class SettingsContentView : ContentView
 {
-	public SettingsContentView()
-	{
-		InitializeComponent();
-
-        this.BindingContext = this;
-	}
-
-    public static readonly BindableProperty TitleProperty = 
+    public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(nameof(Title), typeof(string), typeof(SettingsContentView));
 
     public static readonly BindableProperty DescriptionProperty =
