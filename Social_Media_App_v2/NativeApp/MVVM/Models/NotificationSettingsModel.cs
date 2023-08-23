@@ -3,6 +3,6 @@
 namespace NativeApp.MVVM.Models;
 public class NotificationSettingsModel
 {
-    public NotificationTypes NotificationTypes { get; set; }
-    public NotificationMethods NotificationMethods { get; set; }
+    public NotificationTypes Types { get; set; }
+    public NotificationMethods Methods { get; set; }
 }
