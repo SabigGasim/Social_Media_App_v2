@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.AccountInformation.AccountInfoPage"
+             Title="Account information"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings"
+             x:DataType="{x:Type settings:AccountInfoViewModel}"
+             >
+    <VerticalStackLayout x:Name="SettingsStackLayout">
+
+        <Label x:Name="HeaderLabel"
+               Style="{StaticResource BaseLabel}"
+               Padding="15,15,15,30"
+               FontSize="17"
+               TextColor="{StaticResource Gray200}"
+               Text="See information about your account">
+        </Label>
+        
+        <TableView x:Name="SettingsTableView"
+                   Intent="Settings"
+                   Scale="1.1"
+                   >
+            <TableRoot>
+                <TableSection TextColor="White">
+                    <TextCell x:Name="UsernameTextCell"
+                              Text="Username"
+                              Detail="{Binding AccountInfo.Username, StringFormat='@{0}'}"
+                              TextColor="White"
+                              DetailColor="#71767B"/>
+                    <TextCell x:Name="PhoneTextCell"
+                              Text="Phone"
+                              Detail="{Binding AccountInfo.PhoneNumber}"
+                              TextColor="White"
+                              DetailColor="#71767B"/>
+                    <TextCell x:Name="EmailTextCell"
+                              Text="Email"
+                              Detail="{Binding AccountInfo.Email}"
+                              TextColor="White"
+                              DetailColor="#71767B"/>
+                    <TextCell x:Name="DateOfBirthTextCell"
+                              Text="Date of birth"
+                              Detail="{Binding AccountInfo.DateOfBirth}"
+                              TextColor="White"
+                              DetailColor="#71767B"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </VerticalStackLayout>
+</ContentPage>

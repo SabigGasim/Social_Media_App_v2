@@ -9,6 +9,8 @@ internal class Routes
     internal static readonly string MediaViewer = typeof(MVVM.Views.PostMediaViewer).FullName!;
     internal static readonly string ProfilePage = typeof(MVVM.Views.ProfilePage).FullName!;
     internal static readonly string SettingsPage = typeof(MVVM.Views.SettingsPage).FullName!;
+    internal static readonly string AccountInfoPage = typeof(MVVM.Views.AccountInfoPage).FullName!;
+
 
     internal static void RegisterRoutes()
     {
