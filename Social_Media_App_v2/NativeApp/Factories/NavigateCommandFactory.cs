@@ -106,12 +106,8 @@ public class NavigateCommandFactory : INavigateCommandFactory
         });
     }
 
-    public ICommand Create()
+    public ICommand Create() => new Command<string>(async (route) =>
     {
-        return new Command(async (param) =>
-        {
-            var route = (string)param;
-            await _navigationService.NavigateToAsync(route);
-        });
-    }
+        await _navigationService.NavigateToAsync(route);
+    });
 }
