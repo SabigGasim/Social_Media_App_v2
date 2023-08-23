@@ -5,7 +5,9 @@ using NativeApp.Factories;
 using NativeApp.Infrastructure.Data.Databases.InMemory;
 using NativeApp.Infrastructure.Repositories;
 using NativeApp.Interfaces;
+using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels;
+using NativeApp.MVVM.ViewModels.Settings;
 using NativeApp.MVVM.Views;
 using NativeApp.Services;
 
@@ -55,6 +57,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<UserSearchViewModel>();
         builder.Services.AddSingleton<AlertsViewModel>();
         builder.Services.AddSingleton<ShellViewModel>();
+
+        builder.Services.AddSingleton<AccountInfoViewModel>();
+        builder.Services.AddSingleton<NotificationSettingsViewModel>();
+        builder.Services.AddSingleton<MutedAndBlockedViewModel>();
+        builder.Services.AddSingleton<PrivacyAndSecurityViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
@@ -66,6 +73,7 @@ public static class MauiProgram
         builder.Services.AddTransient<FollowRequestsPage>();
         builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddSingleton<SettingsPage>();
+        builder.Services.AddSingleton<AccountInfoPage>();
 
         builder.Services.AddSingleton<App>();
 
