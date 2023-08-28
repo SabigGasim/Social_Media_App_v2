@@ -79,8 +79,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\Helvetica Neue Medium Extended.ttf" />
-	  <None Remove="Resources\Fonts\Helvetica Neue UltraLight.ttf" />
 	  <None Remove="Resources\Images\audience.png" />
 	  <None Remove="Resources\Images\back.png" />
 	  <None Remove="Resources\Images\bell.png" />
