@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:NativeApp"
     xmlns:views="clr-namespace:NativeApp.MVVM.Views"
+    xmlns:settingsViews="clr-namespace:NativeApp.MVVM.Views.Settings"
     xmlns:viewmodels="clr-namespace:NativeApp.MVVM.ViewModels"
     xmlns:contnetViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
     Shell.FlyoutBehavior="Flyout"
@@ -57,7 +58,7 @@
              Route="settings"
              Icon="settings.png" 
              Title="Settings">
-            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate settingsViews:SettingsPage}"/>
         </Tab>
     </TabBar>
 

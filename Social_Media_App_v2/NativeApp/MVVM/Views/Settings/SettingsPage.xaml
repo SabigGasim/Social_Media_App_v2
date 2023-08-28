@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
              xmlns:contentViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
              xmlns:constants="clr-namespace:NativeApp.Constants"
+             xmlns:entites="clr-namespace:NativeApp.Common.Entities"
              x:DataType="{x:Type viewModels:SettingsViewModel}">
     
     <ContentPage.Resources>
@@ -22,13 +23,12 @@
     <ScrollView x:Name="SettingsScrollView" IsClippedToBounds="True">
         <VerticalStackLayout Padding="15,10">
             <Label Text="Account"/>
-
-            <contentViews:SettingsContentView Title="Account Info"
-                                  Icon="profile.png" 
-                                  Description="See information about your account"
-                                  Command="{Binding TableViewOptionClickedCommand}"
-                                  CommandParameter="{x:Static constants:Routes.AccountInfoPage}"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}">
+            <contentViews:SettingsContentView Title="Account info"
+                                              Icon="profile.png" 
+                                              Description="See information about your account"
+                                              Command="{Binding TableViewOptionClickedCommand}"
+                                              CommandParameter="{x:Static constants:Routes.AccountInfoPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}">
             </contentViews:SettingsContentView>
 
             <contentViews:SettingsContentView Title="Change Password"

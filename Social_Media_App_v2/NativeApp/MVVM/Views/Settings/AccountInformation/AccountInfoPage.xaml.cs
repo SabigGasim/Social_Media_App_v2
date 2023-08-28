@@ -1,15 +1,13 @@
-using NativeApp.MVVM.ViewModels;
+using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
 
-namespace NativeApp.MVVM.Views;
+namespace NativeApp.MVVM.Views.Settings.AccountInformation;
 
 public partial class AccountInfoPage : ContentPage
 {
-	public AccountInfoPage(IServiceProvider serviceProvider)
+    public AccountInfoPage(AccountInfoViewModel viewModel)
 	{
 		InitializeComponent();
 
-		var viewModel = serviceProvider.GetRequiredService<SettingsViewModel>();
-
-		BindingContext = viewModel.AccountInfoViewModel;
+        BindingContext = viewModel;
     }
 }

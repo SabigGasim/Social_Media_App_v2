@@ -8,7 +8,10 @@ using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels;
 using NativeApp.MVVM.ViewModels.Settings;
+using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
 using NativeApp.MVVM.Views;
+using NativeApp.MVVM.Views.Settings;
+using NativeApp.MVVM.Views.Settings.AccountInformation;
 using NativeApp.Services;
 
 namespace NativeApp;
@@ -63,6 +66,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MutedAndBlockedViewModel>();
         builder.Services.AddSingleton<PrivacyAndSecurityViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
+        builder.Services.AddSingleton<ChangeUsernameViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -74,6 +78,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddSingleton<AccountInfoPage>();
+        builder.Services.AddSingleton<ChangeUsernamePage>();
 
         builder.Services.AddSingleton<App>();
 

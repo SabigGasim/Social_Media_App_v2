@@ -11,7 +11,6 @@ public partial class SettingsPage : ContentPage
 		InitializeComponent();
 
         _viewModel = viewModel;
-
 		BindingContext = _viewModel;
     }
 }
