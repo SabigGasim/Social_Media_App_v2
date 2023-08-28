@@ -54,3 +54,9 @@ public static partial class MapperlyMappings
         });
     }
 }
+
+[Mapper(UseDeepCloning = true)]
+public static partial class DeepCopyMapperlyMappings
+{
+    public static partial AccountInfoModel DeepCopy(this AccountInfoModel accountInfo);
+}
