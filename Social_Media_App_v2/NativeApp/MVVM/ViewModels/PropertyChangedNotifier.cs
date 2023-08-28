@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -8,7 +9,7 @@ public interface IPropertyChangedNotifier : INotifyPropertyChanged
     bool TrySetValue<T>(ref T? property, T? value, [CallerMemberName] string? propertyName = null);
 }
 
-public class PropertyChangedNotifier : IPropertyChangedNotifier
+public class PropertyChangedNotifier : ObservableObject, IPropertyChangedNotifier
 {
     public bool TrySetValue<T>(ref T? property, T? value, [CallerMemberName] string? propertyName = null)
     {
@@ -21,11 +22,4 @@ public class PropertyChangedNotifier : IPropertyChangedNotifier
 
         return false;
     }
-
-    public void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 }

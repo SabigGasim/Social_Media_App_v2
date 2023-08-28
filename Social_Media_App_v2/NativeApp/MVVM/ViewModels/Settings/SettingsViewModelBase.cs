@@ -1,22 +1,6 @@
-﻿using Domain.Common;
-using NativeApp.Interfaces;
-using System.Windows.Input;
+﻿namespace NativeApp.MVVM.ViewModels.Settings;
 
-namespace NativeApp.MVVM.ViewModels.Settings;
-public abstract class SettingsViewModelBase : ViewModelBase
+public abstract class SettingsViewModelBase<TModel> : ViewModelBase
 {
-    private readonly INavigationService _navigationService;
-
-    public SettingsViewModelBase(INavigationService navigationService)
-    {
-        _navigationService = navigationService;
-    }
-
-    public abstract ICommand? SaveSettingsCommand { get; }
-    
-    protected virtual async Task<Result> UpdateSettings()
-    {
-        await _navigationService.PopAsync();
-        return Results.Success();
-    }
+    public abstract TModel? Model { get; set; }
 }

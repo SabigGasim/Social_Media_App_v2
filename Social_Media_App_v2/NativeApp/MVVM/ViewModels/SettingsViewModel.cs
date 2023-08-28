@@ -5,6 +5,7 @@ using NativeApp.Helpers;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels.Settings;
+using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -20,42 +21,46 @@ public class SettingsViewModel : ViewModelBase
 
     public SettingsViewModel(
         INavigateCommandFactory navigateCommandFactory,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider,
+        AccountInfoViewModel accuontInfoViewModel,
+        NotificationSettingsViewModel notificationSettingsViewModel,
+        MutedAndBlockedViewModel mutedAndBlockedViewModel,
+        PrivacyAndSecurityViewModel privacyAndSecurityViewModel)
     {
         _navigateCommandFactory = navigateCommandFactory;
         _serviceProvider = serviceProvider;
 
-        _accountInfo = _serviceProvider.GetRequiredService<AccountInfoViewModel>();
-        _notificationSettings = _serviceProvider.GetRequiredService<NotificationSettingsViewModel>();
-        _mutedAndBlocked = _serviceProvider.GetRequiredService<MutedAndBlockedViewModel>();
-        _privacyAndSecurityModel = _serviceProvider.GetRequiredService<PrivacyAndSecurityViewModel>();
+        _accountInfo = accuontInfoViewModel;
+        _notificationSettings = notificationSettingsViewModel;
+        _mutedAndBlocked = mutedAndBlockedViewModel;
+        _privacyAndSecurityModel = privacyAndSecurityViewModel;
 
         ConfigureDefaultSettings().GetAwaiter().GetResult();
 
         IntializeCommands();
-    }   
+    }
 
     public AccountInfoViewModel? AccountInfoViewModel
     {
-        get => _accountInfo; 
+        get => _accountInfo;
         set => TrySetValue(ref _accountInfo, value);
     }
 
     public NotificationSettingsViewModel? NotificationSettingsViewModel
     {
-        get => _notificationSettings; 
+        get => _notificationSettings;
         set => TrySetValue(ref _notificationSettings, value);
     }
 
     public MutedAndBlockedViewModel? MutedAndBlockedViewModel
     {
-        get => _mutedAndBlocked; 
+        get => _mutedAndBlocked;
         set => TrySetValue(ref _mutedAndBlocked, value);
     }
 
     public PrivacyAndSecurityViewModel? PrivacyAndSecurityViewModel
     {
-        get => _privacyAndSecurityModel; 
+        get => _privacyAndSecurityModel;
         set => TrySetValue(ref _privacyAndSecurityModel, value);
     }
 
@@ -65,7 +70,7 @@ public class SettingsViewModel : ViewModelBase
         set => TrySetValue(ref _tableViewOptionClickedCommand, value);
     }
 
-    
+
     private void IntializeCommands()
     {
         TableViewOptionClickedCommand = _navigateCommandFactory.Create();
@@ -74,11 +79,12 @@ public class SettingsViewModel : ViewModelBase
     private async Task ConfigureDefaultSettings()
     {
         var accountInfo = new AccountInfoModel
-        {   
+        {
             DateOfBirth = new DateOnly(2007, 5, 15),
             Email = "test@test.com",
             PhoneNumber = "+69123456789",
-            Username = "Yes user user"
+            Username = "BarbieGirlFan74",
+            Nickname = "ابن مطحس"
         };
 
         var userLookupRepository = _serviceProvider.GetRequiredService<IUserLookupRepository>();
@@ -118,9 +124,9 @@ public class SettingsViewModel : ViewModelBase
             TwoFactorEnabled = false
         };
 
-        _accountInfo!.AccountInfo = accountInfo;
-        _mutedAndBlocked!.MutedAndBlocked = mutedAndBlocked;
-        _notificationSettings!.NotificationSettings = notificationSettings;
-        _privacyAndSecurityModel!.PrivacyAndSecurity = privacyAndSecurity;
+        _accountInfo!.Model = accountInfo;
+        _mutedAndBlocked!.Model = mutedAndBlocked;
+        _notificationSettings!.Model = notificationSettings;
+        _privacyAndSecurityModel!.Model = privacyAndSecurity;
     }
 }
