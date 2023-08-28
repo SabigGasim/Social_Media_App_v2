@@ -7,4 +7,6 @@
     >
     <converters:HumanizeIntToStringConverter x:Key="IntToStirngConverter"/>
     <converters:HumanizeDateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+    <converters:JoinStringListConverter x:Key="JoinStringListConverter"/>
+    <converters:FirstStringItemConverter x:Key="FirstStringItemConverter"/>
 </ResourceDictionary>
