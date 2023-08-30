@@ -52,7 +52,9 @@
                               Text="Date of birth"
                               Detail="{Binding Model.DateOfBirth, Mode=OneWay}"
                               TextColor="White"
-                              DetailColor="#71767B"/>
+                              DetailColor="#71767B"
+                              Command="{Binding TableCellClickedCommand, Mode=OneTime}"
+                              CommandParameter="{x:Static constants:Routes.ChangeDateOfBirthPage}"/>
                 </TableSection>
             </TableRoot>
         </TableView>
