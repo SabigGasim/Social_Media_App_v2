@@ -29,17 +29,13 @@ public class OlderThanRule<T> : IValidationRule<T>
         var utcNow = DateTimeOffset.UtcNow;
         var minAge = utcNow.AddYears(-_minAge);
 
-        DateOnly dateOfBirthDateOnly;
-
-        if (value is DateTimeOffset dateTimeOffset)
+        DateOnly dateOfBirthDateOnly = value switch
         {
-            dateOfBirthDateOnly = new DateOnly(dateTimeOffset.Year, dateTimeOffset.Month, dateTimeOffset.Day);
-        }
-        else if (value is DateTime dateTime)
-        {
-            dateOfBirthDateOnly = new DateOnly(dateTime.Year, dateTime.Month, dateTime.Day);
-        }
-        else return false;
+            DateOnly dateOnly => dateOnly,
+            DateTimeOffset dateTimeOffset => DateOnly.FromDateTime(dateTimeOffset.DateTime),
+            DateTime dateTime => DateOnly.FromDateTime(dateTime),
+            _ => throw new ArgumentException("The specified argument is not a DateTime, DateTimeOffset or DateOnly")
+        };
 
         var utcNowDateOnly = new DateOnly(utcNow.Year, utcNow.Month, utcNow.Day);
         var thirteenYearsAgo = new DateOnly(minAge.Year, minAge.Month, minAge.Day);
