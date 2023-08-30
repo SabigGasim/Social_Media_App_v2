@@ -178,6 +178,9 @@
 	  <MauiXaml Update="MVVM\Views\SearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\ChangeNicknamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\ChangeUsernamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -35,7 +35,9 @@
                               Text="Nickname"
                               Detail="{Binding Model.Nickname, Mode=OneWay}"
                               TextColor="White"
-                              DetailColor="#71767B"/>
+                              DetailColor="#71767B"
+                              Command="{Binding TableCellClickedCommand, Mode=OneTime}"
+                              CommandParameter="{x:Static constants:Routes.ChangeNicknamePage}"/>
                     <TextCell x:Name="PhoneTextCell"
                               Text="Phone"
                               Detail="{Binding Model.PhoneNumber, Mode=OneWay}"
