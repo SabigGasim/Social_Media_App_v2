@@ -9,4 +9,5 @@
     <converters:HumanizeDateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
     <converters:JoinStringListConverter x:Key="JoinStringListConverter"/>
     <converters:FirstStringItemConverter x:Key="FirstStringItemConverter"/>
+    <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
 </ResourceDictionary>
