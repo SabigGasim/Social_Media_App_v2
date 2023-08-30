@@ -20,6 +20,19 @@ public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
 
     public bool Check(T? value)
     {
-        return value is string str && !string.IsNullOrEmpty(str);
+        switch (value)
+        {
+            case null:
+                return false;
+            
+            case string str:
+                return str != string.Empty;
+            
+            case IEquatable<T>:
+                return value.Equals(default);
+
+            default:
+                return EqualityComparer<T>.Default.Equals(value, default);
+        }
     }
 }
