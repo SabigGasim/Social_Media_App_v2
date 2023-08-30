@@ -29,10 +29,10 @@ public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
                 return str != string.Empty;
             
             case IEquatable<T>:
-                return value.Equals(default);
+                return !value.Equals(default);
 
             default:
-                return EqualityComparer<T>.Default.Equals(value, default);
+                return !EqualityComparer<T>.Default.Equals(value, default);
         }
     }
 }
