@@ -6,6 +6,7 @@ using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels.Settings;
 using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
+using NativeApp.MVVM.ViewModels.Settings.Notifications;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;

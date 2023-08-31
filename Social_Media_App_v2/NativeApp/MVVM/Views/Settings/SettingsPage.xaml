@@ -40,6 +40,8 @@
             <contentViews:SettingsContentView Title="Filters"
                                            Icon="bell.png"
                                            Description="Here you can set the notifications you prefer to receive"
+                                              Command="{Binding TableViewOptionClickedCommand}"
+                                              CommandParameter="{x:Static constants:Routes.NotificationFiltersPage}"
                                   ControlTemplate="{StaticResource SettingsControlTemplate}"/>
             <contentViews:SettingsContentView Title="Methods"
                                            Icon="email.png"

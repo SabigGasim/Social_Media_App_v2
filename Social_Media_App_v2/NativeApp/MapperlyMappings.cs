@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Common;
+using Domain.Entities;
 using NativeApp.MVVM.Models;
 using Riok.Mapperly.Abstractions;
 
@@ -59,4 +60,7 @@ public static partial class MapperlyMappings
 public static partial class DeepCopyMapperlyMappings
 {
     public static partial AccountInfoModel DeepCopy(this AccountInfoModel accountInfo);
+    public static partial NotificationSettingsModel DeepCopy(this NotificationSettingsModel accountInfo);
+    public static partial NotificationTypes DeepCopy(this NotificationTypes accountInfo);
+    public static partial NotificationMethods DeepCopy(this NotificationMethods accountInfo);
 }

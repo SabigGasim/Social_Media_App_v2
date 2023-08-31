@@ -5,13 +5,14 @@ using NativeApp.Factories;
 using NativeApp.Infrastructure.Data.Databases.InMemory;
 using NativeApp.Infrastructure.Repositories;
 using NativeApp.Interfaces;
-using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels;
 using NativeApp.MVVM.ViewModels.Settings;
 using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
+using NativeApp.MVVM.ViewModels.Settings.Notifications;
 using NativeApp.MVVM.Views;
 using NativeApp.MVVM.Views.Settings;
 using NativeApp.MVVM.Views.Settings.AccountInformation;
+using NativeApp.MVVM.Views.Settings.Notifications;
 using NativeApp.Services;
 
 namespace NativeApp;
@@ -69,6 +70,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChangeUsernameViewModel>();
         builder.Services.AddSingleton<ChangeNicknameViewModel>();
         builder.Services.AddSingleton<ChangeDateOfBirthViewModel>();
+        builder.Services.AddSingleton<NotificationFiltersViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -83,6 +85,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChangeUsernamePage>();
         builder.Services.AddSingleton<ChangeNicknamePage>();
         builder.Services.AddSingleton<ChangeDateOfBirthPage>();
+        builder.Services.AddSingleton<NotificationFiltersPage>();
 
         builder.Services.AddSingleton<App>();
 
