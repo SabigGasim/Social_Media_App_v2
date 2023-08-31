@@ -1,6 +1,6 @@
 ﻿using NativeApp.MVVM.Models;
 
-namespace NativeApp.MVVM.ViewModels.Settings;
+namespace NativeApp.MVVM.ViewModels.Settings.Notifications;
 
 public class NotificationSettingsViewModel : SettingsViewModelBase<NotificationSettingsModel>
 {
