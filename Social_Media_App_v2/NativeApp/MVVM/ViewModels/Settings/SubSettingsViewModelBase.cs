@@ -21,7 +21,7 @@ public abstract class SubSettingsViewModelBase<TViewModel, TModel> : ViewModelBa
         _modelSetter = (value) => viewModel.Model = value;
     }
 
-    public TModel? Model
+    protected TModel? Model
     {
         get => _modelGetter();
         set
