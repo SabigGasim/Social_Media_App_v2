@@ -14,6 +14,11 @@
              IsEnabled="{Binding Nickname.IsValid, Mode=OneWay}"/>
     </Shell.TitleView>
 
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
     <VerticalStackLayout x:Name="UsernameStackLayout"
                       Padding="15"
                       >

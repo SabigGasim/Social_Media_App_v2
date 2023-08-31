@@ -19,7 +19,7 @@ public class ChangeNicknameViewModel : SubSettingsViewModelBase<AccountInfoViewM
 
     public ValidatableObject<string> Nickname { get; private set; } = new();
 
-    public void SetOriginalNickname()
+    protected override void SetOriginalSettings()
     {
         Nickname.Value = this.Model!.Nickname;
     }

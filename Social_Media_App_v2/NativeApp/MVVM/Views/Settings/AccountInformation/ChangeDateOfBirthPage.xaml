@@ -13,6 +13,11 @@
          IsEnabled="{Binding DateOfBirth.IsValid, Mode=OneWay}"/>
     </Shell.TitleView>
 
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                    Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
     <VerticalStackLayout x:Name="UsernameStackLayout"
                   Padding="15"
                   >

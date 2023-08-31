@@ -9,7 +9,7 @@
     
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="NavigatedTo"
-                                        Command="{Binding NavigatedToCommand, Mode=OneTime}"/>
+                                Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
     </ContentPage.Behaviors>
 
     <Shell.TitleView>

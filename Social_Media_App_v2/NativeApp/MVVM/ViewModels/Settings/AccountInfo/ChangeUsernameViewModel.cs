@@ -19,7 +19,7 @@ public class ChangeUsernameViewModel : SubSettingsViewModelBase<AccountInfoViewM
 
     public ValidatableObject<string> Username { get; private set; } = new();
 
-    public void SetOriginalUsername()
+    protected override void SetOriginalSettings()
     {
         Username.Value = this.Model!.Username;
     }

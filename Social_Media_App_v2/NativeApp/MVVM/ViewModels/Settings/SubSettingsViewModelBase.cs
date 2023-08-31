@@ -8,6 +8,7 @@ public abstract class SubSettingsViewModelBase<TViewModel, TModel> : ViewModelBa
 {
     private readonly INavigationService _navigationService;
     private ICommand? _saveSettingsCommand;
+    private ICommand? _setOriginalSettingsCommand;
     private Func<TModel?> _modelGetter;
     private Action<TModel?> _modelSetter;
 
@@ -42,6 +43,12 @@ public abstract class SubSettingsViewModelBase<TViewModel, TModel> : ViewModelBa
 
             HandleErrorResult(result);
         });
+
+    public ICommand? SetOriginalSettingsCommand => _setOriginalSettingsCommand 
+        ??= new Command(SetOriginalSettings);
+
+
+    protected abstract void SetOriginalSettings();
 
     protected virtual async Task<Result> UpdateSettings()
     {

@@ -19,7 +19,7 @@ public class ChangeDateOfBirthViewModel : SubSettingsViewModelBase<AccountInfoVi
 
     public ValidatableObject<DateOnly> DateOfBirth { get; private set; } = new();
 
-    public void SetOriginalDateOfBirth()
+    protected override void SetOriginalSettings()
     {
         DateOfBirth.Value = this.Model!.DateOfBirth;
     }

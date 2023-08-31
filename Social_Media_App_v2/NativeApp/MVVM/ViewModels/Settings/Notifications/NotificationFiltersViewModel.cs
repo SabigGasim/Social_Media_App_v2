@@ -1,14 +1,12 @@
 ﻿using Domain.Common;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
-using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels.Settings.Notifications;
 public class NotificationFiltersViewModel : 
     SubSettingsViewModelBase<NotificationSettingsViewModel, NotificationSettingsModel>
 {
     private NotificationTypes? _filters;
-    private ICommand? _navigatedToCommand;
 
     public NotificationFiltersViewModel(
         INavigationService navigationService,
@@ -22,8 +20,6 @@ public class NotificationFiltersViewModel :
         get => _filters; 
         private set => TrySetValue(ref _filters, value); 
     }
-
-    public ICommand? NavigatedToCommand => _navigatedToCommand ??= new Command(SetOriginalFilters);
 
     protected override Task<Result> UpdateSettings()
     {
@@ -39,8 +35,7 @@ public class NotificationFiltersViewModel :
         return base.UpdateSettings();
     }
 
-
-    private void SetOriginalFilters()
+    protected override void SetOriginalSettings()
     {
         this.Filters = this.Model!.Types.DeepCopy();
     }
