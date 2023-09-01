@@ -5,7 +5,7 @@
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+		<OutputType Condition="'$(TargetFramework)' != 'net7.0'">Exe</OutputType>
 		<RootNamespace>NativeApp</RootNamespace>
 		<Nullable>enable</Nullable>
 		<UseMaui>true</UseMaui>
@@ -34,6 +34,7 @@
 		<Platforms>AnyCPU;ARM64</Platforms>
 	</PropertyGroup>
 	
+	
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
 	  <EnableLLVM>False</EnableLLVM>
@@ -48,7 +49,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
 	  <AndroidLinkTool>r8</AndroidLinkTool>
 		<EnableLLVM>False</EnableLLVM>
-		<DebugSymbols>True</DebugSymbols>
+		<DebugSymbols>False</DebugSymbols>
 		<RunAOTCompilation>True</RunAOTCompilation>
 	</PropertyGroup>
 
@@ -185,6 +186,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\ChangeUsernamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\Notifications\NotificationFiltersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\Notifications\NotificationMethodsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\SettingsPage.xaml">
