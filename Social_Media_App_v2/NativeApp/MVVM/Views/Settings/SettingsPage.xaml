@@ -26,7 +26,7 @@
             <contentViews:SettingsContentView Title="Account info"
                                               Icon="profile.png" 
                                               Description="See information about your account"
-                                              Command="{Binding TableViewOptionClickedCommand}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
                                               CommandParameter="{x:Static constants:Routes.AccountInfoPage}"
                                               ControlTemplate="{StaticResource SettingsControlTemplate}">
             </contentViews:SettingsContentView>
@@ -38,15 +38,17 @@
             </contentViews:SettingsContentView>
             <Label Text="Notifications" />
             <contentViews:SettingsContentView Title="Filters"
-                                           Icon="bell.png"
-                                           Description="Here you can set the notifications you prefer to receive"
-                                              Command="{Binding TableViewOptionClickedCommand}"
+                                              Icon="bell.png"
+                                              Description="Here you can set the notifications you prefer to receive"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
                                               CommandParameter="{x:Static constants:Routes.NotificationFiltersPage}"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
             <contentViews:SettingsContentView Title="Methods"
-                                           Icon="email.png"
-                                           Description="Control where do you want to receive your notifications"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              Icon="email.png"
+                                              Description="Control where do you want to receive your notifications"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.NotificationMethodsPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
             <Label Text="Muted and blocked"/>
             <contentViews:SettingsContentView Title="Blocked accounts"
                                            Icon="blocked_user.png"

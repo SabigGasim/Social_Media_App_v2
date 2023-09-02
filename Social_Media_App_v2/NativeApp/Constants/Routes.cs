@@ -14,6 +14,7 @@ internal class Routes
     internal static readonly string ChangeNicknamePage = typeof(MVVM.Views.Settings.AccountInformation.ChangeNicknamePage).FullName!;
     internal static readonly string ChangeDateOfBirthPage = typeof(MVVM.Views.Settings.AccountInformation.ChangeDateOfBirthPage).FullName!;
     internal static readonly string NotificationFiltersPage = typeof(MVVM.Views.Settings.Notifications.NotificationFiltersPage).FullName!;
+    internal static readonly string NotificationMethodsPage = typeof(MVVM.Views.Settings.Notifications.NotificationMethodsPage).FullName!;
 
     internal static void RegisterRoutes()
     {

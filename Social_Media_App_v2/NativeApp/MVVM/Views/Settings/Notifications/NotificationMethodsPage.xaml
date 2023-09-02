@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.Notifications.NotificationMethodsPage"
+             Title="NotificationMethodsPage"
+             xmlns:contentViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.Notifications"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="{x:Type settings:NotificationMethodsViewModel}"
+             >
+    
+    <Shell.TitleView>
+        <Button x:Name="SaveButton"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding SaveSettingsCommand, Mode=OneTime}"/>
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                            Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout Margin="15" >
+        <Label x:Name="HeaderLabel"
+               Style="{StaticResource BaseLabel}"
+               FontSize="16"
+               Text="Customize how you get notified." 
+               Margin="0,0,0,15"
+               TextColor="#71767B"/>
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection TextColor="White">
+                    <SwitchCell x:Name="AppAlertsSwitchCell"
+                                On="{Binding Methods.AppAlerts, Mode=TwoWay}"
+                                Text="App alerts"
+                                />
+                    <SwitchCell x:Name="EmailSwitchCell"
+                                On="{Binding Methods.Email, Mode=TwoWay}"
+                                Text="Email"
+                                IsEnabled="{Binding AccountInfo.Email, Mode=OneWay, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                />
+                    <SwitchCell x:Name="PushNotificationsSwitchCell"
+                                On="{Binding Methods.PushNotifications, Mode=TwoWay}"
+                                Text="Push notifications"/>
+                    <SwitchCell x:Name="SmsSwitchCell"
+                                On="{Binding Methods.SMS, Mode=TwoWay}"
+                                Text="SMS"
+                                IsEnabled="{Binding AccountInfo.PhoneNumber, Mode=OneWay, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </VerticalStackLayout>
+</ContentPage>
