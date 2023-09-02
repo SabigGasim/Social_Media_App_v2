@@ -11,6 +11,11 @@ public interface IPropertyChangedNotifier : INotifyPropertyChanged
 
 public class PropertyChangedNotifier : ObservableObject, IPropertyChangedNotifier
 {
+    public PropertyChangedNotifier()
+    {
+        Subscriber = new(this);
+    }
+
     public bool TrySetValue<T>(ref T? property, T? value, [CallerMemberName] string? propertyName = null)
     {
         if(property is null || !property!.Equals(value)!)
@@ -22,4 +27,6 @@ public class PropertyChangedNotifier : ObservableObject, IPropertyChangedNotifie
 
         return false;
     }
+
+    public Subscriber Subscriber { get; private init; } = default!;
 }
