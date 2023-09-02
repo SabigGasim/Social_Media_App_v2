@@ -10,4 +10,5 @@
     <converters:JoinStringListConverter x:Key="JoinStringListConverter"/>
     <converters:FirstStringItemConverter x:Key="FirstStringItemConverter"/>
     <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
+    <converters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter"/>
 </ResourceDictionary>
