@@ -11,4 +11,5 @@
     <converters:FirstStringItemConverter x:Key="FirstStringItemConverter"/>
     <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
     <converters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter"/>
+    <converters:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
 </ResourceDictionary>
