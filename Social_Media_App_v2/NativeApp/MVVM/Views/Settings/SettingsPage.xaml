@@ -55,9 +55,11 @@
                                            Description="These accounts will not show in your timeline and will not be able to view your posts or your engaments and will not be able to send you messages."
                                   ControlTemplate="{StaticResource SettingsControlTemplate}"/>
             <contentViews:SettingsContentView Title="Muted accounts"
-                                           Icon="mute.png"
-                                           Description="These accounts will not show in your timeline"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              Icon="mute.png"
+                                              Description="These accounts will not show in your timeline"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.MutedAccountsPage}"/>
             <contentViews:SettingsContentView Title="Muted words"
                                            Icon="mute.png"
                                            Description="These words will not show in your timeline"

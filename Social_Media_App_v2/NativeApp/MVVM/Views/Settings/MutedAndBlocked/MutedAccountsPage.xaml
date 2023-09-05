@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.MutedAndBlocked.MutedAccountsPage"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.MutedAndBlocked"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="{x:Type settings:MutedAccountsViewModel}"
+             Title="Muted accounts">
+    <ListView x:Name="MutedAccountList"
+              CachingStrategy="RecycleElement"
+              SeparatorVisibility="None"
+              ItemsSource="{Binding UserViewModels, Mode=OneWay}"
+              HasUnevenRows="False"
+              RowHeight="60"
+              Margin="15">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="{x:Type viewModels:UserViewModel}">
+                <ViewCell>
+                    <Grid RowDefinitions="50"
+                      ColumnDefinitions="50,*,50"
+                      ColumnSpacing="10"
+                      Margin="0,10,0,0">
+                        <ImageButton x:Name="UserImageButton"
+                                    Grid.Column="0"
+                                    VerticalOptions="Start"
+                                    CornerRadius="25" 
+                                    Aspect="AspectFill"
+                                    Source="{Binding User.Profile.Icon.Source, Mode=OneTime}"
+                                        
+                                 />
+
+                        <Label x:Name="UsernameAndNicknameLabel" 
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Start"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource CaptionLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding User.UserName, Mode=OneTime}"/>
+                                    <Span Text="&#x0a;"/>
+                                    <Span Text="{Binding User.Nickname, Mode=OneTime, StringFormat='@{0}'}"
+                                      TextColor="{StaticResource Gray400}"
+                                      FontSize="{StaticResource ElementSize}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <ImageButton x:Name="MuteAndUnmuteImageButton"
+                                     Source="mute.png"
+                                     Grid.Column="2"
+                                     Padding="0,5"
+                                     Command="{Binding UnMuteUserCommand, Mode=OneTime}"
+                                     IsVisible="{Binding User.IsMuted}"
+                                     >
+                            <ImageButton.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="Red"/>
+                            </ImageButton.Behaviors>
+                        </ImageButton>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>

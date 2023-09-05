@@ -8,10 +8,12 @@ using NativeApp.Interfaces;
 using NativeApp.MVVM.ViewModels;
 using NativeApp.MVVM.ViewModels.Settings;
 using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
+using NativeApp.MVVM.ViewModels.Settings.MutedAndBlocked;
 using NativeApp.MVVM.ViewModels.Settings.Notifications;
 using NativeApp.MVVM.Views;
 using NativeApp.MVVM.Views.Settings;
 using NativeApp.MVVM.Views.Settings.AccountInformation;
+using NativeApp.MVVM.Views.Settings.MutedAndBlocked;
 using NativeApp.MVVM.Views.Settings.Notifications;
 using NativeApp.Services;
 
@@ -65,6 +67,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<AccountInfoViewModel>();
         builder.Services.AddSingleton<NotificationSettingsViewModel>();
         builder.Services.AddSingleton<MutedAndBlockedViewModel>();
+        builder.Services.AddSingleton<MutedAccountsViewModel>();
         builder.Services.AddSingleton<PrivacyAndSecurityViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton<ChangeUsernameViewModel>();
@@ -88,6 +91,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChangeDateOfBirthPage>();
         builder.Services.AddSingleton<NotificationFiltersPage>();
         builder.Services.AddSingleton<NotificationMethodsPage>();
+        builder.Services.AddSingleton<MutedAccountsPage>();
 
 
         builder.Services.AddSingleton<App>();

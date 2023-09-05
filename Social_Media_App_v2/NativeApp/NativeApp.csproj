@@ -143,13 +143,13 @@
 	  <Compile Update="MVVM\Views\PostMediaViewer.xaml.cs">
 	    <DependentUpon>PostMediaViewer.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="MVVM\Views\Settings\MutedAndBlocked\MutedAccountsPage.xaml.cs">
+	    <DependentUpon>MutedAccountsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\AccountInfoPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="MVVM\Views\ChangePasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\ContentViews\FlyoutHeaderContentView.xaml">
@@ -186,6 +186,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\ChangeUsernamePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\MutedAndBlocked\MutedAccountsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\Notifications\NotificationFiltersPage.xaml">
