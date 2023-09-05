@@ -6,6 +6,7 @@ using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
 using NativeApp.MVVM.ViewModels.Settings;
 using NativeApp.MVVM.ViewModels.Settings.AccountInfo;
+using NativeApp.MVVM.ViewModels.Settings.MutedAndBlocked;
 using NativeApp.MVVM.ViewModels.Settings.Notifications;
 using System.Windows.Input;
 
@@ -89,8 +90,21 @@ public class SettingsViewModel : ViewModelBase
         };
 
         var userLookupRepository = _serviceProvider.GetRequiredService<IUserLookupRepository>();
-        var muted = (await userLookupRepository.FindManyByUsername("a")).Value!.Map();
-        var blocked = (await userLookupRepository.FindManyByUsername("b")).Value!.Map();
+        var muted = (await userLookupRepository.FindManyByUsername("a")).Value!.Map()
+            .Select(x => 
+            { 
+                x.IsMuted = true; 
+                return x; 
+            })
+            .Take(50);
+
+        var blocked = (await userLookupRepository.FindManyByUsername("b")).Value!.Map()
+            .Select(x =>
+            {
+                x.IsBlocked = true;
+                return x;
+            })
+            .Take(50);
 
         var mutedAndBlocked = new MutedAndBlockedModel
         {
