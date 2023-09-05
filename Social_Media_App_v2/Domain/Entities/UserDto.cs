@@ -14,6 +14,8 @@ public class UserDto
     public long FollowingCount { get; set; }
     public long PostsCount { get; set; }
     public bool IsUserBeingFollowed { get; set; }
+    public bool IsMuted { get; set; }
+    public bool IsBlocked { get; set; }
     public ProfileDto Profile { get; set; }
     public AccountState State { get; set; }
 }

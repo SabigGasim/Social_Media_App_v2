@@ -10,6 +10,7 @@ public class UserViewModel : ViewModelBase
     private INavigateCommandFactory _navigateCommandFactory;
     private ICommand? _profileIconClickedCommand;
     private UserModel? _user;
+    private ICommand? _unMuteUserCommand;
 
     public UserViewModel(INavigateCommandFactory navigateCommandFactory)
     {
@@ -38,4 +39,10 @@ public class UserViewModel : ViewModelBase
                 .Create(nameof(MediaListModel), new MediaListModel{User!.Profile.Icon}, Routes.MediaViewer);
         }
     }
+
+    public ICommand? UnMuteUserCommand => _unMuteUserCommand ??= new Command(() =>
+    {
+        this.User!.IsMuted = false;
+        OnPropertyChanged(nameof(User));
+    });
 }
