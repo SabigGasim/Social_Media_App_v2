@@ -102,6 +102,8 @@ public class SettingsViewModel : ViewModelBase
             .Select(x =>
             {
                 x.IsBlocked = true;
+                x.IsUserBeingFollowed = true; //to later test which DataTrigger will be invoked to set the right button style
+                                              //under MVVM/Views/Settings/MutedAndBlocked/BlockedAccountsPage.xaml
                 return x;
             })
             .Take(50);

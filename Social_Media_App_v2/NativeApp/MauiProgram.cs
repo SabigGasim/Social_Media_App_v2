@@ -68,6 +68,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<NotificationSettingsViewModel>();
         builder.Services.AddSingleton<MutedAndBlockedViewModel>();
         builder.Services.AddSingleton<MutedAccountsViewModel>();
+        builder.Services.AddSingleton<BlockedAccountsViewModel>();
         builder.Services.AddSingleton<PrivacyAndSecurityViewModel>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton<ChangeUsernameViewModel>();
@@ -92,6 +93,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<NotificationFiltersPage>();
         builder.Services.AddSingleton<NotificationMethodsPage>();
         builder.Services.AddSingleton<MutedAccountsPage>();
+        builder.Services.AddSingleton<BlockedAccountsPage>();
 
 
         builder.Services.AddSingleton<App>();

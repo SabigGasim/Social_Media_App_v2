@@ -1,7 +1,6 @@
 ﻿using NativeApp.Constants;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
-using System.Runtime.InteropServices;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
