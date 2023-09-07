@@ -2,7 +2,8 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels">
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -66,6 +67,38 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="FollowStateButton" x:DataType="{x:Type viewModels:UserViewModel}">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="Command" Value="{Binding FollowOrUnFollowCommand, Mode=OneTime}"/>
+        <Style.Triggers>
+            <DataTrigger TargetType="Button"
+                         Binding="{Binding User.IsBlocked, Mode=OneWay}"
+                         Value="True">
+                <Setter Property="BackgroundColor" Value="DarkRed"/>
+                <Setter Property="Text" Value="Unblock"/>
+                <Setter Property="Command" Value="{Binding BlockOrUnblockUserCommand, Mode=OneTime}"/>
+            </DataTrigger>
+            <MultiTrigger TargetType="Button">
+                <MultiTrigger.Conditions>
+                    <BindingCondition Binding="{Binding User.IsBlocked, Mode=OneWay}" Value="False"/>
+                    <BindingCondition Binding="{Binding User.IsUserBeingFollowed, Mode=OneWay}" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray600}"/>
+                <Setter Property="Text" Value="Following"/>
+            </MultiTrigger>
+            <MultiTrigger TargetType="Button">
+                <MultiTrigger.Conditions>
+                    <BindingCondition Binding="{Binding User.IsBlocked, Mode=OneWay}" Value="False"/>
+                    <BindingCondition Binding="{Binding User.IsUserBeingFollowed, Mode=OneWay}" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="Text" Value="Follow"/>
+            </MultiTrigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="Button" x:Key="PrimaryButton" BasedOn="{StaticResource BaseButton}">
