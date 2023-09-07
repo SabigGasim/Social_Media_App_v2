@@ -8,7 +8,6 @@ public class ProfileViewModel : ViewModelBase
 {
     private RangeObservableCollection<PostViewModel>? _postViewModels = new();
     private UserViewModel? _userViewModel;
-    private ICommand? _followButtonCommand;
     private readonly IPostRepository _repository;
     private readonly IServiceProvider _serviceProvider;
 
@@ -20,17 +19,6 @@ public class ProfileViewModel : ViewModelBase
         _repository = repository;
         _serviceProvider = serviceProvider;
         _userViewModel = userViewModel;
-
-        InitializeCommands();
-    }
-
-    private void InitializeCommands()
-    {
-        _followButtonCommand = new Command(() =>
-        {
-            UserViewModel!.User!.IsUserBeingFollowed = !UserViewModel.User.IsUserBeingFollowed;
-            OnPropertyChanged(nameof(UserViewModel));
-        });
     }
 
     public async Task UpdatePosts(Guid? lastSeenPost, int numberOfPosts)
@@ -69,6 +57,4 @@ public class ProfileViewModel : ViewModelBase
         get => _postViewModels;
         set => TrySetValue(ref _postViewModels, value);
     }
-
-    public ICommand? FollowButtonCommand => _followButtonCommand;
 }

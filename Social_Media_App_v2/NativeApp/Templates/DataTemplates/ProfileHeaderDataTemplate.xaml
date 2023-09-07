@@ -119,7 +119,7 @@
                     BackgroundColor="{StaticResource Primary}"
                     Grid.Column="0"
                     CornerRadius="10"
-                    Command="{Binding FollowButtonCommand, Mode=OneTime}">
+                    Command="{Binding UserViewModel.FollowOrUnFollowCommand, Mode=OneTime}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button"
                                  Binding="{Binding UserViewModel.User.IsUserBeingFollowed}"

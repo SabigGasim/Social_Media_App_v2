@@ -1,6 +1,7 @@
 ﻿using NativeApp.Constants;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
+using System.Runtime.InteropServices;
 using System.Windows.Input;
 
 namespace NativeApp.MVVM.ViewModels;
@@ -11,6 +12,8 @@ public class UserViewModel : ViewModelBase
     private ICommand? _profileIconClickedCommand;
     private UserModel? _user;
     private ICommand? _unMuteUserCommand;
+    private ICommand? _blockOrUnblockUserCommand;
+    private ICommand? _followOrUnFollowCommand;
 
     public UserViewModel(INavigateCommandFactory navigateCommandFactory)
     {
@@ -40,9 +43,21 @@ public class UserViewModel : ViewModelBase
         }
     }
 
-    public ICommand? UnMuteUserCommand => _unMuteUserCommand ??= new Command(() =>
+    public ICommand? MuteOrUnmuteUserCommand => _unMuteUserCommand ??= new Command(() =>
     {
-        this.User!.IsMuted = false;
+        this.User!.IsMuted = !this.User!.IsMuted;
+        OnPropertyChanged(nameof(User));
+    });
+
+    public ICommand? BlockOrUnblockUserCommand => _blockOrUnblockUserCommand ??= new Command(() =>
+    {
+        this.User!.IsBlocked = !this.User.IsBlocked;
+        OnPropertyChanged(nameof(User));
+    });
+
+    public ICommand? FollowOrUnFollowCommand => _followOrUnFollowCommand ??= new Command(() =>
+    {
+        this!.User!.IsUserBeingFollowed = !this.User!.IsUserBeingFollowed;
         OnPropertyChanged(nameof(User));
     });
 }

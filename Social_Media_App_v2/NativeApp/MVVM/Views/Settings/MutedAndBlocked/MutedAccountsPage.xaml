@@ -51,7 +51,7 @@
                                      Source="mute.png"
                                      Grid.Column="2"
                                      Padding="0,5"
-                                     Command="{Binding UnMuteUserCommand, Mode=OneTime}"
+                                     Command="{Binding MuteOrUnmuteUserCommand, Mode=OneTime}"
                                      IsVisible="{Binding User.IsMuted}"
                                      >
                             <ImageButton.Behaviors>
