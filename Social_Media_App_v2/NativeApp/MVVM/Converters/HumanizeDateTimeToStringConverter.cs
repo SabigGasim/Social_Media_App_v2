@@ -1,5 +1,4 @@
 ﻿using NativeApp.Interfaces;
-using NativeApp.MVVM.ViewModels;
 using System.Globalization;
 
 namespace NativeApp.MVVM.Converters;
@@ -20,12 +19,22 @@ public class HumanizeDateTimeToStringConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is null || value is not DateTime dateTime)
+        if (value is null)
         {
-            return null;
+            return default!;
         }
 
-        return _dateTimeHumanizerService.Humanize(dateTime);
+        if(value is DateTime dateTime)
+        {
+            return _dateTimeHumanizerService.Humanize(dateTime);
+        }
+
+        if(value is DateTimeOffset dateTimeOffset)
+        {
+            return _dateTimeHumanizerService.Humanize(dateTimeOffset);
+        }
+
+        return default!;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

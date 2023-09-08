@@ -1,7 +1,6 @@
 ﻿using Humanizer;
 using Humanizer.Localisation;
 using NativeApp.Interfaces;
-using NativeApp.MVVM.ViewModels;
 
 namespace NativeApp.Services;
 
@@ -16,6 +15,11 @@ public class HumanizerService : IHumanizerService
             return "Now";
         }
 
+        if(dateTime == DateTime.MaxValue)
+        {
+            return "Forever";
+        }
+
         var since = timeSpace.Humanize(maxUnit: TimeUnit.Year, minUnit: TimeUnit.Second);
         return since;
     }
@@ -27,6 +31,11 @@ public class HumanizerService : IHumanizerService
         if (Math.Abs(timeSpace.Ticks) < TimeSpan.TicksPerSecond)
         {
             return "Now";
+        }
+
+        if (dateTime == DateTimeOffset.MaxValue)
+        {
+            return "Forever";
         }
 
         var since = timeSpace.Humanize(maxUnit: TimeUnit.Year, minUnit: TimeUnit.Second);
