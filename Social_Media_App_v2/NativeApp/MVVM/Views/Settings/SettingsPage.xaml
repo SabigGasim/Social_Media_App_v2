@@ -63,9 +63,11 @@
                                               Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
                                               CommandParameter="{x:Static constants:Routes.MutedAccountsPage}"/>
             <contentViews:SettingsContentView Title="Muted words"
-                                           Icon="mute.png"
-                                           Description="These words will not show in your timeline"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              Icon="mute.png"
+                                              Description="These words will not show in your timeline"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.MutedWordsPage}"/>
             <Label Text="Privacy and safety"/>
             <contentViews:SettingsContentView Title="Audience"
                                            Icon="audience.png"

@@ -76,6 +76,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ChangeDateOfBirthViewModel>();
         builder.Services.AddSingleton<NotificationFiltersViewModel>();
         builder.Services.AddSingleton<NotificationMethodsViewModel>();
+        builder.Services.AddSingleton<MutedWordsViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -94,6 +95,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<NotificationMethodsPage>();
         builder.Services.AddSingleton<MutedAccountsPage>();
         builder.Services.AddSingleton<BlockedAccountsPage>();
+        builder.Services.AddSingleton<MutedWordsPage>();
 
 
         builder.Services.AddSingleton<App>();

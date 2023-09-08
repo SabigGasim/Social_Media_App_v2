@@ -17,6 +17,7 @@ internal class Routes
     internal static readonly string NotificationMethodsPage = typeof(MVVM.Views.Settings.Notifications.NotificationMethodsPage).FullName!;
     internal static readonly string MutedAccountsPage = typeof(MVVM.Views.Settings.MutedAndBlocked.MutedAccountsPage).FullName!;
     internal static readonly string BlockedAccountsPage = typeof(MVVM.Views.Settings.MutedAndBlocked.BlockedAccountsPage).FullName!;
+    internal static readonly string MutedWordsPage = typeof(MVVM.Views.Settings.MutedAndBlocked.MutedWordsPage).FullName!;
 
     internal static void RegisterRoutes()
     {

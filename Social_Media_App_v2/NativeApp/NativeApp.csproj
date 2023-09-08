@@ -103,6 +103,7 @@
 	  <None Remove="Resources\Images\lock.png" />
 	  <None Remove="Resources\Images\mute.png" />
 	  <None Remove="Resources\Images\pencil.png" />
+	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\profile.png" />
 	  <None Remove="Resources\Images\request.png" />
 	  <None Remove="Resources\Images\request_selected.png" />
@@ -192,6 +193,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\MutedAndBlocked\MutedAccountsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\MutedAndBlocked\MutedWordsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\Notifications\NotificationFiltersPage.xaml">
