@@ -110,8 +110,14 @@ public class SettingsViewModel : ViewModelBase
 
         var mutedAndBlocked = new MutedAndBlockedModel
         {
-            MutedUsers = new RangeObservableCollection<UserModel>(muted),
-            BlockedUsers = new RangeObservableCollection<UserModel>(blocked)
+            MutedUsers = new(muted),
+            BlockedUsers = new(blocked),
+            MutedWords = new(new MutedWordModel[]
+            {
+                new("Ad", DateTimeOffset.UtcNow.AddDays(30)),
+                new("The N word", DateTimeOffset.UtcNow.AddHours(20)),
+                new("@%^#$&!", DateTimeOffset.MaxValue)
+            })
         };
 
         var notificationSettings = new NotificationSettingsModel
