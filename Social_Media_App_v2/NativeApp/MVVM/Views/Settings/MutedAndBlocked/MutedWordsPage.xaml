@@ -10,10 +10,11 @@
 
     <Grid Padding="0,30,0,0">
         <ImageButton x:Name="AddWordImageButton"
+                     ZIndex="1"
                      Command="{Binding GoToWordAdditionPageCommand, Mode=OneTime}"
                      Source="plus.png"
-                     HeightRequest="50"
-                     WidthRequest="50"
+                     HeightRequest="80"
+                     WidthRequest="80"
                      CornerRadius="20"
                      VerticalOptions="End"
                      HorizontalOptions="End"
@@ -27,7 +28,7 @@
         </ImageButton>
         <ListView x:Name="MutedWordsListView"
                   CachingStrategy="RecycleElement"
-                  SeparatorVisibility="Default"
+                  SeparatorVisibility="None"
                   SelectionMode="None"
                   ItemsSource="{Binding Words, Mode=OneWay}"
                   >

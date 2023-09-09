@@ -189,6 +189,9 @@
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\ChangeUsernamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Settings\MutedAndBlocked\AddMutedWordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\MutedAndBlocked\BlockedAccountsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
