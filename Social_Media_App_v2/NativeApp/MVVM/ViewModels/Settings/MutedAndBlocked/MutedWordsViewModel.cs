@@ -1,4 +1,5 @@
 ﻿
+using NativeApp.Constants;
 using NativeApp.Helpers;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.Models;
@@ -31,6 +32,8 @@ public class MutedWordsViewModel : ViewModelBase
                 OnPropertyChanged(nameof(Words));
             }
         };
+
+        SubscribeToMutedWords();
     }
 
     public RangeObservableCollection<MutedWordModel>? Words
@@ -44,7 +47,7 @@ public class MutedWordsViewModel : ViewModelBase
     }
 
     public ICommand? GoToWordAdditionPageCommand =>
-        _goToWordAdditionPageCommand ??= _navigateCommandFactory.Create();
+        _goToWordAdditionPageCommand ??= _navigateCommandFactory.Create(Routes.AddMutedWordPage);
 
     private void SubscribeToMutedWords() => _subscriber.Subscribe(OnMutedWordsChangedEventHandler);
 }
