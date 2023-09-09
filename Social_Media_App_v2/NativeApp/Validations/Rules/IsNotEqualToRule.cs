@@ -31,7 +31,7 @@ public class IsNotEqualToRule<T> : IValidationRule<T>
         {
             IEquatable<T> equatable => !equatable.Equals(_value),
             IStructuralEquatable equatable => !equatable.Equals(_value),
-            _ => !EqualityComparer<T>.Default.Equals(_value)
+            _ => !EqualityComparer<T>.Default.Equals(_value, value)
         };
     }
 }
