@@ -12,4 +12,5 @@
     <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
     <converters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter"/>
     <converters:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
+    <converters:AllBooleansAreTrueMultiConverter x:Key="AllTrueMultiConverter"/>
 </ResourceDictionary>
