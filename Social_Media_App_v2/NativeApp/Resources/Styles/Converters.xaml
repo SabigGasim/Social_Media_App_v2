@@ -14,4 +14,5 @@
     <converters:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
     <converters:AllBooleansAreTrueMultiConverter x:Key="AllTrueMultiConverter"/>
     <converters:DurationToStringConverter x:Key="DurationToStringConverter"/>
+    <converters:PrivacyToBoolConverter x:Key="PrivacyToBoolConverter"/>
 </ResourceDictionary>
