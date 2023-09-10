@@ -10,17 +10,8 @@
 
     <Grid Padding="0,30,0,0">
         <ImageButton x:Name="AddWordImageButton"
-                     ZIndex="1"
+                     Style="{StaticResource CircularAddButton}"
                      Command="{Binding GoToWordAdditionPageCommand, Mode=OneTime}"
-                     Source="plus.png"
-                     HeightRequest="80"
-                     WidthRequest="80"
-                     CornerRadius="20"
-                     VerticalOptions="End"
-                     HorizontalOptions="End"
-                     Margin="0,0,20,25"
-                     BackgroundColor="{StaticResource Primary}"
-                     Padding="15"
                      >
             <ImageButton.Behaviors>
                 <toolkit:IconTintColorBehavior TintColor="White"/>

@@ -101,6 +101,19 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="ImageButton" x:Key="CircularAddButton">
+        <Setter Property="ZIndex" Value="1"/>
+        <Setter Property="Source" Value="plus.png"/>
+        <Setter Property="HeightRequest" Value="80"/>
+        <Setter Property="WidthRequest" Value="80"/>
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="Margin" Value="0,0,20,25"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+        <Setter Property="Padding" Value="15"/>
+    </Style>
+
     <Style TargetType="Button" x:Key="PrimaryButton" BasedOn="{StaticResource BaseButton}">
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
         <Setter Property="TextColor" Value="{StaticResource White}"/>
