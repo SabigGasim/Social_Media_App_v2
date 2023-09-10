@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.PrivacyAndSecurity.AudiencePage"
+             xmlns:contentViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.PrivacyAndSecurity"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="{x:Type settings:AudienceViewModel}">
+    
+    <Shell.TitleView>
+        <Button x:Name="SaveButton"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding SaveSettingsCommand, Mode=OneTime}"
+                />
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                        Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout Margin="15" >
+        <Label x:Name="HeaderLabel"
+           Style="{StaticResource BaseLabel}"
+           FontSize="16"
+           Text="Customize how your audience show your posts." 
+           Margin="0,0,0,15"
+           TextColor="#71767B"/>
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection TextColor="White">
+                    <SwitchCell x:Name="AppAlertsSwitchCell"
+                                On="{Binding Privacy, Mode=TwoWay, Converter={StaticResource PrivacyToBoolConverter}}"
+                                Text="Make your account private"
+                                />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </VerticalStackLayout>
+</ContentPage>

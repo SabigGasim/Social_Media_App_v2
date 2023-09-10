@@ -32,9 +32,9 @@
             </contentViews:SettingsContentView>
 
             <contentViews:SettingsContentView Title="Change Password"
-                                           Icon="lock.png" 
-                                           Description="Change your password at any time"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}">
+                                              Icon="lock.png" 
+                                              Description="Change your password at any time"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}">
             </contentViews:SettingsContentView>
             <Label Text="Notifications" />
             <contentViews:SettingsContentView Title="Filters"
@@ -70,13 +70,15 @@
                                               CommandParameter="{x:Static constants:Routes.MutedWordsPage}"/>
             <Label Text="Privacy and safety"/>
             <contentViews:SettingsContentView Title="Audience"
-                                           Icon="audience.png"
-                                           Description="Manage the visiblity of your posts"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              Icon="audience.png"
+                                              Description="Manage the visiblity of your posts"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.AudiencePage}"/>
             <contentViews:SettingsContentView Title="Two factor authentication"
-                                           Icon="twofactor.png"
-                                           Description="When enabled, adds an extra layer of security to your account by requiring two different forms of verification during the login process"
-                                  ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+                                              Icon="twofactor.png"
+                                              Description="When enabled, adds an extra layer of security to your account by requiring two different forms of verification during the login process"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

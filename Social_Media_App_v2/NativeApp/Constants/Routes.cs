@@ -19,6 +19,7 @@ internal class Routes
     internal static readonly string BlockedAccountsPage = typeof(MVVM.Views.Settings.MutedAndBlocked.BlockedAccountsPage).FullName!;
     internal static readonly string MutedWordsPage = typeof(MVVM.Views.Settings.MutedAndBlocked.MutedWordsPage).FullName!;
     internal static readonly string AddMutedWordPage = typeof(MVVM.Views.Settings.MutedAndBlocked.AddMutedWordPage).FullName!;
+    internal static readonly string AudiencePage = typeof(MVVM.Views.Settings.PrivacyAndSecurity.AudiencePage).FullName!;
 
     internal static void RegisterRoutes()
     {

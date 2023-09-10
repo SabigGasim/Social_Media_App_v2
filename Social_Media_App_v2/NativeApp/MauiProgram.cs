@@ -15,6 +15,7 @@ using NativeApp.MVVM.Views.Settings;
 using NativeApp.MVVM.Views.Settings.AccountInformation;
 using NativeApp.MVVM.Views.Settings.MutedAndBlocked;
 using NativeApp.MVVM.Views.Settings.Notifications;
+using NativeApp.MVVM.Views.Settings.PrivacyAndSecurity;
 using NativeApp.Services;
 
 namespace NativeApp;
@@ -78,6 +79,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<NotificationMethodsViewModel>();
         builder.Services.AddSingleton<MutedWordsViewModel>();
         builder.Services.AddSingleton<AddMutedWordViewModel>();
+        builder.Services.AddSingleton<AudienceViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -98,6 +100,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<BlockedAccountsPage>();
         builder.Services.AddSingleton<MutedWordsPage>();
         builder.Services.AddSingleton<AddMutedWordPage>();
+        builder.Services.AddSingleton<AudiencePage>();
 
 
         builder.Services.AddSingleton<App>();
