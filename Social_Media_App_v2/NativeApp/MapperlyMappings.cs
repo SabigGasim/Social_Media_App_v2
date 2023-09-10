@@ -59,8 +59,9 @@ public static partial class MapperlyMappings
 [Mapper(UseDeepCloning = true)]
 public static partial class DeepCopyMapperlyMappings
 {
-    public static partial AccountInfoModel DeepCopy(this AccountInfoModel accountInfo);
-    public static partial NotificationSettingsModel DeepCopy(this NotificationSettingsModel accountInfo);
-    public static partial NotificationTypes DeepCopy(this NotificationTypes accountInfo);
-    public static partial NotificationMethods DeepCopy(this NotificationMethods accountInfo);
+    public static partial AccountInfoModel DeepCopy(this AccountInfoModel model);
+    public static partial NotificationSettingsModel DeepCopy(this NotificationSettingsModel model);
+    public static partial NotificationTypes DeepCopy(this NotificationTypes types);
+    public static partial NotificationMethods DeepCopy(this NotificationMethods methods);
+    public static partial PrivacyAndSecurityModel DeepCopy(this PrivacyAndSecurityModel model);
 }
