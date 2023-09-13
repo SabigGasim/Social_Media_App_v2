@@ -18,7 +18,7 @@
                      HeightRequest="50"
                      Grid.Row="0"
                      Command="{Binding ProfileFlyoutItemClickedCommand, Mode=OneTime}"
-                     Source="{Binding CurrentAccount.User.Profile.Icon.Source, Mode=OneWay}"/>
+                     Source="{Binding AccountsAccessor.CurrentAccount.User.Profile.Icon.Source, Mode=OneWay}"/>
 
 
         <ImageButton x:Name="AccountManagerButton"
@@ -36,11 +36,11 @@
                Grid.Row="1">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="{Binding CurrentAccount.User.Nickname, Mode=OneWay}"
+                    <Span Text="{Binding AccountsAccessor.CurrentAccount.User.Nickname, Mode=OneWay}"
                        FontAttributes="Bold"
                        FontSize="22"/>
                     <Span Text="&#x0a;"/>
-                    <Span Text="{Binding CurrentAccount.User.UserName, StringFormat='@{0}', Mode=OneWay}"
+                    <Span Text="{Binding AccountsAccessor.CurrentAccount.User.UserName, StringFormat='@{0}', Mode=OneWay}"
                        TextColor="#5E6369"
                        FontSize="18"/>
                 </FormattedString>
@@ -52,12 +52,12 @@
                Grid.Row="2">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="{Binding CurrentAccount.User.FollowingCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
+                    <Span Text="{Binding AccountsAccessor.CurrentAccount.User.FollowingCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
                           FontAttributes="Bold"/>
                     <Span Text=" Following"
                           TextColor="#5E6369"/>
                     <Span Text="&#x0020;&#x0020;&#x0020;"/>
-                    <Span Text="{Binding CurrentAccount.User.FollowersCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
+                    <Span Text="{Binding AccountsAccessor.CurrentAccount.User.FollowersCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
                           FontAttributes="Bold"/>
                     <Span Text=" Followers"
                           TextColor="#5E6369"/>

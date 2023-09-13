@@ -43,6 +43,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<IFollowRequestsRepository, FakeFollowRequestsRepository>();
         builder.Services.AddSingleton<IUserLookupRepository, FakeUserLookupRepository>();
         builder.Services.AddSingleton<IAlertsRepository, FakeAlertsRepository>();
+        builder.Services.AddSingleton<AccountsAccessor>();
+        builder.Services.AddSingleton<BindableAccountsAccessor>();
 
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();

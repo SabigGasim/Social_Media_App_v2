@@ -18,7 +18,7 @@
             >
         <CollectionView x:Name="AccountsCollectionView"
                     Footer="{Binding .}"
-                    ItemsSource="{Binding Accounts, Mode=OneWay}"
+                    ItemsSource="{Binding AccountsAccessor.Accounts, Mode=OneWay}"
                     ItemSizingStrategy="MeasureAllItems"
                     >
             <CollectionView.ItemsLayout>
