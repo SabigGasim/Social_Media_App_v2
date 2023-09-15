@@ -1,7 +1,9 @@
-﻿using Domain.Common;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using Domain.Common;
 using Domain.Entities;
 using NativeApp.MVVM.Models;
 using Riok.Mapperly.Abstractions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NativeApp;
 
@@ -64,4 +66,67 @@ public static partial class DeepCopyMapperlyMappings
     public static partial NotificationTypes DeepCopy(this NotificationTypes types);
     public static partial NotificationMethods DeepCopy(this NotificationMethods methods);
     public static partial PrivacyAndSecurityModel DeepCopy(this PrivacyAndSecurityModel model);
+
+    public static MediaListModel DeepCopy(this MediaListModel list)
+    {
+        return new(list.Select(DeepCopy));
+    }
+
+    public static MediaModel DeepCopy(this MediaModel list)
+    {
+        var target = new MediaModel
+        {
+            Id = list.Id,
+            Url = list.Url,
+            ContentType = list.ContentType,
+            ContentLength = list.ContentLength,
+            Source = list.Source
+        };
+        return target;
+    }
+
+    //Manually deep copy because the library started to crash generating source code for some reason
+    public static PostModel DeepCopy(this PostModel model)
+    {
+        return new PostModel
+        {
+            Id = model.Id,
+            Date = model.Date,
+            CommentsCount = model.CommentsCount,
+            IsLiked = model.IsLiked,
+            Likes = model.Likes,
+            Text = model.Text,
+            Media = new MediaListModel(model.Media?.Select(m =>
+            {
+                return new MediaModel
+                {
+                    Id = m.Id,
+                    ContentLength = m.ContentLength,
+                    ContentType = m.ContentType,
+                    Url = m.Url,
+                    Source = m.Source,
+                };
+            }) ?? Enumerable.Empty<MediaModel>()),
+            User = new UserModel
+            {
+                AccountPrivacy = model.User.AccountPrivacy,
+                FollowersCount = model.User.FollowingCount,
+                FollowingCount = model.User.FollowingCount,
+                IsBlocked = model.User.IsBlocked,
+                IsMuted = model.User.IsMuted,
+                Nickname = model.User.Nickname,
+                IsUserBeingFollowed = model.User.IsUserBeingFollowed,
+                Id = model.User.Id,
+                PostsCount = model.User.PostsCount,
+                State = model.User.State,
+                UserName = model.User.UserName,
+                Profile = new ProfileModel
+                {
+                    Id = model.User.Profile.Id,
+                    Description = model.User.Profile.Description,
+                    Icon = model.User.Profile.Icon,
+                },
+            }
+        };
+    }
 }
