@@ -3,6 +3,9 @@ using Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 using NativeApp.Factories;
 using NativeApp.Infrastructure.Data.Databases.InMemory;
+using NativeApp.Infrastructure.Data.FileManagers;
+using NativeApp.Infrastructure.Data.MediaPickers;
+using NativeApp.Infrastructure.Data.Persistence;
 using NativeApp.Infrastructure.Repositories;
 using NativeApp.Interfaces;
 using NativeApp.MVVM.ViewModels;
@@ -45,6 +48,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<IAlertsRepository, FakeAlertsRepository>();
         builder.Services.AddSingleton<AccountsAccessor>();
         builder.Services.AddSingleton<BindableAccountsAccessor>();
+        builder.Services.AddSingleton<Interfaces.IMediaPicker, MauiMediaPicker>();
 
         builder.Services.AddSingleton<IRouteParametersFactory, RouteParametersFactory>();
         builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
@@ -57,7 +61,7 @@ public static class MauiProgram
         builder.Services.AddTransient<UserAlertViewModel>();
         builder.Services.AddTransient<AccountAlertViewModel>();
 
-        builder.Services.AddTransient<TimelineViewModel>();
+        builder.Services.AddSingleton<TimelineViewModel>();
         builder.Services.AddTransient<PostCommentsViewModel>();
         builder.Services.AddTransient<CommentRepliesViewModel>();
         builder.Services.AddTransient<FollowRequestViewModel>();
@@ -82,6 +86,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MutedWordsViewModel>();
         builder.Services.AddSingleton<AddMutedWordViewModel>();
         builder.Services.AddSingleton<AudienceViewModel>();
+        builder.Services.AddSingleton<AddPostViewModel>();
 
         builder.Services.AddSingleton<HomePage>();
         builder.Services.AddSingleton<SearchPage>();
@@ -103,6 +108,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<MutedWordsPage>();
         builder.Services.AddSingleton<AddMutedWordPage>();
         builder.Services.AddSingleton<AudiencePage>();
+        builder.Services.AddSingleton<AddPostPage>();
 
 
         builder.Services.AddSingleton<App>();

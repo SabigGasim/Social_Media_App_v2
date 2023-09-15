@@ -9,19 +9,27 @@
              xmlns:templateSelectors="clr-namespace:NativeApp.Templates.DataTemplateSelectors"
              xmlns:helpers="clr-namespace:NativeApp.Helpers"
              xmlns:interfaces="clr-namespace:NativeApp.Interfaces"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundColor="{AppThemeBinding Light=WhiteSmoke, Dark={StaticResource Black}}"
              Padding="{OnIdiom Tablet='150,0', Default='8,0'}"
              x:DataType="{x:Type viewmodels:TimelineViewModel}"
              FlowDirection="LeftToRight">
-    
-    <ListView x:Name="PostsListView"
-              ItemsSource="{Binding PostViewModels}"
-              ItemTemplate="{StaticResource postDataTemplateSelector}"
-              HasUnevenRows="True"
-              SeparatorVisibility="None"
-              CachingStrategy="RecycleElement"
-              SelectionMode="None"
-              
-              />
+    <Grid>
+        <ListView x:Name="PostsListView"
+          ItemsSource="{Binding PostViewModels, Mode=OneWay}"
+          ItemTemplate="{StaticResource postDataTemplateSelector}"
+          HasUnevenRows="True"
+          SeparatorVisibility="None"
+          CachingStrategy="RecycleElement"
+          SelectionMode="None"
+          />
+        <ImageButton Style="{StaticResource CircularAddButton}"
+                     Command="{Binding GoToAddPostPageCommand}"
+                     Margin="0,0,5,0">
+            <ImageButton.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="White"/>
+            </ImageButton.Behaviors>
+        </ImageButton>
+    </Grid>
 </ContentPage>
     

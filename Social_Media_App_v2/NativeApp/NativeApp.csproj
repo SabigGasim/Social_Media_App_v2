@@ -97,6 +97,7 @@
 	  <None Remove="Resources\Images\heart_selected.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\home_selected.png" />
+	  <None Remove="Resources\Images\image.png" />
 	  <None Remove="Resources\Images\image_icon.png" />
 	  <None Remove="Resources\Images\like.png" />
 	  <None Remove="Resources\Images\like_selected.png" />
@@ -150,6 +151,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MVVM\Views\AddPostPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Settings\AccountInformation\AccountInfoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -235,6 +239,24 @@
 
 	<ItemGroup>
 	  <Folder Include="Common\Exceptions\" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
+	  <PackageReference Include="FFImageLoadingCompat.Maui">
+	    <Version>0.1.1</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+	  <PackageReference Include="FFImageLoadingCompat.Maui">
+	    <Version>0.1.1</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
+	  <PackageReference Include="FFImageLoadingCompat.Maui">
+	    <Version>0.1.1</Version>
+	  </PackageReference>
 	</ItemGroup>
 
 
