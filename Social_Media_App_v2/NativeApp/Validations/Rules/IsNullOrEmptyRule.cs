@@ -26,7 +26,7 @@ public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
                 return false;
             
             case string str:
-                return str != string.Empty;
+                return !string.IsNullOrEmpty(str);
             
             case IEquatable<T>:
                 return !value.Equals(default);
