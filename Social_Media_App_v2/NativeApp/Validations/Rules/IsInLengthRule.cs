@@ -1,5 +1,7 @@
 ﻿using Humanizer;
 using NativeApp.Interfaces;
+using NativeApp.MVVM.Models;
+using System.Collections;
 
 namespace NativeApp.Validations.Rules;
 public class IsInLengthRule<T> : IValidationRule<T>
@@ -34,6 +36,11 @@ public class IsInLengthRule<T> : IValidationRule<T>
 
     public bool Check(T? value)
     {
-        return value is string str && str.Length >= _min && str.Length <= _max;
+        return value switch
+        {
+            string str => str.Length >= _min && str.Length <= _max,
+            ICollection collection => collection.Count >= _min && collection.Count <= _max,
+            _ => false
+        };
     }
 }
