@@ -42,4 +42,11 @@ public sealed class TimelineViewModel : ViewModelBase
         get => _postViewModels;
         set => TrySetValue(ref _postViewModels, value);
     }
+
+    public Task AddPost(PostViewModel post)
+    {
+        PostViewModels!.Insert(0, post);
+
+        return Task.CompletedTask;
+    }
 }
