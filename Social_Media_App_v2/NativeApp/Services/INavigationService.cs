@@ -5,7 +5,7 @@ namespace NativeApp.Services;
 
 public class MauiNavigationService : INavigationService
 {
-    public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null) =>
+    public Task NavigateToAsync(string route, IDictionary<string, object>? routeParameters = null) =>
         routeParameters is not null
             ? Shell.Current.GoToAsync(route, routeParameters)
             : Shell.Current.GoToAsync(route);

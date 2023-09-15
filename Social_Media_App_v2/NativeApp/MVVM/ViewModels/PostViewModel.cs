@@ -46,6 +46,7 @@ public class PostViewModel : ViewModelBase
         _likeButtonClickedCommand = new Command(() =>
         {
             Post!.IsLiked = !Post.IsLiked;
+            Post!.Likes += Post!.IsLiked ? 1 : -1;
             OnPropertyChanged(nameof(Post));
         });
 
