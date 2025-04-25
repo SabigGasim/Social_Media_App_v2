@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="NativeApp.Templates.DataTemplateSelectors.AlertDataTemplateSelectorResourceDictionary"
+                    xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+                    xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+                    xmlns:templateSelectors="clr-namespace:NativeApp.Templates.DataTemplateSelectors">
+
+    <ControlTemplate x:Key="UserAlertControlTemplate">
+        <Grid RowDefinitions="Auto"
+              ColumnDefinitions="50,*,80"
+              ColumnSpacing="10"
+              BindingContext="{TemplateBinding BindingContext}"
+              x:DataType="{x:Type viewModels:UserAlertViewModel}"
+              Margin="0,20,0,0">
+            <ImageButton x:Name="UserImageButton"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         HeightRequest="50"
+                         VerticalOptions="Start"
+                         CornerRadius="25" 
+                         Aspect="AspectFill"
+                         Source="{Binding Alert.User.Profile.Icon.Source, Mode=OneTime}"
+                         Command="{Binding ProfileImageButtonClicked, Mode=OneTime}" 
+                         />
+
+            <Label x:Name="AlertDescriptionLabel" 
+                   HorizontalTextAlignment="Start"
+                   VerticalTextAlignment="Start"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource CaptionLabel}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Alert.Description, Mode=OneTime}"/>
+                        <Span Text="&#x0a;"/>
+                        <Span Text="{Binding Alert.Date, Mode=OneTime, Converter={StaticResource DateTimeToStringConverter}}"
+                              TextColor="{StaticResource Gray400}"
+                              FontSize="{StaticResource ElementSize}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ImageButton x:Name="AlertThumbnailImageButton"
+                         Source="{Binding Alert.Thumbnail.Source, Mode=OneTime}"
+                         VerticalOptions="Start"
+                         Grid.Row="0"
+                         Aspect="AspectFit"
+                         Grid.Column="2"
+                         HeightRequest="80"
+                         />
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding AlertClickedCommand, Mode=OneTime}"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="AccountAlertControlTemplate">
+        <Grid RowDefinitions="Auto"
+              ColumnDefinitions="50,*"
+              ColumnSpacing="10"
+              BindingContext="{TemplateBinding BindingContext}"
+              x:DataType="{x:Type viewModels:AccountAlertViewModel}"
+              Margin="0,20,0,0">
+            <ImageButton x:Name="AlertIconImageButton"
+                     Grid.Column="0"
+                     HeightRequest="50"
+                     VerticalOptions="Start"
+                     CornerRadius="25" 
+                     Aspect="AspectFill"
+                     Source="{Binding Alert.Icon.Source, Mode=OneTime}" 
+                     />
+
+            <Label x:Name="AlertDescriptionLabel" 
+                   HorizontalTextAlignment="Start"
+                   VerticalTextAlignment="Center"
+                   Style="{StaticResource CaptionLabel}"
+                   Grid.Column="1">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Alert.Description, Mode=OneTime}"/>
+                        <Span Text="&#x0a;"/>
+                        <Span Text="{Binding Alert.Date, Mode=OneTime, Converter={StaticResource DateTimeToStringConverter}}"
+                              TextColor="{StaticResource Gray400}"
+                              FontSize="{StaticResource ElementSize}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+    </ControlTemplate>
+
+    <templateSelectors:AlertDataTemplateSelector x:Key="AlertDataTemplateSelector">
+        <templateSelectors:AlertDataTemplateSelector.AccountAlertDataTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <TemplatedView ControlTemplate="{StaticResource AccountAlertControlTemplate}"/>
+                </ViewCell>
+            </DataTemplate>
+        </templateSelectors:AlertDataTemplateSelector.AccountAlertDataTemplate>
+        <templateSelectors:AlertDataTemplateSelector.UserAlertDataTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <TemplatedView ControlTemplate="{StaticResource UserAlertControlTemplate}"/>
+                </ViewCell>
+            </DataTemplate>
+        </templateSelectors:AlertDataTemplateSelector.UserAlertDataTemplate>
+    </templateSelectors:AlertDataTemplateSelector>
+
+</ResourceDictionary>

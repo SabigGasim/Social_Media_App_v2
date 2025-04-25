@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.Notifications.NotificationFiltersPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.Notifications"
+             Title="Filters"
+             x:DataType="{x:Type settings:NotificationFiltersViewModel}">
+    
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
+    <Shell.TitleView>
+        <Button x:Name="SaveButton"
+            Style="{StaticResource SaveButton}"
+            Command="{Binding SaveSettingsCommand, Mode=OneTime}"/>
+    </Shell.TitleView>
+
+    <TableView Margin="15" Intent="Settings">
+        <TableRoot>
+            <TableSection>
+                <SwitchCell x:Name="NewPostsFromFriendsSwitchCell"
+                            On="{Binding Filters.NewPostsFromFriends, Mode=TwoWay}"
+                            Text="What your friends are posting"
+                            />
+                <SwitchCell x:Name="ContentSuggestionSwitchCell"
+                            On="{Binding Filters.ContentSuggestion, Mode=TwoWay}"
+                            Text="Content suggestion"/>
+                <SwitchCell x:Name="DirectMessagesSwitchCell"
+                            On="{Binding Filters.DirectMessages, Mode=TwoWay}"
+                            Text="New direct messages"/>
+                <SwitchCell x:Name="GroupMessagesSwitchCell"
+                            On="{Binding Filters.GroupMessages, Mode=TwoWay}"
+                            Text="New group messages"/>
+                <SwitchCell x:Name="FollowRequestsSwitchCell"
+                            On="{Binding Filters.FollowRequests, Mode=TwoWay}"
+                            Text="New follow requests"/>
+                <SwitchCell x:Name="NewFollowsSwitchCell"
+                            On="{Binding Filters.NewFollows, Mode=TwoWay}"
+                            Text="New follows"/>
+                <SwitchCell x:Name="AcceptedFollowReuqestsSwitchCell"
+                            On="{Binding Filters.AcceptedFollowReuqests, Mode=TwoWay}"
+                            Text="Accepted follow requests"/>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>

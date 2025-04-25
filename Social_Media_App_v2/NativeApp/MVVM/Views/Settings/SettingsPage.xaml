@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.SettingsPage"
+             Title="Settings"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             xmlns:contentViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
+             xmlns:constants="clr-namespace:NativeApp.Constants"
+             xmlns:entites="clr-namespace:NativeApp.Common.Entities"
+             x:DataType="{x:Type viewModels:SettingsViewModel}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" BasedOn="{StaticResource BaseLabel}">
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Padding" Value="0,15,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    <ScrollView x:Name="SettingsScrollView" IsClippedToBounds="True">
+        <VerticalStackLayout Padding="15,10">
+            <Label Text="Account"/>
+            <contentViews:SettingsContentView Title="Account info"
+                                              Icon="profile.png" 
+                                              Description="See information about your account"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.AccountInfoPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}">
+            </contentViews:SettingsContentView>
+
+            <contentViews:SettingsContentView Title="Change Password"
+                                              Icon="lock.png" 
+                                              Description="Change your password at any time"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}">
+            </contentViews:SettingsContentView>
+            <Label Text="Notifications" />
+            <contentViews:SettingsContentView Title="Filters"
+                                              Icon="bell.png"
+                                              Description="Here you can set the notifications you prefer to receive"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.NotificationFiltersPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+            <contentViews:SettingsContentView Title="Methods"
+                                              Icon="email.png"
+                                              Description="Control where do you want to receive your notifications"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.NotificationMethodsPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+            <Label Text="Muted and blocked"/>
+            <contentViews:SettingsContentView Title="Blocked accounts"
+                                              Icon="blocked_user.png"
+                                              Description="These accounts will not show in your timeline and will not be able to view your posts or your engaments and will not be able to send you messages."
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.BlockedAccountsPage}"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+            <contentViews:SettingsContentView Title="Muted accounts"
+                                              Icon="mute.png"
+                                              Description="These accounts will not show in your timeline"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.MutedAccountsPage}"/>
+            <contentViews:SettingsContentView Title="Muted words"
+                                              Icon="mute.png"
+                                              Description="These words will not show in your timeline"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.MutedWordsPage}"/>
+            <Label Text="Privacy and safety"/>
+            <contentViews:SettingsContentView Title="Audience"
+                                              Icon="audience.png"
+                                              Description="Manage the visiblity of your posts"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"
+                                              Command="{Binding TableViewOptionClickedCommand, Mode=OneTime}"
+                                              CommandParameter="{x:Static constants:Routes.AudiencePage}"/>
+            <contentViews:SettingsContentView Title="Two factor authentication"
+                                              Icon="twofactor.png"
+                                              Description="When enabled, adds an extra layer of security to your account by requiring two different forms of verification during the login process"
+                                              ControlTemplate="{StaticResource SettingsControlTemplate}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

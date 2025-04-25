@@ -4,11 +4,62 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:NativeApp"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:views="clr-namespace:NativeApp.MVVM.Views"
+    xmlns:settingsViews="clr-namespace:NativeApp.MVVM.Views.Settings"
+    xmlns:viewmodels="clr-namespace:NativeApp.MVVM.ViewModels"
+    xmlns:contnetViews="clr-namespace:NativeApp.MVVM.Views.ContentViews"
+    Shell.FlyoutBehavior="Flyout"
+    FlowDirection="LeftToRight"
+    FlyoutVerticalScrollMode="Auto"
+    x:DataType="{x:Type viewmodels:ShellViewModel}"
+    MenuItemTemplate="{StaticResource CustomMenuFlyoutItemTemplate}"
+    >
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <contnetViews:FlyoutHeaderContentView/>
+    </Shell.FlyoutHeader>
+
+    <MenuFlyoutItem Text="Profile"
+                    IconImageSource="profile.png"
+                    Command="{Binding ProfileFlyoutItemClickedCommand, Mode=OneTime}"/>
+    <MenuFlyoutItem Text="Settings &amp; Privacy"
+                    IconImageSource="settings_ruller.png"
+                    Clicked="SettingsFlyoutItem_Clicked"
+                    />
+
+
+    <TabBar x:Name="ButtomTabBar"
+            Route="main">
+        <Tab Icon="home.png"
+             Title="Home"
+             Route="home">
+            <ShellContent
+                Route="view"
+                ContentTemplate="{DataTemplate views:HomePage}">
+            </ShellContent>
+        </Tab>
+        <Tab Route="notifications"
+             Icon="bell.png" 
+             Title="Notifications">
+            <ShellContent Route="AlertsPage"
+                          Title="Alerts"
+                          ContentTemplate="{DataTemplate views:AlertsPage}"/>
+            <ShellContent Route="FollowRequestsPage"
+                          Title="Follow Requests"
+                          ContentTemplate="{DataTemplate views:FollowRequestsPage}"/>
+        </Tab>
+        <Tab Route="explore"
+             Icon="search.png" 
+             Title="Explore">
+            <ShellContent Title="Explore"
+                          ContentTemplate="{DataTemplate views:SearchPage}"/>
+        </Tab>
+        <Tab x:Name="SettingsItem"
+             Route="settings"
+             Icon="settings.png" 
+             Title="Settings">
+            <ShellContent ContentTemplate="{DataTemplate settingsViews:SettingsPage}"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.AccountInformation.ChangeUsernamePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.AccountInfo"
+             Title="Change username"
+             x:Name="ChangeUsernameContentPage"
+             x:DataType="{x:Type settings:ChangeUsernameViewModel}">
+
+    <Shell.TitleView>
+        <Button x:Name="SaveButton"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding SaveSettingsCommand, Mode=OneTime}"    
+                IsEnabled="{Binding Username.IsValid, Mode=OneWay}"/>
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout x:Name="UsernameStackLayout"
+                         Padding="15"
+                         >
+        <Label x:Name="HeaderLabel"
+               Style="{StaticResource BaseLabel}"
+               FontSize="16"
+               Text="Change your username at anytime!" 
+               Margin="0,0,0,15"
+               TextColor="#71767B"/>
+        
+        <Border x:Name="EntryBorder"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                Stroke="#5E6369"
+                Padding="15,0">
+            <Entry x:Name="UsernameEntry"
+                   Placeholder="Type username.."
+                   PlaceholderColor="#5E6369"
+                   Text="{Binding Username.Value, Mode=TwoWay}"
+                   ClearButtonVisibility="WhileEditing"
+                   >
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior x:TypeArguments="TextChangedEventArgs"
+                                                    EventName="TextChanged"
+                                                    Command="{Binding TextChangedCommand}"/>
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        <Label Text="{Binding Username.Errors, Mode=OneWay, Converter={StaticResource FirstStringItemConverter}}"
+               Style="{StaticResource ValidationErrorLabelStyle}"
+               LineHeight="1.3"/>
+    </VerticalStackLayout>
+</ContentPage>

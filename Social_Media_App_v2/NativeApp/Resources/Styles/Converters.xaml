@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:NativeApp.MVVM.Converters"
+    >
+    <converters:HumanizeIntToStringConverter x:Key="IntToStirngConverter"/>
+    <converters:HumanizeDateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+    <converters:JoinStringListConverter x:Key="JoinStringListConverter"/>
+    <converters:FirstStringItemConverter x:Key="FirstStringItemConverter"/>
+    <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
+    <converters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter"/>
+    <converters:ReverseBoolConverter x:Key="ReverseBoolConverter"/>
+    <converters:AllBooleansAreTrueMultiConverter x:Key="AllTrueMultiConverter"/>
+    <converters:DurationToStringConverter x:Key="DurationToStringConverter"/>
+    <converters:PrivacyToBoolConverter x:Key="PrivacyToBoolConverter"/>
+</ResourceDictionary>

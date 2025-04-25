@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.Templates.DataTemplates.ProfileHeaderDataTemplate"
+             xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels">
+    <ControlTemplate x:Key="ProfileHeaderControlTemplate">
+        <Grid RowDefinitions="80,Auto,40,15"
+                  ColumnDefinitions="80,*,*,*"
+          BindingContext="{TemplateBinding BindingContext}"
+          x:DataType="{x:Type viewModels:ProfileViewModel}"
+          Margin="0,20">
+            <Border Grid.Row="0"
+                Grid.Column="0"
+                StrokeShape="RoundRectangle 40"
+                StrokeThickness="3"
+                BackgroundColor="Transparent">
+                <Border.Stroke>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="Purple"
+                      Offset="0.1" />
+                        <GradientStop Color="{StaticResource Primary}"
+                      Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <ImageButton x:Name="userIconImageButton"
+                         Source="{Binding UserViewModel.User.Profile.Icon.Source, Mode=OneTime}"
+                         Aspect="AspectFill"
+                         CornerRadius="31"
+                         WidthRequest="62"
+                         HeightRequest="62"
+                         Margin="6"
+                             />
+            </Border>
+            <Label x:Name="PostsCountLabel"
+                       Style="{StaticResource ElementLabel}"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding UserViewModel.User.PostsCount, Mode=OneTime, Converter={StaticResource IntToStirngConverter}}"
+                                  FontAttributes="Bold"
+                                  />
+                        <Span Text="&#x0a;"/>
+                        <Span Text="Posts"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label x:Name="FollowersCountLabel"
+                       Style="{StaticResource ElementLabel}"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding UserViewModel.User.FollowersCount, Mode=OneWay, Converter={StaticResource IntToStirngConverter}}"
+                                  FontAttributes="Bold"
+                                  />
+                        <Span Text="&#x0a;"/>
+                        <Span Text="Followers"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label x:Name="FollowingCountLabel"
+                       Style="{StaticResource ElementLabel}"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding UserViewModel.User.FollowingCount, Mode=OneTime, Converter={StaticResource IntToStirngConverter}}"
+                                  FontAttributes="Bold"
+                                  />
+                        <Span Text="&#x0a;"/>
+                        <Span Text="Following"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label x:Name="MoreOptionsButton"
+               Text="⁝"
+               Style="{StaticResource BaseLabel}"
+               FontSize="16"
+               FontAttributes="Bold"
+               Grid.Row="0"
+               Grid.Column="4"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               HorizontalTextAlignment="End"
+               VerticalTextAlignment="Start"
+               />
+
+            <Label x:Name="DescriptionLabel"
+               FontSize="14"
+               Text="{Binding UserViewModel.User.Profile.Description, Mode=OneWay}"
+               HorizontalOptions="Start"
+               Grid.Row="1"
+               Grid.ColumnSpan="4"
+               Margin="5,15,0,15"
+                       />
+            <Grid Grid.Row="2"
+              ColumnSpacing="10"
+              Grid.ColumnSpan="4"
+              RowDefinitions="*"
+              ColumnDefinitions="*,*"
+              >
+                <Button x:Name="FollowingButton"
+                    TextColor="White"
+                    Text="Follow"
+                    BackgroundColor="{StaticResource Primary}"
+                    Grid.Column="0"
+                    CornerRadius="10"
+                    Command="{Binding UserViewModel.FollowOrUnFollowCommand, Mode=OneTime}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                 Binding="{Binding UserViewModel.User.IsUserBeingFollowed}"
+                                 Value="true">
+                            <Setter Property="BackgroundColor"
+                                Value="{StaticResource Gray600}"/>
+                            <Setter Property="Text"
+                                Value="Following"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button x:Name="MessageButton"
+                    BackgroundColor="{StaticResource Gray600}"
+                    TextColor="White"
+                    Text="Message"
+                    Grid.Column="1"
+                    CornerRadius="10">
+                </Button>
+            </Grid>
+            <BoxView x:Name="HeaderSeparatorBoxView"
+                 Color="{StaticResource Gray600}"
+                 HeightRequest="1"
+                 VerticalOptions="End"
+                 Grid.ColumnSpan="4"
+                 Grid.Row="3"
+                 Margin="-10,0"
+                 />
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             x:Class="NativeApp.MVVM.Views.CommentsPage"
+             Title="Comments"
+             FlowDirection="LeftToRight"
+             xmlns:templateSelectors="clr-namespace:NativeApp.Templates.DataTemplateSelectors"
+             x:DataType="{x:Type viewModels:PostCommentsViewModel}"
+             >
+    <Grid x:Name="CommentsGrid"
+          RowDefinitions="*, Auto"
+          ColumnDefinitions="*">
+        <CollectionView x:Name="CommentsCollectionView"
+                Grid.Row="0"
+                ItemsSource="{Binding Comments, Mode=OneTime}"
+                Header="{Binding PostViewModel, Mode=OneTime}"
+                ItemTemplate="{StaticResource CommentTemplate}"      
+                HeaderTemplate="{StaticResource postAsHeaderDataTemplateSelector}"
+                />
+        <Grid x:Name="CommentEntryGrid"
+              RowDefinitions="Auto"
+              ColumnDefinitions="50,*,50"
+              ColumnSpacing="10"
+              Grid.Row="1"
+              BackgroundColor="{StaticResource Gray950}">
+            
+            <BoxView HeightRequest="1"
+                     Grid.ColumnSpan="3"
+                     VerticalOptions="Start"
+                     BackgroundColor="{StaticResource Gray300}"
+                     />
+            <ImageButton x:Name="AddCommentImageButton"
+                         Source="send.png"
+                         Aspect="AspectFit"
+                         Grid.Column="0"
+                         Margin="10,20,0,15"
+                         VerticalOptions="Start"
+                         HeightRequest="25"
+                         Command="{Binding SendCommentCommand, Mode=OneTime}"
+                         CommandParameter="{Binding Source={x:Reference CommentEntry}, Path=Text, Mode=OneWay}"
+                         />
+            <Border x:Name="CommentEntryBorder"
+                    StrokeShape="RoundRectangle 5"
+                    StrokeThickness="0"
+                    Grid.Column="1"
+                    Margin="0,13,0,20"
+                    >
+                <Editor x:Name="CommentEntry"
+                        Placeholder="Comment your thoughts.."
+                        FontSize="13"
+                        PlaceholderColor="White"
+                        BackgroundColor="{StaticResource Gray600}"
+                        AutoSize="TextChanges"
+                        MaximumHeightRequest="200"
+                        Completed="CommentEntry_Completed"
+                        />
+            </Border>
+            <ImageButton x:Name="UserProfileImageButton"
+                         Source="default_profile.jpg"
+                         CornerRadius="15"
+                         Margin="0,17,0,0"
+                         VerticalOptions="Start"
+                         HorizontalOptions="Center"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         Grid.Column="2"
+                         />
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:NativeApp.MVVM.Models"
+             xmlns:viewModels="clr-namespace:NativeApp.MVVM.ViewModels"
+             x:Class="NativeApp.MVVM.Views.AddPostPage"
+             Title="AddPostPage"
+             x:DataType="{x:Type viewModels:AddPostViewModel}"
+             >
+    
+    <Shell.TitleView>
+        <Button x:Name="AddPostButton"
+                Style="{StaticResource SaveButton}"
+                Text="Post"
+                TextColor="White"
+                BackgroundColor="{StaticResource Primary}"
+                Command="{Binding AddPostCommand, Mode=OneTime}"
+                IsEnabled="{Binding IsValid, Mode=OneWay}"
+                CornerRadius="15"
+                Margin="10,10"
+                Padding="10,5"
+                >
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="1.0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.75" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+        </Button>
+    </Shell.TitleView>
+
+    <Grid x:Name="PostEditorGrid"
+          RowDefinitions="Auto,70"
+          ColumnDefinitions="40,*"
+          ColumnSpacing="10"
+          RowSpacing="20"
+          Padding="10,25">
+        <ImageButton x:Name="UserProfileIconImageButton"
+                     Source="default_profile.jpg"
+                     CornerRadius="20"
+                     HeightRequest="40"
+                     Grid.Row="0"
+                     Grid.Column="0"
+                     VerticalOptions="Start"/>
+        <Editor x:Name="PostTextEditor"
+                Text="{Binding Text.Value, Mode=TwoWay}"
+                Placeholder="Share your thoughts"
+                PlaceholderColor="#8697A8"
+                Grid.Row="0"
+                FontSize="18"
+                MinimumHeightRequest="200"
+                MaximumHeightRequest="300"
+                AutoSize="TextChanges"
+                Grid.Column="1"
+                TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"
+                >
+            <Editor.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                                Command="{Binding ValidateCommand, Mode=OneTime}"/>
+            </Editor.Behaviors>
+        </Editor>
+
+        <CollectionView x:Name="ImagesCollectionView"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        Header="{Binding .}"
+                        ItemsSource="{Binding Media.Value, Mode=OneWay}"
+                        >
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <Border Stroke="{StaticResource Primary}"
+                            StrokeShape="RoundRectangle 15"
+                            StrokeThickness="2"
+                            StrokeMiterLimit="0"
+                            WidthRequest="70"
+                            HeightRequest="70"
+                            BackgroundColor="#141414">
+                        <ImageButton x:Name="PostImageImageButton" 
+                                     Source="plus.png"
+                                     Command="{Binding PickPhotosCommand, Mode=OneTime}"
+                                     Padding="10"
+                                     >
+                            <ImageButton.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                            </ImageButton.Behaviors>
+                        </ImageButton>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:MediaModel}">
+                    <ImageButton x:Name="PostImageImageButton" 
+                                 Source="{Binding Source}"
+                                 CornerRadius="15"
+                                 Aspect="AspectFill"
+                                 WidthRequest="70"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

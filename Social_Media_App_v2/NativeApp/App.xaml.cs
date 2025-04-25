@@ -1,11 +1,17 @@
-﻿namespace NativeApp;
+﻿using NativeApp.MVVM.ViewModels;
+using System.Globalization;
+
+namespace NativeApp;
 
 public partial class App : Application
 {
-    public App()
+    public App(ShellViewModel viewModel)
     {
         InitializeComponent();
 
-        MainPage = new AppShell();
+        CultureInfo.CurrentCulture = new CultureInfo("en-US");
+        CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+
+        MainPage = new AppShell(viewModel);
     }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.Settings.AccountInformation.ChangeNicknamePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:settings="clr-namespace:NativeApp.MVVM.ViewModels.Settings.AccountInfo"
+             Title="Change nickname"
+             x:DataType="{x:Type settings:ChangeNicknameViewModel}"
+             >
+    <Shell.TitleView>
+        <Button x:Name="SaveButton"
+             Style="{StaticResource SaveButton}"
+             Command="{Binding SaveSettingsCommand, Mode=OneTime}"    
+             IsEnabled="{Binding Nickname.IsValid, Mode=OneWay}"/>
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="NavigatedTo"
+                                Command="{Binding SetOriginalSettingsCommand, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout x:Name="UsernameStackLayout"
+                      Padding="15"
+                      >
+        <Label x:Name="HeaderLabel"
+            Style="{StaticResource BaseLabel}"
+            FontSize="16"
+            Text="Change your nickname at anytime!" 
+            Margin="0,0,0,15"
+            TextColor="#71767B"/>
+
+        <Border x:Name="EntryBorder"
+             StrokeThickness="2"
+             StrokeShape="RoundRectangle 10"
+             Stroke="#5E6369"
+             Padding="15,0">
+            <Entry x:Name="NicknameEntry"
+                Placeholder="Type nikname.."
+                PlaceholderColor="#5E6369"
+                Text="{Binding Nickname.Value, Mode=TwoWay}"
+                ClearButtonVisibility="WhileEditing"
+                >
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior x:TypeArguments="TextChangedEventArgs"
+                                                 EventName="TextChanged"
+                                                 Command="{Binding TextChangedCommand, Mode=OneTime}"/>
+                </Entry.Behaviors>
+            </Entry>
+        </Border>
+        <Label Text="{Binding Nickname.Errors, Mode=OneWay, Converter={StaticResource FirstStringItemConverter}}"
+            Style="{StaticResource ValidationErrorLabelStyle}"
+            LineHeight="1.3"/>
+    </VerticalStackLayout>
+</ContentPage>

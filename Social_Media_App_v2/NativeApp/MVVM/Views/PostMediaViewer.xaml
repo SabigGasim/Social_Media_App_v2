@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NativeApp.MVVM.Views.PostMediaViewer"
+             xmlns:models="clr-namespace:NativeApp.MVVM.Models">
+    <Grid x:DataType="{x:Type models:MediaListModel}">
+        <CarouselView x:Name="PostImagesCarouselView"
+                  ItemsSource="{Binding This}"
+                  Loop="False"
+                  IndicatorView="{x:Reference MediaIndicatorView}"
+                  >
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:MediaModel}">
+                    <ImageButton x:Name="PostImageCarouselView"
+                            Source="{Binding Source, Mode=OneTime}"
+                            Aspect="AspectFit"/>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView x:Name="MediaIndicatorView" 
+                       IsVisible="{Binding This.Count, Mode=OneTime}"
+                       IndicatorColor="{StaticResource Gray400}"
+                       SelectedIndicatorColor="{StaticResource Primary}"
+                       Margin="0,0,0,15"
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"
+                       />
+    </Grid>
+</ContentPage>

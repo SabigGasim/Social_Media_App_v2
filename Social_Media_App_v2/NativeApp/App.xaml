@@ -2,12 +2,21 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:NativeApp"
+             xmlns:converters="clr-namespace:NativeApp.MVVM.Converters"
              x:Class="NativeApp.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Values.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Converters.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplateSelectors/PostDataTemplateSelector.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplates/CommentDataTemplate.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplates/ProfileHeaderDataTemplate.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplateSelectors/AlertDataTemplateSelector.xaml"/>
+                <ResourceDictionary Source="Templates/DataTemplates/CustomFlyoutItemTemplate.xaml"/>
+                <ResourceDictionary Source="Templates/ControlTemplates/SettingsControlTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
